@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
+@Table(name = "agencia")
 public class Agencia implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -12,27 +13,18 @@ public class Agencia implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_agencia")
-    private int id;
+    private Long id;
 
     private String agencia;
 
     @Column(name="nome_agencia")
     private String nome;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
-
-    public Agencia() {
-    }
-
-    public Agencia(int id, String agencia, String nome) {
-        this.id = id;
-        this.agencia = agencia;
-        this.nome = nome;
-    }
-
-    public void setId(int id) {
+    
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,6 +44,14 @@ public class Agencia implements Serializable {
         this.nome = nome;
     }
 
+    public Agencia() {
+    }
+
+    public Agencia(String agencia, String nome) {
+        this.agencia = agencia;
+        this.nome = nome;
+    }
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -64,4 +64,9 @@ public class Agencia implements Serializable {
     public int hashCode() {
         return Objects.hash(id);
     }
+
+	@Override
+	public String toString() {
+		return "Agencia id: " + id + " Agencia: " + agencia + " Nome Agencia: " + nome;
+	} 
 }
