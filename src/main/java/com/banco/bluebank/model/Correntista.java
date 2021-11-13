@@ -29,7 +29,7 @@ public class Correntista implements Serializable {
     
     private String rg;
     
-    @Column(name = "cpf", length = 14, nullable = false)
+    @Column(name = "cnpj", length = 14, nullable = false)
     private String cnpj;
     
     @Column(name="pf_pj")
@@ -41,10 +41,10 @@ public class Correntista implements Serializable {
     @Column(name="sms_validacao")
     private String smsValidacao;
     
-    @OneToMany(mappedBy = "endereco")
+    @OneToMany(mappedBy = "correntista")
     private List<Endereco> enderecos;
     
-    @OneToMany(mappedBy = "contato")
+    @OneToMany(mappedBy = "correntista")
     private List<ContatoCliente> contatos;
     
 	public Long getId() {
