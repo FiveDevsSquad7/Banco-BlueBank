@@ -22,7 +22,7 @@ public class Movimentacao  implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_conta")
+    @Column(name="id_movimentacao")
     private Long id;
     
     @ManyToOne
