@@ -2,56 +2,49 @@ package com.banco.bluebank.controller;
 
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.service.AgenciaService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping
+@RequestMapping(path = "/agencias")
 public class AgenciaController {
+
     @Autowired
     private AgenciaService service;
 
-    @GetMapping(path = "/agencias")
-    public List<Agencia> buscarTodos() {
-        return service.buscarTodos();
+    @GetMapping
+    public List<Agencia> listar() {
+        return service.listar();
     }
 
-    @GetMapping(path = "agencia/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-        Optional<Agencia> conta = service.buscarId(id);
-        if(!conta.isEmpty()) {
-            return ResponseEntity.ok(conta.orElseThrow(() -> new RuntimeException("Não foi possível encontrar essa com por esse ID!")));
-        }
-        return ResponseEntity.ok().build();
+    @GetMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Agencia buscar(@PathVariable Long id) {
+        return service.buscar(id);
     }
 
-    @PostMapping (path = "agencia/novaAgencia")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Agencia salvar(@RequestBody @Valid Agencia agenciaInput) {
-        return service.salvar(agenciaInput);
+    public Agencia salvar(@RequestBody Agencia agencia) {
+        return service.salvar(agencia);
     }
 
-    @PutMapping("agencia/atualizar/{id}")
-    public ResponseEntity<?> atualizar(@RequestBody Agencia agenciaInput, @PathVariable Long id){
-        Optional<Agencia> optionalAgencia = Optional.ofNullable(service.buscarPorIdParaAtualizar(id));
-        return ResponseEntity.ok().build();
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
+    public Agencia atualizar(@PathVariable Long id, @RequestBody Agencia agencia) {
+        Agencia agenciaAtual = service.buscar(id);
+        BeanUtils.copyProperties(agencia, agenciaAtual, "id");
+        return service.salvar(agenciaAtual);
     }
 
-    @DeleteMapping("agencia/excluir/{id}")
-    public ResponseEntity<?> excluir(@PathVariable Long id) {
-        Optional<Agencia> optionalAgencia = service.buscarId(id);
-        if(optionalAgencia.isPresent()) {
-            service.excluir(id);
-            return     ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void remover(@PathVariable Long id) {
+        service.excluir(id);
     }
 
 }

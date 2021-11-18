@@ -1,8 +1,12 @@
 package com.banco.bluebank.service;
 
+import com.banco.bluebank.exceptions.AgenciaNaoEncontradaException;
+import com.banco.bluebank.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.repository.AgenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,28 +16,35 @@ import java.util.Optional;
 @Service
 public class AgenciaService {
 
+    private static final String MSG_AGENCIA_EM_USO
+            = "Agência de id %d não pode ser removida, pois está em uso";
+
     @Autowired
     private AgenciaRepository agenciaRepository;
 
-    public  List<Agencia> buscarTodos() {
+    public Agencia salvar(Agencia agencia){
+        return agenciaRepository.save(agencia);
+    }
+
+     public  List<Agencia> listar() {
         return agenciaRepository.findAll();
     }
 
-    public Optional<Agencia> buscarId(Long id){
-        return agenciaRepository.findById(id);
+    public Agencia buscar(Long agenciaId) {
+        return agenciaRepository.findById(agenciaId)
+                .orElseThrow( () -> new AgenciaNaoEncontradaException(agenciaId));
     }
 
-    public Agencia salvar(Agencia agenciaInput){
-        return agenciaRepository.save(agenciaInput);
-    }
+    public void excluir(Long agenciaId) {
+        try {
+            agenciaRepository.deleteById(agenciaId);
 
-    public Agencia buscarPorIdParaAtualizar(Long id) {
-        Optional<Agencia> optionalAgencia = agenciaRepository.findById(id);
-        return optionalAgencia.orElseThrow(() -> new RuntimeException("Não foi possível encontrar essa com por esse ID!"));
-    }
+        } catch (EmptyResultDataAccessException e) {
+            throw new AgenciaNaoEncontradaException(agenciaId);
 
-    @Transactional
-    public void excluir(Long id) {
-        agenciaRepository.deleteById(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new EntidadeEmUsoException(
+                    String.format(MSG_AGENCIA_EM_USO, agenciaId));
+        }
     }
 }
