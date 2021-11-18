@@ -30,7 +30,7 @@ public class AgenciaService {
         return agenciaRepository.findAll();
     }
 
-    public Agencia buscarOuFalhar(Long agenciaId) {
+    public Agencia buscar(Long agenciaId) {
         return agenciaRepository.findById(agenciaId)
                 .orElseThrow( () -> new AgenciaNaoEncontradaException(agenciaId));
     }
