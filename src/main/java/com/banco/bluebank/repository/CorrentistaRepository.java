@@ -8,4 +8,6 @@ import com.banco.bluebank.model.Correntista;
 @Repository
 public interface CorrentistaRepository extends JpaRepository<Correntista, Long>{
 
+
+
 }
