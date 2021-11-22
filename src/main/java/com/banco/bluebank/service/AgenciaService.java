@@ -1,17 +1,15 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.exceptions.AgenciaNaoEncontradaException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptionhandler.exceptions.agencia.AgenciaVaziaException;
+import com.banco.bluebank.exceptionhandler.exceptions.agencia.PesquisarAgenciaPorIdException;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.repository.AgenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class AgenciaService {
@@ -32,7 +30,7 @@ public class AgenciaService {
 
     public Agencia buscar(Long agenciaId) {
         return agenciaRepository.findById(agenciaId)
-                .orElseThrow( () -> new AgenciaNaoEncontradaException(agenciaId));
+                .orElseThrow(() -> new AgenciaVaziaException("Agencia não encontrada na Base de dados!"));
     }
 
     public void excluir(Long agenciaId) {
@@ -40,10 +38,10 @@ public class AgenciaService {
             agenciaRepository.deleteById(agenciaId);
 
         } catch (EmptyResultDataAccessException e) {
-            throw new AgenciaNaoEncontradaException(agenciaId);
+            throw new AgenciaVaziaException("Agencia não encontrada na Base de dados!");
 
         } catch (DataIntegrityViolationException e) {
-            throw new EntidadeEmUsoException(
+            throw new PesquisarAgenciaPorIdException(
                     String.format(MSG_AGENCIA_EM_USO, agenciaId));
         }
     }
