@@ -1,47 +1,28 @@
 package com.banco.bluebank.model;
 
-import java.io.Serializable;
-import java.util.Objects;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@SuppressWarnings("serial")
 @Entity
-@Table(name = "contato_cliente")
-public class ContatoCliente implements Serializable {
+@Table(name = "contato_correntista")
+public class ContatoCliente  extends AbstractEntity {
 
-    private static final long serialVersionUID = 1L;
+	private String telefone;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_contato_pessoa")
-    private Long id;
-    
-    private String telefone;
-    
-    private String email;
-    
-    @Column(name="info_recado")
-    private String infoRecado;
-    
-    @ManyToOne(optional=false)
-    @JoinColumn(name="id_correntista")
-    private Correntista correntista;
-    
+	private String email;
 
-	public Long getId() {
-		return id;
-	}
+	@Column(name="info_recado")
+	private String infoRecado;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@ManyToOne
+	// evita recursividade quando o json de resposta for criado para a datatables.
+	@JsonIgnore
+	private Correntista correntista;
 
 	public String getTelefone() {
 		return telefone;
@@ -66,7 +47,7 @@ public class ContatoCliente implements Serializable {
 	public void setInfoRecado(String infoRecado) {
 		this.infoRecado = infoRecado;
 	}
-	
+
 	public Correntista getCorrentista() {
 		return correntista;
 	}
@@ -82,31 +63,7 @@ public class ContatoCliente implements Serializable {
 	}
 
 	public ContatoCliente() {
-		
-	}
-	
-	@Override
-	public int hashCode() {
-		return Objects.hash(id);
+
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContatoCliente other = (ContatoCliente) obj;
-		return id == other.id;
-	}
-
-	@Override
-	public String toString() {
-		return "ContatoCliente [id=" + id + ", telefone=" + telefone + ", email=" + email + ", infoRecado=" + infoRecado
-				+ ", correntista=" + correntista + "]";
-	}
-	
-	
 }
