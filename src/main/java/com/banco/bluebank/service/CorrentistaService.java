@@ -1,8 +1,6 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.exceptions.AgenciaNaoEncontradaException;
-import com.banco.bluebank.exceptions.CorrentistaNaoEncontradaException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptionhandler.exceptions.correntista.CorrentistaSemCadastroException;
 import com.banco.bluebank.model.Correntista;
 import com.banco.bluebank.repository.CorrentistaRepository;
 
@@ -47,7 +45,7 @@ public class CorrentistaService {
 
     public Correntista buscar(Long correntistaId) {
         return correntistaRepositoryrepository.findById(correntistaId)
-                .orElseThrow( () -> new CorrentistaNaoEncontradaException(correntistaId));
+                .orElseThrow(() -> new CorrentistaSemCadastroException("Não foi possível encontrar correntista com essa identificação!"));
     }
 
     public void excluir(Long correntistaId) {
@@ -58,10 +56,10 @@ public class CorrentistaService {
             correntistaRepositoryrepository.deleteById(correntistaId);
 
         } catch (EmptyResultDataAccessException e) {
-            throw new CorrentistaNaoEncontradaException(correntistaId);
+            throw new CorrentistaSemCadastroException(" ");
 
         } catch (DataIntegrityViolationException e) {
-            throw new EntidadeEmUsoException(
+            throw new CorrentistaSemCadastroException(
                     String.format(MSG_AGENCIA_EM_USO, correntistaId));
         }
     }
