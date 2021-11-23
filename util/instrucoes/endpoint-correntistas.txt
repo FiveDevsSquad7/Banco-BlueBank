@@ -1,0 +1,107 @@
+Instrucoes para testes dos endpoints de correntistas:
+
+- inserir novo correntista:
+POST /correntistas
+
+body:
+{
+    "nome": "Antonio Silva",
+    "cpf": "546465445",
+    "rg": "46546464",
+    "cnpj": "446465",
+    "tipoPessoa": "F",
+    "emailValidacao": "carlos@betiol.dev",
+    "enderecos": [
+        {
+            "logradouro": "non minim quis culpa",
+            "numero": "ut dolor",
+            "complemento": "dolore non sunt",
+            "cep": "in mollit",
+            "bairro": "ut minim occaecat tempor qui",
+            "cidade": "ea dolor ipsum",
+            "estado": "consequat enim"
+        },
+        {
+            "logradouro": "sit et laboris reprehenderit",
+            "numero": "sed officia",
+            "complemento": "occaecat",
+            "cep": "voluptate in qui ut dolore",
+            "bairro": "anim quis ex officia",
+            "cidade": "Excepteur",
+            "estado": "dolore esse"
+        }
+    ],
+    "contatos": [
+        {
+            "telefone": "fugiat ea",
+            "email": "sed",
+            "infoRecado": "ad voluptate anim eiusmod"
+        },
+        {
+            "telefone": "proident est Ut nulla",
+            "email": "consectetur in velit",
+            "infoRecado": "sint officia irure"
+        }
+    ],
+    "sms": "6456465"
+}
+
+- listar correntistas:
+GET /correntistas
+
+- listar determinado correntista:
+GET /correntistas/{id}
+
+- update em determinado correntista:
+PUT /correntistas/{id}
+
+body:
+{
+    "id": 1,
+    "nome": "Carlos Betiol",
+    "cpf": "546465445",
+    "rg": "46546464",
+    "cnpj": "446465",
+    "tipoPessoa": "F",
+    "emailValidacao": "carlos@betiol.dev",
+    "sms": "6456465"
+}
+
+- eliminar um determinado correntista:
+DELETE /correntistas/{id}
+
+- listar os enderecos de um determinado correntista:
+GET /correntistas/{id}/enderecos
+
+- adicionar enderecos para um determinado correntista:
+POST /correntistas/{idCorrentista}/enderecos
+
+body:
+{
+    "logradouro": "rua do angico",
+    "numero": "ut dolor",
+    "complemento": "dolore non sunt",
+    "cep": "in mollit",
+    "bairro": "ut minim occaecat tempor qui",
+    "cidade": "manaus",
+    "estado": "AM"
+}
+
+- remover enderecos de um determinado correntista:
+DELETE /correntistas/{idCorrentista}/enderecos/{idEndereco}
+
+- listar os contatos de um determinado correntista:
+GET /correntistas/{id}/contatos
+
+- adicionar contatos para um determinado correntista:
+POST /correntistas/{idCorrentista}/contatos
+
+body:
+{
+    "telefone": "9999999",
+    "email": "joca@email.com",
+    "infoRecado": "ad voluptate anim eiusmod"
+}
+
+- remover contatos de um determinado correntista:
+DELETE /correntistas/{idCorrentista}/contatos/{idContato}

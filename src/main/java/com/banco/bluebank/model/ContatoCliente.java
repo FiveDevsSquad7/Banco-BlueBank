@@ -1,5 +1,7 @@
 package com.banco.bluebank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -26,12 +28,17 @@ public class ContatoCliente implements Serializable {
     private String telefone;
     
     private String email;
+
+	@Column(name = "id_correntista")
+	@JsonIgnore
+	private Long idCorrentista;
     
     @Column(name="info_recado")
     private String infoRecado;
     
     @ManyToOne(optional=false)
-    @JoinColumn(name="id_correntista")
+    @JoinColumn(name="id_correntista", insertable = false, updatable = false)
+	@JsonIgnore
     private Correntista correntista;
     
 
@@ -73,6 +80,14 @@ public class ContatoCliente implements Serializable {
 
 	public void setCorrentista(Correntista correntista) {
 		this.correntista = correntista;
+	}
+
+	public Long getIdCorrentista() {
+		return idCorrentista;
+	}
+
+	public void setIdCorrentista(Long idCorrentista) {
+		this.idCorrentista = idCorrentista;
 	}
 
 	public ContatoCliente(String telefone, String email, String infoRecado) {
