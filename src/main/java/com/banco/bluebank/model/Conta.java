@@ -1,9 +1,7 @@
 package com.banco.bluebank.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "conta")
@@ -31,15 +30,41 @@ public class Conta  implements Serializable {
     private String tipoConta;
     
     @ManyToOne
-    @JoinColumn(name="id_correntista")
+    @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
     
-    @ManyToOne(optional=false)
-    @JoinColumn(name="id_agencia")
+    @ManyToOne
+    @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
+    
+    @Column(name = "id_correntista")
+    @JsonIgnore
+    private Long idCorrentista;
+    
+    @Column(name = "id_agencia")
+    @JsonIgnore
+    private Long idAgencia;
     
     private int digito;
     
+    
+        
+	public Long getIdCorrentista() {
+		return idCorrentista;
+	}
+
+	public void setIdCorrentista(Long idCorrentista) {
+		this.idCorrentista = idCorrentista;
+	}
+
+	public Long getIdAgencia() {
+		return idAgencia;
+	}
+
+	public void setIdAgencia(Long idAgencia) {
+		this.idAgencia = idAgencia;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -88,14 +113,20 @@ public class Conta  implements Serializable {
 		this.agencia = agencia;
 	}
 	
-	public Conta(Integer numeroConta, int digito, String tipoConta, Correntista correntista, Agencia agencia) {
+	
+	
+	public Conta(Integer numeroConta, String tipoConta, Correntista correntista, Agencia agencia, Long idCorrentista,
+			Long idAgencia, int digito) {
+		super();
 		this.numeroConta = numeroConta;
-		this.digito = digito;
 		this.tipoConta = tipoConta;
 		this.correntista = correntista;
 		this.agencia = agencia;
+		this.idCorrentista = idCorrentista;
+		this.idAgencia = idAgencia;
+		this.digito = digito;
 	}
-	
+
 	public Conta() {
 		
 	}

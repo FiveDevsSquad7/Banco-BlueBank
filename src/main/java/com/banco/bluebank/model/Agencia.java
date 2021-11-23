@@ -1,6 +1,7 @@
 package com.banco.bluebank.model;
 
 import javax.persistence.*;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -20,7 +21,8 @@ public class Agencia implements Serializable {
     @Column(name="nome_agencia")
     private String nome;
 
-    public Long getId() {
+ 
+	public Long getId() {
         return id;
     }
     
