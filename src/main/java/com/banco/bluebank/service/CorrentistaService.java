@@ -67,25 +67,14 @@ public class CorrentistaService {
     }
 
 
-    @Transactional(readOnly = true)
-    public Optional<Correntista> listarPorId(Long id) {
-
-        Optional<Correntista> correntistas = correntistaRepository.findById(id);
-        correntistas.stream()
-                .map(Correntista::getId)
-                .collect(Collectors.toList());
-        return correntistas;
-
-    }
-
     public Correntista buscar(Long correntistaId) {
         return correntistaRepository.findById(correntistaId)
                 .orElseThrow( () -> new CorrentistaNaoEncontradoException(correntistaId));
     }
 
     public void excluir(Long correntistaId) {
-        listarPorId(correntistaId);
-        //buscar(correntistaId);
+
+        buscar(correntistaId);
 
         try {
             correntistaRepository.deleteById(correntistaId);
