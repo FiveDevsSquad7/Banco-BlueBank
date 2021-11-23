@@ -4,13 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "correntista")
@@ -41,10 +35,12 @@ public class Correntista implements Serializable {
     @Column(name="sms_validacao")
     private String smsValidacao;
     
-    @OneToMany(mappedBy = "correntista")
-    private List<Endereco> enderecos;
+    @OneToMany(mappedBy = "correntista", cascade = CascadeType.REMOVE)
+	@Column(insertable = false, updatable = false)
+	private List<Endereco> enderecos;
     
-    @OneToMany(mappedBy = "correntista")
+    @OneToMany(mappedBy = "correntista", cascade = CascadeType.REMOVE)
+	@Column(insertable = false, updatable = false)
     private List<ContatoCliente> contatos;
     
 	public Long getId() {
