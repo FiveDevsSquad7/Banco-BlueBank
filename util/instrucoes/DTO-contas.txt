@@ -1,0 +1,29 @@
+DTO Contas - Weslley
+
+Instruções para os JSON de envio para CONTAS (POST e PUT)
+{
+    "numeroConta":"5551",
+    "digito":"3",
+    "tipoConta":"Corrente",
+    "correntista": 1 ,
+    "agencia": 2
+}
+
+
+Instruçoes para os retornos GET do JSON para CONTAS
+
+{
+    "id": 2,
+    "numeroConta": 5551,
+    "digito": 3,
+    "tipoConta": "Corrente",
+    "idAgencia": 2,
+    "agencia": "030-7",
+    "nomeAgencia": "Cataratas",
+    "idCorrentista": 1,
+    "nomeCorrentista": "Antonio Silva",
+    "cpf": "546465445",
+    "rg": "46546464",
+    "cnpj": "446465"
+}
+
