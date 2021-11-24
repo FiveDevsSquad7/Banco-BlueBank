@@ -1,5 +1,7 @@
 package com.banco.bluebank.exceptionhandler;
-import com.banco.bluebank.exceptionhandler.exceptions.*;
+import com.banco.bluebank.exceptions.BusinessException;
+import com.banco.bluebank.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptions.EntidadeNaoEncontradaException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;

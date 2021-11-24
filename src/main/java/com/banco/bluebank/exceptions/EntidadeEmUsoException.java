@@ -1,10 +1,8 @@
 package com.banco.bluebank.exceptions;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import com.banco.bluebank.exceptions.BusinessException;
 
-@ResponseStatus(HttpStatus.CONFLICT)
-public class EntidadeEmUsoException extends NegocioException {
+public class EntidadeEmUsoException extends BusinessException {
 
 	private static final long serialVersionUID = 1L;
 

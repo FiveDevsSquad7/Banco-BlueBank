@@ -1,6 +1,6 @@
 package com.banco.bluebank.exceptions;
 
-public class EnderecoNaoEncontradoException extends EntidadeNaoEncontradaException{
+public class EnderecoNaoEncontradoException extends EntidadeNaoEncontradaException {
 
     public EnderecoNaoEncontradoException(String mensagem) {
         super(mensagem);
