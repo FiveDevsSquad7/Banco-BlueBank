@@ -1,4 +1,4 @@
-package com.banco.bluebank.exceptionhandler.exceptions;
+package com.banco.bluebank.exceptionhandler;
 
 import lombok.Getter;
 

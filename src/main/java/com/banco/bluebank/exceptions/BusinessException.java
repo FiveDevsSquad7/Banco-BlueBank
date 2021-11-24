@@ -1,4 +1,4 @@
-package com.banco.bluebank.exceptionhandler.exceptions;
+package com.banco.bluebank.exceptions;
 
 
 public class BusinessException extends RuntimeException {
@@ -12,5 +12,10 @@ public class BusinessException extends RuntimeException {
     public BusinessException(String message){
         super(message);
     }
+
+    public BusinessException(String message, Throwable causa) {
+        super(message, causa);
+    }
+
 }
 
