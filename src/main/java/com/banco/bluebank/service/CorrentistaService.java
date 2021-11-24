@@ -1,5 +1,6 @@
 package com.banco.bluebank.service;
 
+import com.banco.bluebank.exceptionhandler.exceptions.BusinessException;
 import com.banco.bluebank.exceptions.ContatoNaoEncontradoException;
 import com.banco.bluebank.exceptions.CorrentistaNaoEncontradoException;
 import com.banco.bluebank.exceptions.EnderecoNaoEncontradoException;
@@ -145,9 +146,6 @@ public class CorrentistaService {
         } catch (EmptyResultDataAccessException e) {
             throw new ContatoNaoEncontradoException(contatoId);
         }
-
     }
-
-
 }
 
