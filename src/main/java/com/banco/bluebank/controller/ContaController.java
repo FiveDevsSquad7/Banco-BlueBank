@@ -2,57 +2,51 @@ package com.banco.bluebank.controller;
 
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.service.ContaService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
-@CrossOrigin(origins = "*")
+
+
 @RestController
-@RequestMapping("/conta")
+@RequestMapping("/contas")
 public class ContaController {
 
     @Autowired
-    private ContaService service;
+    private ContaService contaservice;
 
     @GetMapping
-    public List<Conta> buscarTodos() {
-        return service.buscarTodos();
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-       Optional<Conta> conta = service.buscarId(id);
-        if(!conta.isEmpty()) {
-            return ResponseEntity.ok(conta.orElseThrow(() -> new RuntimeException("Não foi possível encontrar essa com por esse ID!")));
-        }
-        return ResponseEntity.ok().build();
-    }
-
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Conta salvar(@RequestBody @Valid Conta contaInput) {
-        return service.salvar(contaInput);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@RequestBody Conta contaInput, @PathVariable Long id){
-        Optional<Conta> optionalConta = Optional.ofNullable(service.buscarPorIdParaAtualizar(id));
-        return ResponseEntity.ok().build();
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> excluir(@PathVariable Long id) {
-        Optional<Conta> optionalConta = service.buscarId(id);
-        if(optionalConta.isPresent()) {
-            service.excluir(id);
-            return 	ResponseEntity.noContent().build();
-        }
-        return ResponseEntity.notFound().build();
-    }
+	public List<Conta> listar() {
+		return contaservice.listar();
+	}
+	
+	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Conta buscar(@PathVariable Long id) {
+		return contaservice.buscar(id);
+	}
+	
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public Conta salvar(@RequestBody Conta conta) {
+		return contaservice.salvar(conta);
+	}
+	
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public Conta atualizar (@PathVariable Long id, @RequestBody Conta conta){
+		Conta contaAtual = contaservice.buscar(id);
+		BeanUtils.copyProperties(conta, contaAtual, "id");
+		return contaservice.salvar(contaAtual);
+	}
+	
+	
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover (@PathVariable Long id) {
+		contaservice.excluir(id);
+	}
 
 }
