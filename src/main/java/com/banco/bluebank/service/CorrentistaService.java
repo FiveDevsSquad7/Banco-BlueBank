@@ -1,9 +1,9 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.exceptions.ContatoNaoEncontradoException;
-import com.banco.bluebank.exceptions.CorrentistaNaoEncontradoException;
-import com.banco.bluebank.exceptions.EnderecoNaoEncontradoException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptionhandler.exceptions.ContatoNaoEncontradoException;
+import com.banco.bluebank.exceptionhandler.exceptions.CorrentistaNaoEncontradoException;
+import com.banco.bluebank.exceptionhandler.exceptions.EnderecoNaoEncontradoException;
+import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.model.ContatoCliente;
 import com.banco.bluebank.model.Correntista;
 import com.banco.bluebank.model.Endereco;

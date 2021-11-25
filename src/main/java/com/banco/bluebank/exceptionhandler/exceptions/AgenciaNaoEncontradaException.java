@@ -1,4 +1,4 @@
-package com.banco.bluebank.exceptions;
+package com.banco.bluebank.exceptionhandler.exceptions;
 
 public class AgenciaNaoEncontradaException extends EntidadeNaoEncontradaException {
 
