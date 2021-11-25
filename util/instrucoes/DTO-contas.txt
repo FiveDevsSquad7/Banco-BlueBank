@@ -5,8 +5,8 @@ Instruções para os JSON de envio para CONTAS (POST e PUT)
     "numeroConta":"5551",
     "digito":"3",
     "tipoConta":"Corrente",
-    "correntista": 1 ,
-    "agencia": 2
+    "idCorrentista": 1 ,
+    "idAgencia": 2
 }
 
 

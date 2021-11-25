@@ -1,6 +1,7 @@
 package com.banco.bluebank.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,11 +38,11 @@ public class Correntista implements Serializable {
     
     @OneToMany(mappedBy = "correntista", cascade = CascadeType.REMOVE)
 	@Column(insertable = false, updatable = false)
-	private List<Endereco> enderecos;
+	private List<Endereco> enderecos = new ArrayList<>();
     
     @OneToMany(mappedBy = "correntista", cascade = CascadeType.REMOVE)
 	@Column(insertable = false, updatable = false)
-    private List<ContatoCliente> contatos;
+    private List<ContatoCliente> contatos = new ArrayList<>();
     
 	public Long getId() {
 		return id;
