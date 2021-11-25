@@ -13,86 +13,117 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "movimentacao")
-public class Movimentacao  implements Serializable {
+public class Movimentacao implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_movimentacao")
-    private Long id;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_conta_debito")
-    private Conta contaDebito;
-    
-    @ManyToOne
-    @JoinColumn(name = "id_conta_credito")
-    private Conta contaCredito;
-    
-    @Column(name="data_movimento")
-    private Date dataMovimento;
-    
-    private BigDecimal valor;
-    
-    private String descricao;
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_movimentacao")
+	private Long id;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_conta_debito", insertable = false, updatable = false)
+	@JsonIgnore
+	private Conta contaDebito;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_conta_credito", insertable = false, updatable = false)
+	@JsonIgnore
+	private Conta contaCredito;
+
+	//@JsonIgnore
+	@Column(name = "id_conta_credito")
+	private Long idContaCredito;
+
+	//@JsonIgnore
+	@Column(name = "id_conta_debito")
+	private Long idContaDebito;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_movimento")
+	private Date dataMovimento = new java.sql.Date(System.currentTimeMillis());
 	
-    public Long getId() {
+	private BigDecimal valor;
+
+	private String descricao;
+
+	public Long getIdContaCredito() {
+		return idContaCredito;
+	}
+
+	public void setIdContaCredito(Long idContaCredito) {
+		this.idContaCredito = idContaCredito;
+	}
+
+	public Long getIdContaDebito() {
+		return idContaDebito;
+	}
+
+	public void setIdContaDebito(Long idContaDebito) {
+		this.idContaDebito = idContaDebito;
+	}
+
+	public Long getId() {
 		return id;
 	}
-    
+
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
+
 	public Conta getContaDebito() {
 		return contaDebito;
 	}
-	
+
 	public void setContaDebito(Conta contaDebito) {
 		this.contaDebito = contaDebito;
 	}
-	
+
 	public Conta getContaCredito() {
 		return contaCredito;
 	}
-	
+
 	public void setContaCredito(Conta contaCredito) {
 		this.contaCredito = contaCredito;
 	}
-	
+
 	public Date getDataMovimento() {
 		return dataMovimento;
 	}
-	
+
 	public void setDataMovimento(Date dataMovimento) {
 		this.dataMovimento = dataMovimento;
 	}
-	
+
 	public BigDecimal getValor() {
 		return valor;
 	}
-	
+
 	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -104,16 +135,16 @@ public class Movimentacao  implements Serializable {
 		Movimentacao other = (Movimentacao) obj;
 		return Objects.equals(id, other.id);
 	}
-	
+
 	public Movimentacao() {
-		
+
 	}
-	
-	public Movimentacao(Conta contaDebito, Conta contaCredito, Date dataMovimento, BigDecimal valor, String descricao) {
-		this.contaDebito = contaDebito;
-		this.contaCredito = contaCredito;
+
+	public Movimentacao(Date dataMovimento, BigDecimal valor, String descricao) {
+
 		this.dataMovimento = dataMovimento;
 		this.valor = valor;
 		this.descricao = descricao;
 	}
+
 }
