@@ -1,6 +1,6 @@
-package com.banco.bluebank.exceptions;
+package com.banco.bluebank.exceptionhandler.exceptions;
 
-public class ContatoNaoEncontradoException extends EntidadeNaoEncontradaException{
+public class ContatoNaoEncontradoException extends EntidadeNaoEncontradaException {
 
     public ContatoNaoEncontradoException(String mensagem) {
         super(mensagem);

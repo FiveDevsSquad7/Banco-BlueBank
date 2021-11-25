@@ -1,13 +1,14 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.exceptions.AgenciaNaoEncontradaException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.repository.AgenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 
 
