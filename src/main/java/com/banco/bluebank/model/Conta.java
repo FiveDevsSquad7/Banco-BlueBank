@@ -1,6 +1,7 @@
 package com.banco.bluebank.model;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 
 import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "conta")
@@ -22,11 +24,8 @@ public class Conta  implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_conta")
-    private Long id;
-    
     @Column(name="num_conta")
-    private Integer numeroConta;
+    private Long numeroConta;
     
     @Column(name="tipo_conta")
     private String tipoConta;
@@ -46,9 +45,19 @@ public class Conta  implements Serializable {
     @Column(name = "id_agencia")
     @JsonIgnore
     private Long idAgencia;
-    
-    private int digito;
-        
+
+	@CreationTimestamp
+	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
+
+	public OffsetDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(OffsetDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public Long getIdCorrentista() {
 		return idCorrentista;
 	}
@@ -65,28 +74,12 @@ public class Conta  implements Serializable {
 		this.idAgencia = idAgencia;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Integer getNumeroConta() {
+	public Long getNumeroConta() {
 		return numeroConta;
 	}
 	
-	public void setNumeroConta(Integer numeroConta) {
+	public void setNumeroConta(Long numeroConta) {
 		this.numeroConta = numeroConta;
-	}
-	
-	public int getDigito() {
-		return digito;
-	}
-	
-	public void setDigito(int digito) {
-		this.digito = digito;
 	}
 	
 	public String getTipoConta() {
@@ -116,39 +109,29 @@ public class Conta  implements Serializable {
 	public Conta(Integer numeroConta, String tipoConta, Correntista correntista, Agencia agencia, Long idCorrentista,
 			Long idAgencia, int digito) {
 		super();
-		this.numeroConta = numeroConta;
 		this.tipoConta = tipoConta;
 		this.correntista = correntista;
 		this.agencia = agencia;
 		this.idCorrentista = idCorrentista;
 		this.idAgencia = idAgencia;
-		this.digito = digito;
 	}
 
 	public Conta() {
 		
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Conta conta = (Conta) o;
+
+		return numeroConta.equals(conta.numeroConta);
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Conta other = (Conta) obj;
-		return id == other.id;
-	}
-	
-	@Override
-	public String toString() {
-		return "Conta [id=" + id + ", numeroConta=" + numeroConta + ", tipoConta=" + tipoConta + ", correntista="
-				+ correntista + ", agencia=" + agencia + ", digito=" + digito + "]";
+		return numeroConta.hashCode();
 	}
 }

@@ -4,21 +4,28 @@ import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.dto.output.AgenciaOutputDTO;
 import com.banco.bluebank.model.dto.output.ContaOutputDTO;
 import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
+import com.banco.bluebank.utils.DigitoVerificadorLuhn;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.text.Format;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class ContaDisassemblerDTO {
 
+    @Autowired
+    private DigitoVerificadorLuhn dv;
+
     public ContaOutputDTO toModelDTO(Conta conta){
 
         ContaOutputDTO contaDTO = new ContaOutputDTO();
-        contaDTO.setId(conta.getId());
         contaDTO.setNumeroConta(conta.getNumeroConta());
-        contaDTO.setDigito(conta.getDigito());
+        contaDTO.setDigito(dv.calculaDigitoVerificador(conta.getNumeroConta().toString()));
+        contaDTO.setNumeroContaCompleta(String.format("%s-%s",contaDTO.getNumeroConta().toString(),contaDTO.getDigito()));
         contaDTO.setTipoConta(conta.getTipoConta());
+        contaDTO.setDataCadastro(conta.getDataCadastro());
 
         CorrentistaOutputDTO correntistaDTO = new CorrentistaOutputDTO();
         correntistaDTO.setId(conta.getCorrentista().getId());

@@ -10,8 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
-
-
 @RestController
 @RequestMapping("/contas")
 public class ContaController {
@@ -45,7 +43,7 @@ public class ContaController {
 	@ResponseStatus(HttpStatus.OK)
 	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody Conta conta){
 		Conta contaAtual = contaservice.buscar(id);
-		BeanUtils.copyProperties(conta, contaAtual, "id");
+		BeanUtils.copyProperties(conta, contaAtual, "numeroConta");
 		Conta contaModificada = contaservice.salvar(contaAtual);
 		return mapper.toModelDTO(contaModificada);
 	}

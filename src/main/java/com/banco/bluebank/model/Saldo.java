@@ -2,6 +2,7 @@ package com.banco.bluebank.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.Objects;
 
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
@@ -29,13 +31,12 @@ public class Saldo  implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_saldo")
     private Long id;
-    
-    @Column(name = "data_saldo", nullable = false)
-	@DateTimeFormat(iso = ISO.DATE)
-    private Date dataSaldo;
+
+    @Column(name = "data_saldo", nullable = false, columnDefinition = "date")
+    private OffsetDateTime dataSaldo;
     
     @ManyToOne
-    @JoinColumn(name = "id_conta")
+    @JoinColumn(name = "num_conta")
     private Conta conta;
     
     private BigDecimal saldo;
@@ -48,11 +49,11 @@ public class Saldo  implements Serializable {
 		this.id = id;
 	}
 
-	public Date getDataSaldo() {
+	public OffsetDateTime getDataSaldo() {
 		return dataSaldo;
 	}
 
-	public void setDataSaldo(Date dataSaldo) {
+	public void setDataSaldo(OffsetDateTime dataSaldo) {
 		this.dataSaldo = dataSaldo;
 	}
 
@@ -72,7 +73,7 @@ public class Saldo  implements Serializable {
 		this.saldo = saldo;
 	}
 
-	public Saldo(Date dataSaldo, Conta conta, BigDecimal saldo) {
+	public Saldo(OffsetDateTime dataSaldo, Conta conta, BigDecimal saldo) {
 		this.dataSaldo = dataSaldo;
 		this.conta = conta;
 		this.saldo = saldo;
