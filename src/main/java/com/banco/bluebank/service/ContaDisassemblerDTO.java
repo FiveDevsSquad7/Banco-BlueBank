@@ -1,13 +1,9 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.dto.output.AgenciaOutputDTO;
 import com.banco.bluebank.model.dto.output.ContaOutputDTO;
-
 import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

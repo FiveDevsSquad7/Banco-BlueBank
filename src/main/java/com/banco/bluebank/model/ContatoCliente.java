@@ -22,7 +22,7 @@ public class ContatoCliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_contato_pessoa")
+    @Column(name="id_contato_cliente")
     private Long id;
     
     private String telefone;

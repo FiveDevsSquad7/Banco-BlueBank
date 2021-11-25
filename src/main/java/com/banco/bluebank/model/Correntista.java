@@ -19,12 +19,12 @@ public class Correntista implements Serializable {
     private Long id;
     
     private String nome;
-    @Column(name = "cpf", length = 11, nullable = false)
+    @Column(name = "cpf", length = 11, nullable = true)
     private String cpf;
     
     private String rg;
     
-    @Column(name = "cnpj", length = 14, nullable = false)
+    @Column(name = "cnpj", length = 14, nullable = true)
     private String cnpj;
     
     @Column(name="pf_pj")

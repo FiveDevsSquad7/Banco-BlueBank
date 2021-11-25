@@ -48,8 +48,6 @@ public class Conta  implements Serializable {
     private Long idAgencia;
     
     private int digito;
-    
-    
         
 	public Long getIdCorrentista() {
 		return idCorrentista;
