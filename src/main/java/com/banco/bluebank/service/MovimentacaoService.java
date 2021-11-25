@@ -2,12 +2,13 @@ package com.banco.bluebank.service;
 
 import java.util.List;
 
+import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.banco.bluebank.exceptions.MovimentacaoNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.MovimentacaoNaoEncontradaException;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.repository.ContaRepository;
@@ -24,23 +25,13 @@ public class MovimentacaoService {
 
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
-		System.out.println(movimentacao.getDescricao());
-		System.out.println(movimentacao.getIdContaDebito());
-		System.out.println(movimentacao.getIdContaCredito());
-		System.out.println(movimentacao.getValor());
-		System.out.println(movimentacao.getDataMovimento());
-		Conta c1 = contaRepository.findById(movimentacao.getIdContaCredito())
-				.orElseThrow(() -> new IllegalArgumentException("Conta de Credito não existe!"));
-		Conta c2 = contaRepository.findById(movimentacao.getIdContaCredito())
-				.orElseThrow(() -> new IllegalArgumentException("Conta de Debito não existe!"));
-		movimentacao.setContaCredito(c1);
-		movimentacao.setContaDebito(c2);
-		/*
-		 * movimentacao.setDataMovimento(movimentacao.getDataMovimento()); Movimentacao
-		 * movimentacao1 = movimentacao;
-		 * movimentacao1.setContaCredito(movimentacao.getContaCredito());
-		 * movimentacao1.setContaCredito(movimentacao.getContaCredito());
-		 */
+		Conta contaDebito = contaRepository.findById(movimentacao.getIdContaDebito())
+				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getIdContaDebito()));
+		Conta contaCredito = contaRepository.findById(movimentacao.getIdContaCredito())
+				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getIdContaCredito()));
+		movimentacao.setContaDebito(contaDebito);
+		movimentacao.setContaCredito(contaCredito);
+
 		return movimentacaoRepository.save(movimentacao);
 	}
 

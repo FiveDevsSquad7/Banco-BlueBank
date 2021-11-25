@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -112,8 +114,6 @@ public class Conta  implements Serializable {
 	public void setAgencia(Agencia agencia) {
 		this.agencia = agencia;
 	}
-	
-	
 	
 	public Conta(Integer numeroConta, String tipoConta, Correntista correntista, Agencia agencia, Long idCorrentista,
 			Long idAgencia, int digito) {
