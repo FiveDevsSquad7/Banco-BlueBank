@@ -1,7 +1,7 @@
 package com.banco.bluebank.exceptionhandler;
-import com.banco.bluebank.exceptions.BusinessException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
-import com.banco.bluebank.exceptions.EntidadeNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.BusinessException;
+import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptionhandler.exceptions.EntidadeNaoEncontradaException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
@@ -57,7 +57,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
 																  HttpHeaders headers, HttpStatus status, WebRequest request) {
-
 		return handleValidationInternal(ex, headers, status, request, ex.getBindingResult());
 	}
 
@@ -75,7 +74,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 					if (objectError instanceof FieldError) {
 						name = ((FieldError) objectError).getField();
 					}
-
 					return Problem.Object.builder()
 							.name(name)
 							.userMessage(message)
@@ -109,7 +107,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 	@Override
 	protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex,
 																   HttpHeaders headers, HttpStatus status, WebRequest request) {
-
 		ProblemType problemType = ProblemType.RECURSO_NAO_ENCONTRADO;
 		String detail = String.format("O recurso %s, que você tentou acessar, é inexistente.",
 				ex.getRequestURL());
@@ -173,7 +170,6 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private ResponseEntity<Object> handlePropertyBinding(PropertyBindingException ex,
 														 HttpHeaders headers, HttpStatus status, WebRequest request) {
-
 		String path = joinPath(ex.getPath());
 
 		ProblemType problemType = ProblemType.MENSAGEM_INCOMPREENSIVEL;

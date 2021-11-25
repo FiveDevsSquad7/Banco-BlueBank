@@ -1,6 +1,4 @@
-package com.banco.bluebank.exceptions;
-
-import com.banco.bluebank.exceptions.BusinessException;
+package com.banco.bluebank.exceptionhandler.exceptions;
 
 public abstract class EntidadeNaoEncontradaException extends BusinessException {
 
