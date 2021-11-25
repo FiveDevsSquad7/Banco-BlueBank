@@ -1,67 +1,100 @@
 package com.banco.bluebank.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.banco.bluebank.exceptions.ContaException;
+import com.banco.bluebank.model.*;
+import com.banco.bluebank.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import java.util.List;
 
-import com.banco.bluebank.exceptions.ContaEmUsoException;
-import com.banco.bluebank.exceptions.ContaNaoEncontradaException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
-import com.banco.bluebank.exceptions.EntidadeNaoEncontradaException;
-import com.banco.bluebank.model.Conta;
-import com.banco.bluebank.repository.ContaRepository;
+
 
 @Service
-public class ContaService 
-{
+public class ContaService {
 
+    @Autowired
+    private ContaRepository contaRepository;
+    
 	@Autowired
-	private ContaRepository contaRepository;
-
-	public List<Conta> buscarTodos() {
+	private CorrentistaRepository correntistaRepository;
+	
+	@Autowired
+	private AgenciaRepository agenciaRepository;
+	
+//	@Autowired
+//	private SaldoRepository saldoRepository;
+	
+	
+	//ok
+	public List<Conta> listar() {
 		return contaRepository.findAll();
 	}
-
-	public Conta buscarId(Long id) throws EntidadeNaoEncontradaException, EntidadeEmUsoException {
-		try {
-			return contaRepository.findById(id).get();
-		} catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
-		}
+	
+	//ok
+	public Conta buscar(Long id) {
+		return contaRepository.findById(id)
+				.orElseThrow( () -> new ContaException(id));
 	}
-
-	public Conta salvar(Conta contaInput) {
-		return contaRepository.save(contaInput);
-	}
-
-	public Conta buscarPorIdParaAtualizar(Long id) throws EntidadeNaoEncontradaException {
-
+	
+	//ok
+	public Conta salvar(Conta conta) {
 		
-		try {
-    		Conta optionalConta = contaRepository.findById(id).get();
-    		return optionalConta;
-    	}catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
-    	}
-    }
+		Correntista correntista = correntistaRepository.findById(conta.getCorrentista().getId())
+				.orElseThrow( () -> new IllegalArgumentException("Correntista não existe!"));
+		
+		conta.setIdCorrentista(correntista.getId());
+		
+		Agencia agencia = agenciaRepository.findById(conta.getAgencia().getId())
+				.orElseThrow( () -> new IllegalArgumentException("Agencia não existe!"));
+		
+		conta.setIdAgencia(agencia.getId());
+		
+		 conta = contaRepository.save(conta);
+		 conta.setCorrentista(correntista);
+		 conta.setAgencia(agencia);
+		 return conta;
 
-	@Transactional
-	public void excluir(Long id) throws EntidadeNaoEncontradaException, EntidadeEmUsoException {
+	}
+	
+	//
+	public Conta atualizar(Long id, Conta contaAtual) {
+		Conta conta = buscar(id);
+		
+		Correntista correntista = correntistaRepository.findById(contaAtual.getIdCorrentista())
+				.orElseThrow( () -> new IllegalArgumentException("Correntista não existe!"));
+		
+		Agencia agencia = agenciaRepository.findById(contaAtual.getIdAgencia())
+				.orElseThrow( () -> new IllegalArgumentException("Agencia não existe!"));
+		
+		conta = contaRepository.save(conta);
+		conta.setCorrentista(correntista);
+		conta.setAgencia(agencia);
+		return conta;
+		
+//		Correntista correntista = correntistaRepository.findById(contaAtual.getId())
+//				.orElseThrow( () -> new IllegalArgumentException("Correntista não existe!"));
+//		Agencia agencia = agenciaRepository.findById(contaAtual.getId())
+//				.orElseThrow( () -> new IllegalArgumentException("Agencia não existe!")); 
+//		conta.setNumeroConta(contaAtual.getNumeroConta());
+//		conta.setDigito(contaAtual.getNumeroConta());
+//		conta.setTipoConta(contaAtual.getTipoConta());
+//		conta.setCorrentista(correntista);
+//		conta.setAgencia(agencia);
+//		return contaRepository.save(conta);
+	}
+	
+	//ok	
+	public void excluir(Long id) {
 		try {
+			//Saldo saldo = saldoRepository.findById(conta.getId)).orElseThrow( () -> new IllegalArgumentException("Conta com saldo!"));
+			
 			contaRepository.deleteById(id);
+			
 		} catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
-
-		} catch (DataIntegrityViolationException e) {
-			String MSG_AGENCIA_EM_USO = "Conta de id %d não pode ser removida, pois está em uso";
-			String.format(MSG_AGENCIA_EM_USO, id);
-
-			throw new ContaEmUsoException(String.format(MSG_AGENCIA_EM_USO, id));
+			throw new ContaException(id);
+		
 		}
 	}
+  
 }

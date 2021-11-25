@@ -1,5 +1,7 @@
 package com.banco.bluebank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -35,9 +37,14 @@ public class Endereco implements Serializable {
     private String cidade;
     
     private String estado;
-    
+
+	@Column(name = "id_correntista")
+	@JsonIgnore
+	private Long idCorrentista;
+
     @ManyToOne(optional=false)
-    @JoinColumn(name="id_correntista")
+    @JoinColumn(name="id_correntista", insertable = false, updatable = false)
+	@JsonIgnore
     private Correntista correntista;
     
 	public Long getId() {
@@ -126,7 +133,15 @@ public class Endereco implements Serializable {
 	public Endereco() {
 		
 	}
-	
+
+	public Long getIdCorrentista() {
+		return idCorrentista;
+	}
+
+	public void setIdCorrentista(Long idCorrentista) {
+		this.idCorrentista = idCorrentista;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
