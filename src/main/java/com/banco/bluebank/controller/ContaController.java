@@ -38,7 +38,6 @@ public class ContaController {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ContaOutputDTO salvar(@RequestBody Conta conta) {
 		Conta novaConta = contaservice.salvar(conta);
-		System.out.println(novaConta);
 		return mapper.toModelDTO(novaConta);
 	}
 

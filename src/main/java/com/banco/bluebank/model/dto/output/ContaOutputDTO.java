@@ -13,9 +13,6 @@ public class ContaOutputDTO {
     private Integer numeroConta;
     private Integer digito;
     private String tipoConta;
-    private String cpf;
-    private String rg;
-    private String cnpj;
     private CorrentistaOutputDTO correntista;
     private AgenciaOutputDTO agencia;
 

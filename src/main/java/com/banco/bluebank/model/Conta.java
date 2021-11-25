@@ -115,13 +115,6 @@ public class Conta  implements Serializable {
 		this.agencia = agencia;
 	}
 	
-	public CorrentistaOutputDTO getCorrentistaDTO() {
-		CorrentistaOutputDTO correntista = new CorrentistaOutputDTO();
-		correntista.setId(getCorrentista().getId());
-		correntista.setNome(getCorrentista().getNome());
-		return correntista;
-	}
-	
 	public Conta(Integer numeroConta, String tipoConta, Correntista correntista, Agencia agencia, Long idCorrentista,
 			Long idAgencia, int digito) {
 		super();

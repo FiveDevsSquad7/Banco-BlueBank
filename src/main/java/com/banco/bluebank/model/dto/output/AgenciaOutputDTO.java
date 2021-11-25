@@ -8,7 +8,7 @@ import lombok.Setter;
 public class AgenciaOutputDTO {
 
     private Long id;
-    private Long agencia;
-    private Long nome;
+    private String agencia;
+    private String nome;
 
 }
