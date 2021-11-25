@@ -65,20 +65,21 @@ public class ContaService {
 	}
 
 	@Transactional
-	public ContaOutputDTO salvar(Conta conta, ContaInputDTO contaInputDTO) {
+	public ContaOutputDTO salvar(ContaInputDTO contaInputDTO) {
 
 		Long idCorrentista = contaInputDTO.getIdCorrentista();
 		Long idAgencia = 	 contaInputDTO.getIdAgencia();
+		Conta conta1 = contaMapper.converterInputDTOParaModel(contaInputDTO);
 		Correntista correntista = correntistaRepository.findById(contaInputDTO.getIdCorrentista())
 				.orElseThrow(() -> new CorrentistaNaoEncontradoException("ERRO"+idCorrentista));
 
 		Agencia agencia = agenciaRepository.findById(contaInputDTO.getIdAgencia())
 				.orElseThrow(() -> new AgenciaNaoEncontradaException("ERRO"+idAgencia));
 
-		Conta conta1 = contaRepository.save(conta);
+		Conta conta = contaRepository.save(conta1);
 		conta.setCorrentista(correntista);
 		conta.setAgencia(agencia);
-		return contaMapper.converterModelParaOutputDTO(conta1);
+		return contaMapper.converterModelParaOutputDTO(conta);
 
 	}
 
@@ -125,5 +126,4 @@ public class ContaService {
 		
 		}
 	}
-  
 }

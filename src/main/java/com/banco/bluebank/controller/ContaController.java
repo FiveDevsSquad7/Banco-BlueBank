@@ -30,12 +30,11 @@ public class ContaController {
 	public ContaOutputDTO buscar(@PathVariable Long id) {
 		return contaservice.buscarId(id);
 	}
-	/*
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ContaOutputDTO salvar(@RequestBody ContaInputDTO contaInputDTOconta) {
 		return contaservice.salvar(contaInputDTOconta);
-	}*/
+	}
 	/*
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
