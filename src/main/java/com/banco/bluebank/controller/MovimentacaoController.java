@@ -29,10 +29,10 @@ public class MovimentacaoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Movimentacao salvar(@RequestBody Movimentacao movimentacao) {
-		movimentacao.setIdContaCredito(movimentacao.getIdContaCredito());
-		movimentacao.setIdContaDebito(movimentacao.getIdContaDebito());
-		return service.salvar(movimentacao);
-
+		movimentacao.setNumeroContaCredito(movimentacao.getNumeroContaCredito());
+		movimentacao.setNumeroContaDebito(movimentacao.getNumeroContaDebito());
+		service.salvar(movimentacao);
+		return this.buscar(movimentacao.getId());
 	}
 
 	@GetMapping

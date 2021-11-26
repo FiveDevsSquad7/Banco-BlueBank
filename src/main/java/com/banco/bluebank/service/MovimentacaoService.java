@@ -25,10 +25,10 @@ public class MovimentacaoService {
 
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
-		Conta contaDebito = contaRepository.findById(movimentacao.getIdContaDebito())
-				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getIdContaDebito()));
-		Conta contaCredito = contaRepository.findById(movimentacao.getIdContaCredito())
-				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getIdContaCredito()));
+		Conta contaDebito = contaRepository.findById(movimentacao.getNumeroContaDebito())
+				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getNumeroContaDebito()));
+		Conta contaCredito = contaRepository.findById(movimentacao.getNumeroContaCredito())
+				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getNumeroContaCredito()));
 		movimentacao.setContaDebito(contaDebito);
 		movimentacao.setContaCredito(contaCredito);
 

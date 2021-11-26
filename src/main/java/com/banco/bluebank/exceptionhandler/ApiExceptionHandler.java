@@ -1,11 +1,11 @@
 package com.banco.bluebank.exceptionhandler;
+
 import com.banco.bluebank.exceptionhandler.exceptions.BusinessException;
 import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.exceptionhandler.exceptions.EntidadeNaoEncontradaException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
-
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
