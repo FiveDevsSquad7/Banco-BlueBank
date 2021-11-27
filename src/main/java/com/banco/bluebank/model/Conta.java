@@ -30,9 +30,9 @@ public class Conta  implements Serializable {
     @Column(name="num_conta")
     private Long numeroConta;
     
-    @NotBlank(message = "Número da Conta deve ser preenchido")
-    @Size(min = 2, max = 2, message = "Tipo da Conta deve ter entre 2 dígitos")
-    @Column(name="tipo_conta",length = 2)
+    @NotBlank(message = "Tipo da Conta deve ser preenchido")
+    @Size(min = 2, max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
+    @Column(name="tipo_conta",length = 2, nullable = false)
     private String tipoConta;
     
     @NotNull

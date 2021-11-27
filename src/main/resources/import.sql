@@ -5,7 +5,7 @@ insert into agencia (agencia, nome_agencia, data_cadastro) values ('080-2', "Pet
 
 -- registro do proprio banco para criacao da conta interna do banco (sem enderecos e sem contatos)
 insert into correntista (cnpj,cpf,email_validacao,nome,rg,sms_validacao,pf_pj,data_cadastro) values ('99524991000179',null,null,'Blue Bank',null,null,'J', utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('Contabil Interna',1,1, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('AD',1,1, utc_timestamp);
 
 -- registros de correntistas normais com seus enderecos e contatos
 insert into correntista (cnpj,cpf,email_validacao,nome,rg,sms_validacao,pf_pj,data_cadastro) values (null,'76712703000','carlos@sistelpa.com','Carlos Betiol','4444444-4','45991157171','F', utc_timestamp);
@@ -20,7 +20,7 @@ insert into endereco (bairro,cep,cidade,complemento,estado,id_correntista,lograd
 insert into contato_cliente (email,id_correntista,info_recado,telefone,data_cadastro) values ('carlos@betiol.dev',3,'Carlos Betiol','45991157171', utc_timestamp);
 insert into contato_cliente (email,id_correntista,info_recado,telefone,data_cadastro) values ('jonas@gmail.com',3,'Jonas W','11999145454', utc_timestamp);
 
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('Corrente',2,2, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('Poupanca',2,2, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('Corrente',3,3, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('Poupanca',3,3, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',2,2, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',2,2, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',3,3, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',3,3, utc_timestamp);
