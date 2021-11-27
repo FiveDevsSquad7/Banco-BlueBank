@@ -35,12 +35,12 @@ public class ContatoCliente implements Serializable {
     private String telefone;
     
     @NotBlank(message = "Email deve ser preenchido")
-    @Size(min = 10, max = 50, message = "Email deve ter no mínimo 8 e no máximo 15 carecteres")
+    @Size(min = 10, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
     @Column(length = 50, nullable = true)
     private String email;
-
-	@Column(name = "id_correntista")
+	
 	@JsonIgnore
+	@Column(name = "id_correntista")
 	private Long idCorrentista;
     
     @NotBlank(message = "Recado deve ser preenchido")

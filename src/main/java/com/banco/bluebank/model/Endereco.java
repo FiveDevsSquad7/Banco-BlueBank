@@ -16,7 +16,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -29,18 +28,18 @@ public class Endereco implements Serializable {
     @Column(name="id_endereco")
     private Long id;
     
-    @NotNull(message = "O logradouro pessoa deve ser preenchido")
+    @NotBlank(message = "O logradouro pessoa deve ser preenchido")
     @Size(min = 5, max = 50, message = "O logradouro deve ter entre 50 caracteres")
     @Column(length = 50, nullable = true)
     private String logradouro;
     
-    @NotNull(message = "O número da pessoa deve ser preenchido")
+    @NotBlank(message = "O número da pessoa deve ser preenchido")
     @Size(min = 1, max = 10, message = "O logradouro deve ter entre 1:10 números")
     @Column(length = 10,nullable = true)    
     private String numero;
     
-    @NotBlank(message = "O complemento deve ser preenchido")
-    @Size(min = 1, max = 25, message = "O complemento deve ter entre 1:25 carecteres")
+    //@NotBlank(message = "O complemento deve ser preenchido")
+    @Size(max = 25, message = "O complemento deve ter entre 1:25 carecteres")
     @Column(length = 25,nullable = true)  
     private String complemento;
     

@@ -2,7 +2,6 @@ package com.banco.bluebank.model;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
-import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,10 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -31,26 +28,24 @@ public class Conta  implements Serializable {
     private Long numeroConta;
     
     @NotBlank(message = "Tipo da Conta deve ser preenchido")
-    @Size(min = 2, max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
+    @Size(max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
     @Column(name="tipo_conta",length = 2, nullable = false)
     private String tipoConta;
-    
-    @NotNull
+   
     @ManyToOne
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
     
-    @NotNull
     @ManyToOne(optional=false)
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
     
-    @Column(name = "id_correntista")
     @JsonIgnore
+    @Column(name = "id_correntista")
     private Long idCorrentista;
     
-    @Column(name = "id_agencia")
     @JsonIgnore
+    @Column(name = "id_agencia")
     private Long idAgencia;
 
 	@CreationTimestamp

@@ -35,13 +35,13 @@ public class MovimentacaoController {
 		return this.buscar(movimentacao.getId());
 	}
 
-	@GetMapping
+	@GetMapping(path = "/{numeroConta}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Movimentacao> listar() {
-		return service.listar();
+	public List<Movimentacao> listar(@PathVariable Long numeroConta) {
+		return service.listar(numeroConta);
 	}
 
-	@GetMapping(path = "/{id}")
+	//@GetMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Movimentacao buscar(@PathVariable Long id) {
 		return service.buscarPorId(id);
@@ -60,6 +60,4 @@ public class MovimentacaoController {
 	    public void remover(@PathVariable Long id) {
 	        service.excluir(id);
 	    }
-	
-	
 }

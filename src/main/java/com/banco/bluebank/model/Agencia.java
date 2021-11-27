@@ -27,9 +27,9 @@ public class Agencia implements Serializable {
     @Column(name="id_agencia")
     private Long id;
     
-    @Column(length = 9, nullable = false)
     @NotBlank(message = "Número da agência deve ser preenchido")
     @Size(min = 2, max = 9, message = "Número da agência deve ter entre 2 e 40 carecteres")
+    @Column(length = 9, nullable = false)
     private String agencia;
 
     @NotBlank(message = "Nome da agência deve ser preenchido")
