@@ -5,27 +5,18 @@ import com.banco.bluebank.model.Correntista;
 import lombok.Getter;
 import lombok.Setter;
 
-/**
- * @name: ContaOutputDTO
- * @categoria: Classe entidade
- * @description: Util para conversão e para "visualizar"
- * @author: Dev. Weslley Lima
- * @version: V1
- */
+import java.time.OffsetDateTime;
+
 @Getter
 @Setter
 public class ContaOutputDTO {
 
-    private Long id;
-    private Integer numeroConta;
+    private Long numeroConta;
+    private String digito;
+    private String numeroContaCompleta;
     private String tipoConta;
-    private String nomeAgencia;
-    private Long idCorrentista;
-    private String nomeCorrentista;
-    private String cpf;
-    private String rg;
-    private String cnpj;
-    private Long idAgencia;
-    private Integer digito;
+    private OffsetDateTime dataCadastro;
+    private CorrentistaOutputDTO correntista;
+    private AgenciaOutputDTO agencia;
 
 }

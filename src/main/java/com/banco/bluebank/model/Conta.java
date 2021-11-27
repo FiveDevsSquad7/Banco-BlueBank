@@ -1,7 +1,7 @@
 package com.banco.bluebank.model;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.time.OffsetDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,7 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 @Entity
 @Table(name = "conta")
@@ -20,35 +24,42 @@ public class Conta  implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_conta")
-    private Long id;
-    
     @Column(name="num_conta")
-    private Integer numeroConta;
+    private Long numeroConta;
     
-    @Column(name="tipo_conta")
+    @NotBlank(message = "Tipo da Conta deve ser preenchido")
+    @Size(max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
+    @Column(name="tipo_conta",length = 2, nullable = false)
     private String tipoConta;
-    
+   
     @ManyToOne
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
     
-    @ManyToOne
+    @ManyToOne(optional=false)
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
     
-    @Column(name = "id_correntista")
     @JsonIgnore
+    @Column(name = "id_correntista")
     private Long idCorrentista;
     
-    @Column(name = "id_agencia")
     @JsonIgnore
+    @Column(name = "id_agencia")
     private Long idAgencia;
-    
-    private int digito;
-    
-    
-        
+
+	@CreationTimestamp
+	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
+
+	public OffsetDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(OffsetDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public Long getIdCorrentista() {
 		return idCorrentista;
 	}
@@ -65,28 +76,12 @@ public class Conta  implements Serializable {
 		this.idAgencia = idAgencia;
 	}
 
-	public Long getId() {
-		return id;
-	}
-	
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	public Integer getNumeroConta() {
+	public Long getNumeroConta() {
 		return numeroConta;
 	}
 	
-	public void setNumeroConta(Integer numeroConta) {
+	public void setNumeroConta(Long numeroConta) {
 		this.numeroConta = numeroConta;
-	}
-	
-	public int getDigito() {
-		return digito;
-	}
-	
-	public void setDigito(int digito) {
-		this.digito = digito;
 	}
 	
 	public String getTipoConta() {
@@ -113,44 +108,32 @@ public class Conta  implements Serializable {
 		this.agencia = agencia;
 	}
 	
-	
-	
 	public Conta(Integer numeroConta, String tipoConta, Correntista correntista, Agencia agencia, Long idCorrentista,
 			Long idAgencia, int digito) {
 		super();
-		this.numeroConta = numeroConta;
 		this.tipoConta = tipoConta;
 		this.correntista = correntista;
 		this.agencia = agencia;
 		this.idCorrentista = idCorrentista;
 		this.idAgencia = idAgencia;
-		this.digito = digito;
 	}
 
 	public Conta() {
 		
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Conta conta = (Conta) o;
+
+		return numeroConta.equals(conta.numeroConta);
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
-	}
-	
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Conta other = (Conta) obj;
-		return id == other.id;
-	}
-	
-	@Override
-	public String toString() {
-		return "Conta [id=" + id + ", numeroConta=" + numeroConta + ", tipoConta=" + tipoConta + ", correntista="
-				+ correntista + ", agencia=" + agencia + ", digito=" + digito + "]";
+		return numeroConta.hashCode();
 	}
 }

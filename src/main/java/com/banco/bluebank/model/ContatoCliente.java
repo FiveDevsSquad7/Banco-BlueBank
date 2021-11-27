@@ -1,8 +1,10 @@
 package com.banco.bluebank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -13,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "contato_cliente")
@@ -22,25 +26,44 @@ public class ContatoCliente implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id_contato_pessoa")
+    @Column(name="id_contato_cliente")
     private Long id;
     
+    @NotBlank(message = "Telefone deve ser preenchido")
+    @Size(min = 8, max = 15, message = "Telefone deve ter no mínimo 8 e no máximo 15 números")
+    @Column(length = 15, nullable = true)
     private String telefone;
     
+    @NotBlank(message = "Email deve ser preenchido")
+    @Size(min = 10, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
+    @Column(length = 50, nullable = true)
     private String email;
-
-	@Column(name = "id_correntista")
+	
 	@JsonIgnore
+	@Column(name = "id_correntista")
 	private Long idCorrentista;
     
-    @Column(name="info_recado")
+    @NotBlank(message = "Recado deve ser preenchido")
+    @Size(min = 10, max = 50, message = "Recado deve ter no mínimo 10 e no máximo 50 caracteres")
+    @Column(name="info_recado",length = 50, nullable = true)
     private String infoRecado;
     
     @ManyToOne(optional=false)
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
 	@JsonIgnore
     private Correntista correntista;
-    
+
+	@CreationTimestamp
+	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
+
+	public OffsetDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(OffsetDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
 
 	public Long getId() {
 		return id;

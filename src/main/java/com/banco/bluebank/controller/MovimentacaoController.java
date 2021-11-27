@@ -29,19 +29,19 @@ public class MovimentacaoController {
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Movimentacao salvar(@RequestBody Movimentacao movimentacao) {
-		movimentacao.setIdContaCredito(movimentacao.getIdContaCredito());
-		movimentacao.setIdContaDebito(movimentacao.getIdContaDebito());
-		return service.salvar(movimentacao);
-
+		movimentacao.setNumeroContaCredito(movimentacao.getNumeroContaCredito());
+		movimentacao.setNumeroContaDebito(movimentacao.getNumeroContaDebito());
+		service.salvar(movimentacao);
+		return this.buscar(movimentacao.getId());
 	}
 
-	@GetMapping
+	@GetMapping(path = "/{numeroConta}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Movimentacao> listar() {
-		return service.listar();
+	public List<Movimentacao> listar(@PathVariable Long numeroConta) {
+		return service.listar(numeroConta);
 	}
 
-	@GetMapping(path = "/{id}")
+	//@GetMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Movimentacao buscar(@PathVariable Long id) {
 		return service.buscarPorId(id);
@@ -60,6 +60,4 @@ public class MovimentacaoController {
 	    public void remover(@PathVariable Long id) {
 	        service.excluir(id);
 	    }
-	
-	
 }

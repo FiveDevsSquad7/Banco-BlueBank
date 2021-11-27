@@ -1,0 +1,570 @@
+{
+	"info": {
+		"_postman_id": "225fb7bd-fd0e-4e53-a7c7-cd5de46c42a7",
+		"name": "BlueBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Agencias Lista",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/agencias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/agencias/20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agencias",
+						"20"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/agencias/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agencias",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"agencia\": \"030-7\",\n    \"nome\": \"Cataratas do Iguaçu\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/agencias/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agencias",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"agencia\": \"020-3\",\n    \"nome\": \"Centro\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/agencias",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"agencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas Lista",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"Antonio Silva\",\n    \"cpf\": \"546465445\",\n    \"rg\": \"46546464\",\n    \"cnpj\": \"446465\",\n    \"tipoPessoa\": \"F\",\n    \"emailValidacao\": \"carlos@betiol.dev\",\n    \"enderecos\": [\n        {\n            \"logradouro\": \"non minim quis culpa\",\n            \"numero\": \"ut dolor\",\n            \"complemento\": \"dolore non sunt\",\n            \"cep\": \"in mollit\",\n            \"bairro\": \"ut minim occaecat tempor qui\",\n            \"cidade\": \"ea dolor ipsum\",\n            \"estado\": \"consequat enim\"\n        },\n        {\n            \"logradouro\": \"sit et laboris reprehenderit\",\n            \"numero\": \"sed officia\",\n            \"complemento\": \"occaecat\",\n            \"cep\": \"voluptate in qui ut dolore\",\n            \"bairro\": \"anim quis ex officia\",\n            \"cidade\": \"Excepteur\",\n            \"estado\": \"dolore esse\"\n        }\n    ],\n    \"contatos\": [\n        {\n            \"telefone\": \"fugiat ea\",\n            \"email\": \"sed\",\n            \"infoRecado\": \"ad voluptate anim eiusmod\"\n        },\n        {\n            \"telefone\": \"proident est Ut nulla\",\n            \"email\": \"consectetur in velit\",\n            \"infoRecado\": \"sint officia irure\"\n        }\n    ],\n    \"sms\": \"6456465\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/correntistas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 1,\n    \"nome\": \"Carlos Betiol\",\n    \"cpf\": \"546465445\",\n    \"rg\": \"46546464\",\n    \"cnpj\": \"446465\",\n    \"tipoPessoa\": \"F\",\n    \"emailValidacao\": \"carlos@betiol.dev\",\n    \"sms\": \"6456465\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas Lista Enderecos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas/2/enderecos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"2",
+						"enderecos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas add endereco",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"logradouro\": \"rua do angico\",\n    \"numero\": \"ut dolor\",\n    \"complemento\": \"dolore non sunt\",\n    \"cep\": \"in mollit\",\n    \"bairro\": \"ut minim occaecat tempor qui\",\n    \"cidade\": \"manaus\",\n    \"estado\": \"AM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1/enderecos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1",
+						"enderecos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas delete endereco",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1/enderecos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1",
+						"enderecos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas Lista Contatos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas/2/contatos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"2",
+						"contatos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas add contato",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"telefone\": \"9999999\",\n    \"email\": \"joca@email.com\",\n    \"infoRecado\": \"ad voluptate anim eiusmod\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1/contatos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1",
+						"contatos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas delete contato",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/correntistas/1/contatos/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"correntistas",
+						"1",
+						"contatos",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas Lista",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/contas/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tipoConta\":\"Corrente\",\n    \"correntista\": {\"id\": 2} ,\n    \"agencia\": {\"id\": 2}\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/contas",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\n    \"tipoConta\":\"Juridica\",\n    \"correntista\": {\"id\": 2} ,\n    \"agencia\": {\"id\": 2}\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/contas/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/contas/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"contas",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes Lista",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movimentacoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimentacoes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes por Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/movimentacoes/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimentacoes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroContaDebito\":  2,\n    \"numeroContaCredito\": 3,\n    \"descricao\":\"teste 4\",\n    \"valor\": 6000.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/movimentacoes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"movimentacoes"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,8 +1,10 @@
 package com.banco.bluebank.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -13,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "endereco")
@@ -24,18 +28,39 @@ public class Endereco implements Serializable {
     @Column(name="id_endereco")
     private Long id;
     
+    @NotBlank(message = "O logradouro pessoa deve ser preenchido")
+    @Size(min = 5, max = 50, message = "O logradouro deve ter entre 50 caracteres")
+    @Column(length = 50, nullable = true)
     private String logradouro;
     
+    @NotBlank(message = "O número da pessoa deve ser preenchido")
+    @Size(min = 1, max = 10, message = "O logradouro deve ter entre 1:10 números")
+    @Column(length = 10,nullable = true)    
     private String numero;
     
+    //@NotBlank(message = "O complemento deve ser preenchido")
+    @Size(max = 25, message = "O complemento deve ter entre 1:25 carecteres")
+    @Column(length = 25,nullable = true)  
     private String complemento;
     
+    @NotBlank(message = "O CEP deve ser preenchido")
+    @Size(min = 8, max = 8, message = "O CEP deve ter entre 1:8 números")
+    @Column(length = 8, nullable = false)  
     private String cep;
     
+    @NotBlank(message = "O bairro deve ser preenchido")
+    @Size(min = 5, max = 25, message = "O bairro deve ter entre 1:25 caracteres")
+    @Column(length = 25, nullable = true)
     private String bairro;
     
+    @NotBlank(message = "A cidade deve ser preenchido")
+    @Size(min = 5, max = 30, message = "A cidade deve ter entre 1:30 caracteres")
+    @Column(length = 30, nullable = false)
     private String cidade;
     
+    @NotBlank(message = "O estado deve ser preenchido")
+    @Size(min = 2, max = 2, message = "O estado deve ter 2 carecteres")
+    @Column(length = 2, nullable = true)
     private String estado;
 
 	@Column(name = "id_correntista")
@@ -46,7 +71,19 @@ public class Endereco implements Serializable {
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
 	@JsonIgnore
     private Correntista correntista;
-    
+
+	@CreationTimestamp
+	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
+
+	public OffsetDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(OffsetDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public Long getId() {
 		return id;
 	}
