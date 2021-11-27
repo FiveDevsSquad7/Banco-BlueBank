@@ -10,8 +10,6 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -25,9 +23,9 @@ public class Correntista implements Serializable {
     @Column(name = "id_correntista")
     private Long id;
 
-    @Column(length = 50, nullable = false)
     @NotBlank(message = "Nome do correntista deve ser preenchido")
     @Size(min = 2, max = 50, message = "Nome do correntista deve ter entre 2 e 50 letras")
+    @Column(length = 50, nullable = false)
     private String nome;
 
     @Size(min = 2, max = 11, message = "CPF deve conter um valor válido")
@@ -42,10 +40,10 @@ public class Correntista implements Serializable {
     @Column(name = "cnpj", length = 14, nullable = true)
     private String cnpj;
 
-    @NotNull(message = "O tipo pessoa deve ser preenchido")
-    @Size(min = 1, max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
+    @NotBlank(message = "O tipo pessoa deve ser preenchido")
+    @Size(max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
     @Column(name = "pf_pj", length = 1, nullable = false)
-    private char tipoPessoa;
+    private String tipoPessoa;
 
     @Size(min = 5, max = 50, message = "O email deve conter um valor válido")
     @Column(name = "email_validacao", length = 50, nullable = true)
@@ -115,11 +113,11 @@ public class Correntista implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public char getTipoPessoa() {
+    public String getTipoPessoa() {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(char tipoPessoa) {
+    public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
 
@@ -155,7 +153,7 @@ public class Correntista implements Serializable {
         this.contatos = contatos;
     }
 
-    public Correntista(String nome, String cpf, String rg, String cnpj, char tipopessoa, String emailValidacao, String smsValidacao) {
+    public Correntista(String nome, String cpf, String rg, String cnpj, String tipopessoa, String emailValidacao, String smsValidacao) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;

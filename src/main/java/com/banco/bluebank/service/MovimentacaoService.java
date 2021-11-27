@@ -1,5 +1,6 @@
 package com.banco.bluebank.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
@@ -35,8 +36,16 @@ public class MovimentacaoService {
 		return movimentacaoRepository.save(movimentacao);
 	}
 
-	public List<Movimentacao> listar() {
-		return movimentacaoRepository.findAll();
+	public List<Movimentacao> listar(long numeroConta) {
+		ArrayList<Movimentacao> lista = (ArrayList<Movimentacao>) movimentacaoRepository.findAll();
+		ArrayList<Movimentacao> lista2 = new ArrayList<Movimentacao>();
+		for (Movimentacao m1 : lista) {
+			if (m1.getNumeroContaCredito() == numeroConta || m1.getNumeroContaDebito() == numeroConta) {
+				lista2.add(m1);
+			}
+
+		}
+		return lista2;
 	}
 
 	public Movimentacao buscarPorId(Long idMovimentacao) {
