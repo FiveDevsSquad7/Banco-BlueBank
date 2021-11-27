@@ -1,8 +1,16 @@
 package com.banco.bluebank.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "agencia")
@@ -14,10 +22,15 @@ public class Agencia implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id_agencia")
     private Long id;
-
+    
+    @Column(length = 9, nullable = false)
+    @NotBlank(message = "Número da agência deve ser preenchido")
+    @Size(min = 2, max = 9, message = "Número da agência deve ter entre 2 e 40 carecteres")
     private String agencia;
 
-    @Column(name="nome_agencia")
+    @NotBlank(message = "Nome da agência deve ser preenchido")
+    @Size(min = 2, max = 40, message = "Nome da agência deve ter entre 2 e 40 caracteres")
+    @Column(length = 40, name="nome_agencia", nullable = true)
     private String nome;
 
     public Long getId() {

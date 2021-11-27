@@ -11,6 +11,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "correntista")
@@ -23,22 +27,41 @@ public class Correntista implements Serializable {
     @Column(name="id_correntista")
     private Long id;
     
+    @Column(length = 50)
+    @NotBlank(message = "Nome da Pessoa deve ser preenchido")
+    @Size(min = 2, max = 50, message = "Nome da pessoa deve ter entre 2 e 50 letras")
     private String nome;
-    @Column(name = "cpf", length = 11, nullable = false)
+    
+    @NotNull(message = "CPF deve ser preenchido")
+    @Size(min = 2, max = 11, message = "CPF da pessoa deve ter entre 2 e 50 letras")
+    @Pattern(regexp="\\d{3}.\\d{3}.\\d{3}-\\d{2}", message = "CPF da Pessoa deve seguir o padrão NNN.NNN.NNN-NN")
+    @Column( length = 14, nullable = false)
     private String cpf;
     
+    @NotBlank(message = "RG deve ser preenchido")
+    @Size(min = 2, max = 11, message = "RG da pessoa deve ter entre 2 e 20 caracteres")
+    @Column(length = 11,  nullable = true)
     private String rg;
     
+    @NotNull(message = "CNPJ deve ser preenchido")
+    @Size(min = 2, max = 15, message = "CNPJ da pessoa deve ter entre 2 e 15 dígitos")    
     @Column(name = "cnpj", length = 14, nullable = false)
+    @Pattern(regexp="\\d{3}.\\d{3}.\\d{3}.\\d{3}-\\d{3}", message = "CNPJ da Pessoa deve seguir o padrão NNN.NNN.NNN.NNN-NN")
     private String cnpj;
-    
-    @Column(name="pf_pj")
+
+    @NotNull(message = "O tipo pessoa deve ser preenchido")
+    @Size(min = 2, max = 2, message = "O tipo de pessoa deve ter entre 2 caracteres")    
+    @Column(name="pf_pj", length = 2, nullable = false)
     private char tipoPessoa;
     
-    @Column(name="email_validacao")
+    @NotNull(message = "O email validacao deve ser preenchido")
+    @Size(min = 5, max = 50, message = "O tipo de pessoa deve ter entre 5  a 50 caracteres")    
+    @Column(name="email_validacao", length = 50, nullable = false)
     private String emailValidacao;
     
-    @Column(name="sms_validacao")
+    @NotNull(message = "O sms validacao deve ser preenchido")
+    @Size(min = 5, max = 20, message = "O sms deve ter entre 5 a 20 caracteres")    
+    @Column(name="sms_validacao", length = 20, nullable = false)
     private String smsValidacao;
     
     @OneToMany(mappedBy = "correntista")

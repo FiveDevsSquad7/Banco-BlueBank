@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -38,6 +40,9 @@ public class Saldo  implements Serializable {
     @JoinColumn(name = "id_conta")
     private Conta conta;
     
+    @NotNull(message = "Saldo deve ser preenchido")
+    @Size(min = 1, max = 10, message = "Saldo deve ter entre 1:10 dígitos")
+    @Column(length = 10, nullable = false)
     private BigDecimal saldo;
 
 	public Long getId() {

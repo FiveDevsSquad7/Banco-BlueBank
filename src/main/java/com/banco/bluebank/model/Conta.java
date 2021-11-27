@@ -1,6 +1,5 @@
 package com.banco.bluebank.model;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "conta")
@@ -24,20 +26,30 @@ public class Conta  implements Serializable {
     @Column(name="id_conta")
     private Long id;
     
-    @Column(name="num_conta")
+    @NotNull(message = "Número da Conta deve ser preenchido")
+    @Size(min = 2, max = 9, message = "Número da Conta deve ter entre 2 e 9 dígitos")
+    @Column(name="num_conta",length = 9)
     private Integer numeroConta;
     
-    @Column(name="tipo_conta")
+    
+    @NotBlank(message = "Número da Conta deve ser preenchido")
+    @Size(min = 2, max = 2, message = "Tipo da Conta deve ter entre 2 dígitos")
+    @Column(name="tipo_conta",length = 2)
     private String tipoConta;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name="id_correntista")
     private Correntista correntista;
     
+    @NotNull
     @ManyToOne(optional=false)
     @JoinColumn(name="id_agencia")
     private Agencia agencia;
     
+    
+    @NotBlank(message = "O Dígito deve ser computado")
+    @Size(min = 1, max = 1, message = "O digito deve ter 1 digito")
     private int digito;
     
 	public Long getId() {
