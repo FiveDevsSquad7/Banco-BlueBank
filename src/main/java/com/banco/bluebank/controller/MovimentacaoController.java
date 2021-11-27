@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.service.MovimentacaoService;
 
@@ -41,23 +40,23 @@ public class MovimentacaoController {
 		return service.listar(numeroConta);
 	}
 
-	//@GetMapping(path = "/{id}")
+	// @GetMapping(path = "/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Movimentacao buscar(@PathVariable Long id) {
 		return service.buscarPorId(id);
 	}
-	
+
 	@PutMapping("/{id}")
-    @ResponseStatus(HttpStatus.OK)
-    public Movimentacao atualizar(@PathVariable Long id, @RequestBody Movimentacao movimentacao) {
-        Movimentacao MovimentacaoAtual = service.buscarPorId(id);
-        BeanUtils.copyProperties(movimentacao, MovimentacaoAtual, "id");
-        return service.salvar(MovimentacaoAtual);
-    }
-	
-	 @DeleteMapping("/{id}")
-	    @ResponseStatus(HttpStatus.NO_CONTENT)
-	    public void remover(@PathVariable Long id) {
-	        service.excluir(id);
-	    }
+	@ResponseStatus(HttpStatus.OK)
+	public Movimentacao atualizar(@PathVariable Long id, @RequestBody Movimentacao movimentacao) {
+		Movimentacao MovimentacaoAtual = service.buscarPorId(id);
+		BeanUtils.copyProperties(movimentacao, MovimentacaoAtual, "id");
+		return service.salvar(MovimentacaoAtual);
+	}
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover(@PathVariable Long id) {
+		service.excluir(id);
+	}
 }
