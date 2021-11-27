@@ -11,6 +11,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -27,14 +30,18 @@ public class Conta  implements Serializable {
     @Column(name="num_conta")
     private Long numeroConta;
     
-    @Column(name="tipo_conta")
+    @NotBlank(message = "Tipo da Conta deve ser preenchido")
+    @Size(min = 2, max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
+    @Column(name="tipo_conta",length = 2, nullable = false)
     private String tipoConta;
     
+    @NotNull
     @ManyToOne
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
     
-    @ManyToOne
+    @NotNull
+    @ManyToOne(optional=false)
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
     
