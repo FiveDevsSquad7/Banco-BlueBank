@@ -4,7 +4,10 @@ package com.banco.bluebank.controller;
 import com.banco.bluebank.model.ContatoCliente;
 import com.banco.bluebank.model.Correntista;
 import com.banco.bluebank.model.Endereco;
+import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.service.CorrentistaService;
+import com.banco.bluebank.service.MovimentacaoService;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +22,9 @@ public class CorrentistaController {
 
     @Autowired
     private CorrentistaService service;
+    
+    @Autowired
+    private MovimentacaoService serviceMovimentacao;
 
     @GetMapping
     public List<Correntista> listar() {
@@ -29,6 +35,11 @@ public class CorrentistaController {
     @ResponseStatus(HttpStatus.OK)
     public Correntista buscar(@PathVariable Long id) {
         return service.buscar(id);
+    }
+    @GetMapping(path = "/{id}/extrato")
+    @ResponseStatus(HttpStatus.OK)
+    public List<Movimentacao> extrato(@PathVariable Long id) {
+        return serviceMovimentacao.listar(id);
     }
 
     @PostMapping
