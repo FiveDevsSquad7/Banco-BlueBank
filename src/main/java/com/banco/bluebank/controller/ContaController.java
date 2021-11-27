@@ -1,80 +1,58 @@
 package com.banco.bluebank.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import javax.validation.Valid;
-
+import com.banco.bluebank.model.Conta;
+import com.banco.bluebank.model.dto.output.ContaOutputDTO;
+import com.banco.bluebank.service.ContaDisassemblerDTO;
+import com.banco.bluebank.service.ContaService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
-import com.banco.bluebank.exceptions.EntidadeNaoEncontradaException;
-import com.banco.bluebank.model.Conta;
-import com.banco.bluebank.service.ContaService;
-
-@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("/conta")
-public class ContaController
-{
+@RequestMapping("/contas")
+public class ContaController {
 
-    @Autowired
-    private ContaService service;
+	@Autowired
+	private ContaService contaservice;
 
-    @GetMapping
-    public List<Conta> buscarTodos() {
-        return service.buscarTodos();
-    }
+	@Autowired
+	private ContaDisassemblerDTO mapper;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
-    	Conta conta = null;
-    	try {
-    		conta = service.buscarId(id);
-            	return ResponseEntity.ok().build();
-        	} catch (RuntimeException ex) {
-        		//1 caso captura a messagem de erro e exibir para no front ou encapsula no body da resposta JSON no back
-                return ResponseEntity.ok(ex.getMessage());
+	@GetMapping
+	public List<ContaOutputDTO> listar() {
+		return mapper.toCollectionModelDTO(contaservice.listar());
+	}
 
-        	}
-       
-    }
+	@GetMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ContaOutputDTO buscar(@PathVariable Long id) {
+		Conta conta = contaservice.buscar(id);
+		return mapper.toModelDTO(conta);
+	}
 
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Conta salvar(@RequestBody @Valid Conta contaInput) {
-        return service.salvar(contaInput);
-    }
+	@PostMapping
+	@ResponseStatus(HttpStatus.CREATED)
+	public ContaOutputDTO salvar(@RequestBody Conta conta) {
+		Conta novaConta = contaservice.salvar(conta);
+		return mapper.toModelDTO(novaConta);
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<?> atualizar(@RequestBody Conta contaInput, @PathVariable Long id){
-        Optional<Conta> optionalConta = Optional.ofNullable(service.buscarPorIdParaAtualizar(id));
-        return ResponseEntity.ok().build();
-    }
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.OK)
+	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody Conta conta){
+		Conta contaAtual = contaservice.buscar(id);
+		BeanUtils.copyProperties(conta, contaAtual, "numeroConta");
+		Conta contaModificada = contaservice.salvar(contaAtual);
+		return mapper.toModelDTO(contaModificada);
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<?> excluir(@PathVariable Long id) {
-    	try {
-        Conta conta = service.buscarId(id);
-        service.excluir(id);
-        return ResponseEntity.noContent().build();
-    	}catch(EntidadeNaoEncontradaException e) {
-        return ResponseEntity.notFound().build();
-    	}catch(EntidadeEmUsoException e) {
-          return ResponseEntity.internalServerError().build();
-        }
-    }
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void remover (@PathVariable Long id) {
+		contaservice.excluir(id);
+	}
 
 }

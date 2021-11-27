@@ -1,6 +1,10 @@
 package com.banco.bluebank.model;
 
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -32,6 +36,18 @@ public class Agencia implements Serializable {
     @Size(min = 2, max = 40, message = "Nome da agência deve ter entre 2 e 40 caracteres")
     @Column(length = 40, name="nome_agencia", nullable = true)
     private String nome;
+
+    @CreationTimestamp
+    @Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+    private OffsetDateTime dataCadastro;
+
+    public OffsetDateTime getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(OffsetDateTime dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
 
     public Long getId() {
         return id;

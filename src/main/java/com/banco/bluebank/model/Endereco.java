@@ -1,6 +1,10 @@
 package com.banco.bluebank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -59,11 +63,28 @@ public class Endereco implements Serializable {
     @Size(min = 2, max = 2, message = "O estado deve ter 2 carecteres")
     @Column(length = 2, nullable = true)
     private String estado;
-    
+
+	@Column(name = "id_correntista")
+	@JsonIgnore
+	private Long idCorrentista;
+
     @ManyToOne(optional=false)
-    @JoinColumn(name="id_correntista")
+    @JoinColumn(name="id_correntista", insertable = false, updatable = false)
+	@JsonIgnore
     private Correntista correntista;
-    
+
+	@CreationTimestamp
+	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
+
+	public OffsetDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(OffsetDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -150,7 +171,15 @@ public class Endereco implements Serializable {
 	public Endereco() {
 		
 	}
-	
+
+	public Long getIdCorrentista() {
+		return idCorrentista;
+	}
+
+	public void setIdCorrentista(Long idCorrentista) {
+		this.idCorrentista = idCorrentista;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

@@ -1,67 +1,88 @@
 package com.banco.bluebank.service;
 
-import java.util.List;
-import java.util.Optional;
-
+import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.CorrentistaNaoEncontradoException;
+import com.banco.bluebank.model.Agencia;
+import com.banco.bluebank.model.Conta;
+import com.banco.bluebank.model.Correntista;
+import com.banco.bluebank.repository.AgenciaRepository;
+import com.banco.bluebank.repository.ContaRepository;
+import com.banco.bluebank.repository.CorrentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.banco.bluebank.exceptions.ContaEmUsoException;
-import com.banco.bluebank.exceptions.ContaNaoEncontradaException;
-import com.banco.bluebank.exceptions.EntidadeEmUsoException;
-import com.banco.bluebank.exceptions.EntidadeNaoEncontradaException;
-import com.banco.bluebank.model.Conta;
-import com.banco.bluebank.repository.ContaRepository;
+import java.util.List;
+
+
 
 @Service
-public class ContaService 
-{
+public class ContaService {
 
 	@Autowired
 	private ContaRepository contaRepository;
 
-	public List<Conta> buscarTodos() {
+	@Autowired
+	private CorrentistaRepository correntistaRepository;
+
+	@Autowired
+	private AgenciaRepository agenciaRepository;
+
+	public List<Conta> listar() {
 		return contaRepository.findAll();
 	}
 
-	public Conta buscarId(Long id) throws EntidadeNaoEncontradaException, EntidadeEmUsoException {
-		try {
-			return contaRepository.findById(id).get();
-		} catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
-		}
+	public Conta buscar(Long id) {
+		return contaRepository.findById(id)
+				.orElseThrow( () -> new ContaNaoEncontradaException(id));
 	}
 
-	public Conta salvar(Conta contaInput) {
-		return contaRepository.save(contaInput);
+	public Conta salvar(Conta conta) {
+
+		Conta finalConta = conta;
+		Correntista correntista = correntistaRepository.findById(conta.getCorrentista().getId())
+				.orElseThrow( () -> new CorrentistaNaoEncontradoException(finalConta.getCorrentista().getId()));
+
+		conta.setIdCorrentista(correntista.getId());
+
+		Conta finalConta1 = conta;
+		Agencia agencia = agenciaRepository.findById(conta.getAgencia().getId())
+				.orElseThrow( () -> new AgenciaNaoEncontradaException(finalConta1.getAgencia().getId()));
+
+		conta.setIdAgencia(agencia.getId());
+
+		conta = contaRepository.save(conta);
+		conta.setCorrentista(correntista);
+		conta.setAgencia(agencia);
+		return conta;
+
 	}
 
-	public Conta buscarPorIdParaAtualizar(Long id) throws EntidadeNaoEncontradaException {
+	public Conta atualizar(Long id, Conta contaAtual) {
+		Conta conta = buscar(id);
 
-		
-		try {
-    		Conta optionalConta = contaRepository.findById(id).get();
-    		return optionalConta;
-    	}catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
-    	}
-    }
+		Correntista correntista = correntistaRepository.findById(contaAtual.getIdCorrentista())
+				.orElseThrow( () -> new CorrentistaNaoEncontradoException(contaAtual.getIdCorrentista()));
 
-	@Transactional
-	public void excluir(Long id) throws EntidadeNaoEncontradaException, EntidadeEmUsoException {
+		Agencia agencia = agenciaRepository.findById(contaAtual.getIdAgencia())
+				.orElseThrow( () -> new AgenciaNaoEncontradaException(contaAtual.getIdAgencia()));
+
+		conta = contaRepository.save(conta);
+		conta.setCorrentista(correntista);
+		conta.setAgencia(agencia);
+		return conta;
+
+	}
+
+	public void excluir(Long id) {
 		try {
 			contaRepository.deleteById(id);
+
 		} catch (EmptyResultDataAccessException e) {
 			throw new ContaNaoEncontradaException(id);
 
-		} catch (DataIntegrityViolationException e) {
-			String MSG_AGENCIA_EM_USO = "Conta de id %d não pode ser removida, pois está em uso";
-			String.format(MSG_AGENCIA_EM_USO, id);
-
-			throw new ContaEmUsoException(String.format(MSG_AGENCIA_EM_USO, id));
 		}
 	}
+
 }
