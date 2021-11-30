@@ -4,13 +4,13 @@ package com.banco.bluebank.controller;
 import com.banco.bluebank.model.ContatoCliente;
 import com.banco.bluebank.model.Correntista;
 import com.banco.bluebank.model.Endereco;
-import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.service.CorrentistaService;
 import com.banco.bluebank.service.MovimentacaoService;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -193,10 +193,5 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-    @GetMapping(path = "/{id}/extrato")
-    @ResponseStatus(HttpStatus.OK)
-    public List<Movimentacao> extrato(@PathVariable Long id) {
-        return serviceMovimentacao.listar(id);
-    }
 
 }

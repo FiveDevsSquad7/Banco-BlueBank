@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.DigitoVerificadorInvalidoException;
+import com.banco.bluebank.service.MovimentacaoRealizadaEvent;
 import com.banco.bluebank.utils.DigitoVerificadorLuhn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +32,7 @@ public class MovimentacaoService {
 	private DigitoVerificadorLuhn dv;
 
 	@Autowired
-	private NotificacaoCorrentistaService notificacaoCorrentista;
+	private ApplicationEventPublisher eventPublisher;
 
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
@@ -57,8 +59,7 @@ public class MovimentacaoService {
 
 		movimentacao = movimentacaoRepository.save(movimentacao);
 
-		notificacaoCorrentista.notificar(movimentacao.getContaDebito().getCorrentista(), movimentacao.getValor());
-		notificacaoCorrentista.notificar(movimentacao.getContaCredito().getCorrentista(), movimentacao.getValor());
+		eventPublisher.publishEvent(new MovimentacaoRealizadaEvent(movimentacao));
 
 		return movimentacao;
 
@@ -71,8 +72,8 @@ public class MovimentacaoService {
 			if (m1.getNumeroContaCredito() == numeroConta || m1.getNumeroContaDebito() == numeroConta) {
 				lista2.add(m1);
 			}
-
 		}
+
 		return lista2;
 	}
 
