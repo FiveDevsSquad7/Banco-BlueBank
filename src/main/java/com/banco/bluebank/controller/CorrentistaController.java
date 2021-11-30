@@ -185,13 +185,5 @@ public class CorrentistaController {
         service.excluirContato(id, contatoId );
     }
 
-    @ApiOperation(value = "Busca movimentação pelo ID na Base de Dados")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna Movimentação"),
-            @ApiResponse(code = 401, message = "Você não tem permissão para acessar, desde que não esteja logado"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-    })
 
 }
