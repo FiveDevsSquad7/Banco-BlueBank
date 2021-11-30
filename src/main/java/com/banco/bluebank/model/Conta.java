@@ -136,4 +136,17 @@ public class Conta  implements Serializable {
 	public int hashCode() {
 		return numeroConta.hashCode();
 	}
+
+	@Override
+	public String toString() {
+		return "Conta{" +
+				"numeroConta=" + numeroConta +
+				", tipoConta='" + tipoConta + '\'' +
+				", correntista=" + correntista.getNome() +
+				", agencia=" + agencia.getNome() +
+				", idCorrentista=" + idCorrentista +
+				", idAgencia=" + idAgencia +
+				", dataCadastro=" + dataCadastro +
+				'}';
+	}
 }

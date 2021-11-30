@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.DigitoVerificadorInvalidoException;
+import com.banco.bluebank.utils.DigitoVerificadorLuhn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
@@ -24,16 +26,42 @@ public class MovimentacaoService {
 	@Autowired
 	private ContaRepository contaRepository;
 
+	@Autowired
+	private DigitoVerificadorLuhn dv;
+
+	@Autowired
+	private NotificacaoCorrentistaService notificacaoCorrentista;
+
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
-		Conta contaDebito = contaRepository.findById(movimentacao.getNumeroContaDebito())
-				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getNumeroContaDebito()));
-		Conta contaCredito = contaRepository.findById(movimentacao.getNumeroContaCredito())
-				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getNumeroContaCredito()));
+
+		if(! dv.verificaDigitoVerificador(movimentacao.getNumeroContaDebito().toString())){
+			throw new DigitoVerificadorInvalidoException(movimentacao.getNumeroContaDebito());
+		}
+		if(! dv.verificaDigitoVerificador(movimentacao.getNumeroContaCredito().toString())){
+			throw new DigitoVerificadorInvalidoException(movimentacao.getNumeroContaCredito());
+		}
+		String stringContaDebito = movimentacao.getNumeroContaDebito().toString();
+		Long contaDebitoSemDigito = Long.parseLong(stringContaDebito.substring(0,stringContaDebito.length()-1));
+		Conta contaDebito = contaRepository.findById(contaDebitoSemDigito)
+				.orElseThrow(() -> new ContaNaoEncontradaException(contaDebitoSemDigito));
+		String stringContaCredito = movimentacao.getNumeroContaCredito().toString();
+		Long contaCreditoSemDigito = Long.parseLong(stringContaCredito.substring(0,stringContaCredito.length()-1));
+		Conta contaCredito = contaRepository.findById(contaCreditoSemDigito)
+				.orElseThrow(() -> new ContaNaoEncontradaException(contaCreditoSemDigito));
+
 		movimentacao.setContaDebito(contaDebito);
 		movimentacao.setContaCredito(contaCredito);
+		movimentacao.setNumeroContaDebito(contaDebitoSemDigito);
+		movimentacao.setNumeroContaCredito(contaCreditoSemDigito);
 
-		return movimentacaoRepository.save(movimentacao);
+		movimentacao = movimentacaoRepository.save(movimentacao);
+
+		notificacaoCorrentista.notificar(movimentacao.getContaDebito().getCorrentista(), movimentacao.getValor());
+		notificacaoCorrentista.notificar(movimentacao.getContaCredito().getCorrentista(), movimentacao.getValor());
+
+		return movimentacao;
+
 	}
 
 	public List<Movimentacao> listar(long numeroConta) {

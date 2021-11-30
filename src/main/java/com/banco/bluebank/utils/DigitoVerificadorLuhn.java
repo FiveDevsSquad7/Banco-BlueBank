@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DigitoVerificadorLuhn {
 
-    public boolean correctoVerificador(String card) {
+    public boolean verificaDigitoVerificador(String card) {
         if (card == null)
             return false;
         char digitoverificador = card.charAt(card.length() - 1);
