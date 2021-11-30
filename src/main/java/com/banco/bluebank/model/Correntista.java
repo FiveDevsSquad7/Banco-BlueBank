@@ -1,5 +1,6 @@
 package com.banco.bluebank.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -20,47 +22,58 @@ public class Correntista implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(value = "Campo ID")
     @Column(name = "id_correntista")
     private Long id;
 
+    @ApiModelProperty(value = "Campo Nome da pessoa")
+    @Column(length = 50, nullable = false)
     @NotBlank(message = "Nome do correntista deve ser preenchido")
     @Size(min = 2, max = 50, message = "Nome do correntista deve ter entre 2 e 50 letras")
-    @Column(length = 50, nullable = false)
     private String nome;
 
+    @ApiModelProperty(value = " Campo CPF")
     @Size(min = 2, max = 11, message = "CPF deve conter um valor válido")
     @Column(name = "cpf", length = 11, nullable = true)
     private String cpf;
 
+    @ApiModelProperty(value = "Campo RG")
     @Size(min = 2, max = 11, message = "RG do correntista deve ter entre 2 e 20 caracteres")
     @Column(length = 11, nullable = true)
     private String rg;
 
+    @ApiModelProperty(value = "Campo CNPJ")
     @Size(min = 2, max = 14, message = "CNPJ deve conter um valor válido")
     @Column(name = "cnpj", length = 14, nullable = true)
     private String cnpj;
 
-    @NotBlank(message = "O tipo pessoa deve ser preenchido")
-    @Size(max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
+    @ApiModelProperty(value = "Campo Tipo de Pessoa: Fisica ou Juridica")
+    @NotNull(message = "O tipo pessoa deve ser preenchido")
+    @Size(min = 1, max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
     @Column(name = "pf_pj", length = 1, nullable = false)
-    private String tipoPessoa;
+    private char tipoPessoa;
 
+    @ApiModelProperty(value = " Campo E-mail para notificar movimentação")
     @Size(min = 5, max = 50, message = "O email deve conter um valor válido")
     @Column(name = "email_validacao", length = 50, nullable = true)
     private String emailValidacao;
 
+    @ApiModelProperty(value = " Campo SMS para notificar movimentação")
     @Size(min = 5, max = 20, message = "O telefone para SMS deve ter entre 5 a 20 caracteres")
     @Column(name = "sms_validacao", length = 20, nullable = true)
     private String smsValidacao;
 
+    @ApiModelProperty(value = "Campo Endereço do correntista")
     @OneToMany(mappedBy = "correntista", cascade = CascadeType.REMOVE)
     @Column(insertable = false, updatable = false)
     private List<Endereco> enderecos = new ArrayList<>();
 
+    @ApiModelProperty(value = "Campo Objeto Contato relacionado Correntista")
     @OneToMany(mappedBy = "correntista", cascade = CascadeType.REMOVE)
     @Column(insertable = false, updatable = false)
     private List<ContatoCliente> contatos = new ArrayList<>();
 
+    @ApiModelProperty(value = "Campo da data ao criar Correntista")
     @CreationTimestamp
     @Column(name = "data_cadastro", nullable = false, columnDefinition = "datetime")
     private OffsetDateTime dataCadastro;
@@ -113,11 +126,11 @@ public class Correntista implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public String getTipoPessoa() {
+    public char getTipoPessoa() {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(String tipoPessoa) {
+    public void setTipoPessoa(char tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
 
@@ -153,7 +166,7 @@ public class Correntista implements Serializable {
         this.contatos = contatos;
     }
 
-    public Correntista(String nome, String cpf, String rg, String cnpj, String tipopessoa, String emailValidacao, String smsValidacao) {
+    public Correntista(String nome, String cpf, String rg, String cnpj, char tipopessoa, String emailValidacao, String smsValidacao) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
