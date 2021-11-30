@@ -60,7 +60,6 @@ public class MovimentacaoService {
 		movimentacao = movimentacaoRepository.save(movimentacao);
 
 		eventPublisher.publishEvent(new MovimentacaoRealizadaEvent(movimentacao));
-		System.out.println("ja publiquei o evento para notificacoes");
 
 		return movimentacao;
 
@@ -73,8 +72,8 @@ public class MovimentacaoService {
 			if (m1.getNumeroContaCredito() == numeroConta || m1.getNumeroContaDebito() == numeroConta) {
 				lista2.add(m1);
 			}
-
 		}
+
 		return lista2;
 	}
 
