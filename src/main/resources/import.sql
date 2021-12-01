@@ -1,3 +1,7 @@
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+CREATE DEFINER='root'@'%' FUNCTION `f_saldo_conta` (`pConta` Long, `pData` date) RETURNS DECIMAL(19,2) READS SQL DATA  return (select ifnull( ((select sum(a.valor) from movimentacao as a where a.num_conta_debito = pConta and cast(a.data_movimento as date) <= pData) - (select sum(a.valor) from movimentacao as a where a.num_conta_credito = pConta and cast(a.data_movimento as date) <= pData)), 0));
+
 -- agencias, sendo a primeira, a global
 insert into agencia (agencia, nome_agencia, data_cadastro) values ('000-0', "Global", utc_timestamp);
 insert into agencia (agencia, nome_agencia, data_cadastro) values ('030-7', "Centro", utc_timestamp);

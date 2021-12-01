@@ -2,6 +2,7 @@ package com.banco.bluebank.controller;
 
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
+import com.banco.bluebank.model.PeriodoInput;
 import com.banco.bluebank.model.dto.output.ContaOutputDTO;
 import com.banco.bluebank.service.ContaDisassemblerDTO;
 import com.banco.bluebank.service.ContaService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -44,6 +46,12 @@ public class ContaController {
 		Conta novaConta = contaservice.salvar(conta);
 		return mapper.toModelDTO(novaConta);
 	}
+
+//	@GetMapping(path = "/{id}/saldo")
+//	@ResponseStatus(HttpStatus.OK)
+//	public BigDecimal saldo(@PathVariable Long id, @RequestBody PeriodoInput periodo) {
+//		return contaservice.buscarSaldo(id,periodo.getDataFinal());
+//	}
 
 	@GetMapping(path = "/{id}/extrato")
 	@ResponseStatus(HttpStatus.OK)

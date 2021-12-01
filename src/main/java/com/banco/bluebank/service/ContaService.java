@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
-
-
 
 @Service
 public class ContaService {
@@ -32,6 +32,10 @@ public class ContaService {
 	public List<Conta> listar() {
 		return contaRepository.findAll();
 	}
+
+//	public BigDecimal buscarSaldo(Long numeroConta, OffsetDateTime data) {
+//		return contaRepository.findSaldo(numeroConta, data);
+//	}
 
 	public Conta buscar(Long id) {
 		return contaRepository.findById(id)
