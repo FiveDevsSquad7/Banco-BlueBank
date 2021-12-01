@@ -1,5 +1,8 @@
 package com.banco.bluebank.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +28,15 @@ public class MovimentacaoController {
 	@Autowired
 	private MovimentacaoService service;
 
+	@ApiOperation(value = "Cria uma nova Movimentacao")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retornar SUCESSO após criação"),
+			@ApiResponse(code = 401, message = "Você não tem permissão para acessar, desde que não esteja logado"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public Movimentacao salvar(@RequestBody Movimentacao movimentacao) {
@@ -34,6 +46,14 @@ public class MovimentacaoController {
 		return this.buscar(movimentacao.getId());
 	}
 
+	@ApiOperation(value = "Pesquisa Movimentacao pelo numero da conta")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retorna a lista de movimentacoes"),
+			@ApiResponse(code = 401, message = "Você não tem permissão para acessar, desde que não esteja logado"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
 	@GetMapping(path = "/{numeroConta}")
 	@ResponseStatus(HttpStatus.OK)
 	public List<Movimentacao> listar(@PathVariable Long numeroConta) {
@@ -46,6 +66,16 @@ public class MovimentacaoController {
 		return service.buscarPorId(id);
 	}
 
+
+	@ApiOperation(value = "Faz atualização global das movimentacoes específico pelo ID")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retornar SUCESSO após atualização"),
+			@ApiResponse(code = 401, message = "Você não tem permissão para acessar, desde que não esteja logado"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
+
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public Movimentacao atualizar(@PathVariable Long id, @RequestBody Movimentacao movimentacao) {
@@ -53,6 +83,15 @@ public class MovimentacaoController {
 		BeanUtils.copyProperties(movimentacao, MovimentacaoAtual, "id");
 		return service.salvar(MovimentacaoAtual);
 	}
+
+	@ApiOperation(value = "Exclui Movimentacao exclisivo por meio do ID passado!")
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "Retornar SUCESSO após exclusão"),
+			@ApiResponse(code = 401, message = "Você não tem permissão para acessar, desde que não esteja logado"),
+			@ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
+			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+	})
 
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
