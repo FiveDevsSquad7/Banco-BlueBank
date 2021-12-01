@@ -10,9 +10,6 @@ import java.time.OffsetDateTime;
 import java.util.Optional;
 
 @Repository
-public interface ContaRepository extends JpaRepository<Conta, Long>{
+public interface ContaRepository extends JpaRepository<Conta, Long>, ContaRepositoryQueries {
 
-    @Query("select function('f_saldo_conta',p.numeroConta , '2021-12-01') from Conta p where p.numeroConta=2")
-    Optional<BigDecimal> findSaldo(Long numeroConta, OffsetDateTime data);
-
-}
+ }

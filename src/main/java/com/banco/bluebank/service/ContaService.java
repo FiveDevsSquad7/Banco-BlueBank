@@ -33,9 +33,10 @@ public class ContaService {
 		return contaRepository.findAll();
 	}
 
-//	public BigDecimal buscarSaldo(Long numeroConta, OffsetDateTime data) {
-//		return contaRepository.findSaldo(numeroConta, data);
-//	}
+	public BigDecimal buscarSaldo(Long numeroConta, OffsetDateTime data) {
+		System.out.println("Chegou no service");
+		return contaRepository.findSaldo(numeroConta, data);
+	}
 
 	public Conta buscar(Long id) {
 		return contaRepository.findById(id)

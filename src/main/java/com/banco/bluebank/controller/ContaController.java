@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @RestController
@@ -47,11 +48,12 @@ public class ContaController {
 		return mapper.toModelDTO(novaConta);
 	}
 
-//	@GetMapping(path = "/{id}/saldo")
-//	@ResponseStatus(HttpStatus.OK)
-//	public BigDecimal saldo(@PathVariable Long id, @RequestBody PeriodoInput periodo) {
-//		return contaservice.buscarSaldo(id,periodo.getDataFinal());
-//	}
+	@GetMapping(path = "/{id}/saldo/{data}")
+	@ResponseStatus(HttpStatus.OK)
+	public BigDecimal saldo(@PathVariable Long id, @PathVariable String data) {
+		System.out.println("Chegou no controller e recebeu "+data);
+		return contaservice.buscarSaldo(id,OffsetDateTime.parse(data));
+	}
 
 	@GetMapping(path = "/{id}/extrato")
 	@ResponseStatus(HttpStatus.OK)
