@@ -37,7 +37,7 @@ public class AgenciaController {
     @ResponseStatus(HttpStatus.OK)
     public Agencia atualizar(@PathVariable Long id, @RequestBody Agencia agencia) {
         Agencia agenciaAtual = service.buscar(id);
-        BeanUtils.copyProperties(agencia, agenciaAtual, "id");
+        BeanUtils.copyProperties(agencia, agenciaAtual, "id", "dataCadastro");
         return service.salvar(agenciaAtual);
     }
 

@@ -94,8 +94,14 @@ public class Agencia implements Serializable {
         return Objects.hash(id);
     }
 
-	@Override
-	public String toString() {
-		return "Agencia id: " + id + " Agencia: " + agencia + " Nome Agencia: " + nome;
-	} 
+    @Override
+    public String toString() {
+        String dtCadastro = (dataCadastro != null)?dataCadastro.toString():"null";
+        return "Agencia{" +
+                "id=" + id +
+                ", agencia='" + agencia + '\'' +
+                ", nome='" + nome + '\'' +
+                ", dataCadastro=" + dtCadastro +
+                '}';
+    }
 }

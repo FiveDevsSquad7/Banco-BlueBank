@@ -65,7 +65,7 @@ public class ContaController {
 	@ResponseStatus(HttpStatus.OK)
 	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody Conta conta){
 		Conta contaAtual = contaservice.buscar(id);
-		BeanUtils.copyProperties(conta, contaAtual, "numeroConta");
+		BeanUtils.copyProperties(conta, contaAtual, "numeroConta", "dataCadastro");
 		Conta contaModificada = contaservice.salvar(contaAtual);
 		return mapper.toModelDTO(contaModificada);
 	}

@@ -30,5 +30,4 @@ public class MovimentacaoController {
 		return service.buscarPorId(id);
 	}
 
-
 }
