@@ -1,5 +1,6 @@
 package com.banco.bluebank.model;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+@ApiModel(value = "Correntista", description = "Entidade entitulada Correntista")
 @Entity
 @Table(name = "correntista")
 public class Correntista implements Serializable {
@@ -26,7 +28,7 @@ public class Correntista implements Serializable {
     @Column(name = "id_correntista")
     private Long id;
 
-    @ApiModelProperty(value = "Campo Nome da pessoa")
+    @ApiModelProperty(required = true, value = "Campo Nome da pessoa")
     @Column(length = 50, nullable = false)
     @NotBlank(message = "Nome do correntista deve ser preenchido")
     @Size(min = 2, max = 50, message = "Nome do correntista deve ter entre 2 e 50 letras")
@@ -47,7 +49,7 @@ public class Correntista implements Serializable {
     @Column(name = "cnpj", length = 14, nullable = true)
     private String cnpj;
 
-    @ApiModelProperty(value = "Campo Tipo de Pessoa: Fisica ou Juridica")
+    @ApiModelProperty(required = true, value = "Campo Tipo de Pessoa: Fisica ou Juridica")
     @NotNull(message = "O tipo pessoa deve ser preenchido")
     @Size(min = 1, max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
     @Column(name = "pf_pj", length = 1, nullable = false)

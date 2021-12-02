@@ -17,8 +17,11 @@ import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
+@ApiModel(value = "Movimentacao", description = "Entidade entitulada Movimentacao")
 @Entity
 @Table(name = "movimentacao")
 public class Movimentacao implements Serializable {
@@ -27,34 +30,41 @@ public class Movimentacao implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(value = "Campo referente ID")
 	@Column(name = "id_movimentacao")
 	private Long id;
 
+	@ApiModelProperty(value = "Campo referente OBJETO CONTA TIPO DEBITO",
+			reference = "Relacionamento Muitas Contatos para um Conta do Tipo Debito")
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "num_conta_debito", insertable = false, updatable = false)
 	@JsonIgnore
 	private Conta contaDebito;
 
+	@ApiModelProperty(value = "Campo referente OBJETO CONTA TIPO CREDITO",
+			reference = "Relacionamento Muitas Contatos para um Conta do Tipo cretido")
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "num_conta_credito", insertable = false, updatable = false)
 	@JsonIgnore
 	private Conta contaCredito;
-	
-	//@NotBlank(message = "O número da conta de CRÉDITO deve ser preenchido. Ex: 123-4")
+
+	@ApiModelProperty(value = "Campo referente número da Conta Crédito")
 	@Column(name = "num_conta_credito")
 	private Long numeroContaCredito;
-	
-	//@NotBlank(message = "O número da conta de DÉBITO deve ser preenchido. Ex: 123-4")
+
+	@ApiModelProperty(value = "Campo referente número da Conta Debito")
 	@Column(name = "num_conta_debito")
 	private Long numeroContaDebito;
 
+	@ApiModelProperty(value = "Campo referente data de criação")
 	@CreationTimestamp
 	@Column(name = "data_movimento",nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataMovimento;
-	
-	//@NotBlank(message = "Informe o valor da transação. Ex: 2000.02")
+
+	@ApiModelProperty(value = "Campo referente valor")
 	private BigDecimal valor;
-	
+
+	@ApiModelProperty(value = "Campo referente descrição")
 	@Size(min = 1, max = 45, message = "Descrição entre 1 e 45 caracteres.")
 	@Column(length = 45)
 	private String descricao;
