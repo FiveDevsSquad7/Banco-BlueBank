@@ -1,9 +1,6 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
-import com.banco.bluebank.exceptionhandler.exceptions.MovimentacaoNaoEncontradaException;
-import com.banco.bluebank.exceptionhandler.exceptions.SaldoBancoIndisponivelException;
-import com.banco.bluebank.exceptionhandler.exceptions.SaldoCorrentistaIndisponivelException;
+import com.banco.bluebank.exceptionhandler.exceptions.*;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.model.dto.output.SaldoOutput;
@@ -76,21 +73,17 @@ public class MovimentacaoService {
 
 	}
 
-	public List<Movimentacao> listar(Long numeroConta) {
+	public List<Movimentacao> listar(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal) {
 
 		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		Conta conta = contaRepository.findById(numeroContaSemDigito)
 				.orElseThrow( () -> new ContaNaoEncontradaException(numeroContaSemDigito));
 
-		ArrayList<Movimentacao> lista = (ArrayList<Movimentacao>) movimentacaoRepository.findAll();
-		ArrayList<Movimentacao> lista2 = new ArrayList<Movimentacao>();
-		for (Movimentacao m1 : lista) {
-			if (Objects.equals(m1.getNumeroContaCredito(), numeroContaSemDigito) || Objects.equals(m1.getNumeroContaDebito(), numeroContaSemDigito)) {
-				lista2.add(m1);
-			}
+		if(dataFinal.compareTo(dataInicial)<0) {
+			throw new PeriodoInvalidoException();
 		}
+		return movimentacaoRepository.findByConta(numeroContaSemDigito, dataInicial, dataFinal);
 
-		return lista2;
 	}
 
 	public Movimentacao buscarPorId(Long idMovimentacao) {
