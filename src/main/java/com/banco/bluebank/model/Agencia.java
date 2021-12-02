@@ -45,7 +45,7 @@ public class Agencia implements Serializable {
 
     @ApiModelProperty(value = "Campo referente data da criação")
     @CreationTimestamp
-    @Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+    @Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
     private OffsetDateTime dataCadastro;
 
     public OffsetDateTime getDataCadastro() {
@@ -101,8 +101,14 @@ public class Agencia implements Serializable {
         return Objects.hash(id);
     }
 
-	@Override
-	public String toString() {
-		return "Agencia id: " + id + " Agencia: " + agencia + " Nome Agencia: " + nome;
-	} 
+    @Override
+    public String toString() {
+        String dtCadastro = (dataCadastro != null)?dataCadastro.toString():"null";
+        return "Agencia{" +
+                "id=" + id +
+                ", agencia='" + agencia + '\'' +
+                ", nome='" + nome + '\'' +
+                ", dataCadastro=" + dtCadastro +
+                '}';
+    }
 }

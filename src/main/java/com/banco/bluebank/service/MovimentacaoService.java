@@ -1,26 +1,29 @@
 package com.banco.bluebank.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
-import com.banco.bluebank.exceptionhandler.exceptions.DigitoVerificadorInvalidoException;
-import com.banco.bluebank.service.MovimentacaoRealizadaEvent;
-import com.banco.bluebank.utils.DigitoVerificadorLuhn;
+import com.banco.bluebank.exceptionhandler.exceptions.MovimentacaoNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.SaldoBancoIndisponivelException;
+import com.banco.bluebank.exceptionhandler.exceptions.SaldoCorrentistaIndisponivelException;
+import com.banco.bluebank.model.Conta;
+import com.banco.bluebank.model.Movimentacao;
+import com.banco.bluebank.model.dto.output.SaldoOutput;
+import com.banco.bluebank.repository.ContaRepository;
+import com.banco.bluebank.repository.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.banco.bluebank.exceptionhandler.exceptions.MovimentacaoNaoEncontradaException;
-import com.banco.bluebank.model.Conta;
-import com.banco.bluebank.model.Movimentacao;
-import com.banco.bluebank.repository.ContaRepository;
-import com.banco.bluebank.repository.MovimentacaoRepository;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MovimentacaoService {
+
+	private static final Integer PRIMEIRA_CONTA_CORRENTISTAS = 3;
 
 	@Autowired
 	private MovimentacaoRepository movimentacaoRepository;
@@ -28,8 +31,7 @@ public class MovimentacaoService {
 	@Autowired
 	private ContaRepository contaRepository;
 
-	@Autowired
-	private DigitoVerificadorLuhn dv;
+	@Autowired ContaUtils contaUtils;
 
 	@Autowired
 	private ApplicationEventPublisher eventPublisher;
@@ -37,20 +39,29 @@ public class MovimentacaoService {
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
 
-		if(! dv.verificaDigitoVerificador(movimentacao.getNumeroContaDebito().toString())){
-			throw new DigitoVerificadorInvalidoException(movimentacao.getNumeroContaDebito());
-		}
-		if(! dv.verificaDigitoVerificador(movimentacao.getNumeroContaCredito().toString())){
-			throw new DigitoVerificadorInvalidoException(movimentacao.getNumeroContaCredito());
-		}
-		String stringContaDebito = movimentacao.getNumeroContaDebito().toString();
-		Long contaDebitoSemDigito = Long.parseLong(stringContaDebito.substring(0,stringContaDebito.length()-1));
+		Long contaDebitoSemDigito = contaUtils.verificaNumeroConta(movimentacao.getNumeroContaDebito());
+		Long contaCreditoSemDigito = contaUtils.verificaNumeroConta(movimentacao.getNumeroContaCredito());
+
 		Conta contaDebito = contaRepository.findById(contaDebitoSemDigito)
 				.orElseThrow(() -> new ContaNaoEncontradaException(contaDebitoSemDigito));
-		String stringContaCredito = movimentacao.getNumeroContaCredito().toString();
-		Long contaCreditoSemDigito = Long.parseLong(stringContaCredito.substring(0,stringContaCredito.length()-1));
+
 		Conta contaCredito = contaRepository.findById(contaCreditoSemDigito)
 				.orElseThrow(() -> new ContaNaoEncontradaException(contaCreditoSemDigito));
+
+		if( contaDebitoSemDigito >= PRIMEIRA_CONTA_CORRENTISTAS) {
+			SaldoOutput saldo = contaRepository.findSaldo(contaDebitoSemDigito, OffsetDateTime.now());
+			if (saldo.getSaldo().add(movimentacao.getValor()).compareTo(BigDecimal.ZERO) >= 0) {
+				throw new SaldoCorrentistaIndisponivelException(contaDebitoSemDigito);
+			}
+		}
+
+		if( contaCreditoSemDigito < PRIMEIRA_CONTA_CORRENTISTAS &&
+				contaDebitoSemDigito >= PRIMEIRA_CONTA_CORRENTISTAS ) {
+			SaldoOutput saldo = contaRepository.findSaldo(contaCreditoSemDigito, OffsetDateTime.now());
+			if (saldo.getSaldo().subtract(movimentacao.getValor()).compareTo(BigDecimal.ZERO) < 0) {
+				throw new SaldoBancoIndisponivelException();
+			}
+		}
 
 		movimentacao.setContaDebito(contaDebito);
 		movimentacao.setContaCredito(contaCredito);
@@ -65,11 +76,16 @@ public class MovimentacaoService {
 
 	}
 
-	public List<Movimentacao> listar(long numeroConta) {
+	public List<Movimentacao> listar(Long numeroConta) {
+
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
+		Conta conta = contaRepository.findById(numeroContaSemDigito)
+				.orElseThrow( () -> new ContaNaoEncontradaException(numeroContaSemDigito));
+
 		ArrayList<Movimentacao> lista = (ArrayList<Movimentacao>) movimentacaoRepository.findAll();
 		ArrayList<Movimentacao> lista2 = new ArrayList<Movimentacao>();
 		for (Movimentacao m1 : lista) {
-			if (m1.getNumeroContaCredito() == numeroConta || m1.getNumeroContaDebito() == numeroConta) {
+			if (Objects.equals(m1.getNumeroContaCredito(), numeroContaSemDigito) || Objects.equals(m1.getNumeroContaDebito(), numeroContaSemDigito)) {
 				lista2.add(m1);
 			}
 		}
@@ -82,12 +98,4 @@ public class MovimentacaoService {
 				.orElseThrow(() -> new MovimentacaoNaoEncontradaException(idMovimentacao));
 	}
 
-	public void excluir(Long idMovimentacao) {
-		try {
-			movimentacaoRepository.deleteById(idMovimentacao);
-
-		} catch (EmptyResultDataAccessException e) {
-			throw new MovimentacaoNaoEncontradaException(idMovimentacao);
-		}
-	}
 }

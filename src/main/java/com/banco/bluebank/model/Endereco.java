@@ -87,7 +87,7 @@ public class Endereco implements Serializable {
 
 	@ApiModelProperty(value = "Campo referente data da criação")
 	@CreationTimestamp
-	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataCadastro;
 
 	public OffsetDateTime getDataCadastro() {
