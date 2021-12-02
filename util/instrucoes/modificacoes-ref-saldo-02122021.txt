@@ -1,0 +1,93 @@
+- implementacao de funcao SQL e endpoint para saldo de conta (ideia inicial seria fazer view, mas a function no database é mais eficiente), ela foi inserida atraves do import.sql dentro de resources.
+
+- agora nos body json para POST e PUT onde tem que ser enviado o numero da conta com o dígito verificador e sem traço (extrato, create de conta, update de conta, busca de uma conta e delete de uma conta). Para saber o digito verificador de cada conta, basta lista-las com GET /contas.
+
+- retirado a lista de movimentos por conta da controller de movimentos e deixado somente na controller de contas (extrato).
+
+- retirado entpoints de movimentos para DELETE e PUT, teremos somente forma de criar recurso, quando feito em uma conta errada, a operacao inversa deve ser usada (contas de debito e credito). O motivo disso é seguir uma regra de negocios de segurança aplicadas a sistemas deste tipo.
+
+- nas models onde foram colocados datacadastro, o campo agora está anotado como updatable=false, para nao tentar persistir null quando enviado o payload de PUT.
+
+- resolvido problema de retornar null para datacadastro nos metodos PUT nos controllers: AgenciaController, ContaController e CorrentistaController. A solução foi ignorar o campo dataCadastro no BeanUtils.copyProperties dentro do método de PUT.
+
+- o endpoint POST /movimentacoes foi modificado para POST /modificacoes/transferencias (para ficar mais fácil de entender). Este endpoint continua chamando salvar do service de movimentacoes.
+exemplo de payload:
+{
+    "numeroContaDebito":  42,
+    "numeroContaCredito": 59,
+    "descricao":"tranferencia para fulano",
+    "valor": 300.0
+}
+
+- foi criado um endpoint para depositos POST /movimentacoes/deposito (para ficar mais facil de entender). Este endpoint também chama o metodo salvar do service de movimentacoes, apenas antes já deixa fixa a conta 18 como sendo a conta de DEBITO.
+exemplo de payload:
+{
+    "numeroConta":  42,
+    "descricao":"dep no caixa",
+    "valor": 1000.0
+}
+
+- foi criado um endoint para saques POST /movimentacoes/saques (para ficar mais facil de entender). Este endpoint também chama o método salvar do service de movimentacoes, apenas já deixa fixa a conta 18 como sendo a conta de CREDITO.
+
+
+Considerações sobre saldo (que ja fica abstraído com a utilizaçao dos endpoints de depositos, saques e transferencias descritos acima):
+
+1) para buscar um saldo de um dia (sempre ao final do dia). O programador frontend que consome este endpoint pode querer pegar o saldo anterior a uma determinada data, para efeito de extrato (com a data no deslocamento UTC+00:00):
+GET /contas/18/saldo/2021-12-02T00:00Z
+
+2) foi necessário implantar um saldo (no caso coloquei 1.000.000.000) inicial. Para isso foram criadas duas contas e uma movimentação dentro do import.sql, sendo:
+- conta 18 - tipo AD (significa Administrativa Devedora), conta interna a ser debitada na contra-partida para o caso de deposito de um correntista em uma conta, ou creditada na contra-partida no caso de um saque realizado para o correntista em uma conta.
+- conta 26 - tipo AC (significa Administrativa Credora), conta interna estacionária, somente para a implantaçao.
+- a conta 18, através do insert direto da movimentacao no import.sql, é a que ficará com saldo inicial.
+- quando a operacao nao envolve nem a conta 18 e nem a 26, significa que é uma transferencia entre contas de correntistas e o saldo da conta de DEBITO somando valor do movimento deve resultar maior ou igual a 0 (significa que a conta onde está saindo o dinheiro, tem saldo disponível), isso pode ser observado no MovimentacaoService em salvar.
+- quando a conta 18 é DEBITADA e qualquer outra conta de correntista é CREDITADA, significa que está sendo realizado um depósito na conta do correntista, com isso ele fica com saldo para retiradas ou transferencias e a conta 18 fica com o saldo aumentado porque mais dinheiro entrou no banco.
+- quanto a conta 18 é CREDITADA e qualquer outra conta de correntista é DEBITADA, significa que está sendo realizado um saque na conta do correntista, com isso seu saldo diminui para futuras movimentações e também a soma dos recursos disponiveis no banco é diminuido.
+- EM RESUMO: Na conta 18 ficará acumulado tudo q entra no banco depositados por todos os correntistas menos o que sai do banco com saques de correntistas. E a conta 26 é a representação do capital inicial do banco disponível em dinheiro EFETIVO.
+
+3) Exemplo de um fluxo de movimento:
+- Deposito na conta 42 - POST /movimentacoes/deposito
+{
+    "numeroConta":  42,
+    "descricao":"dep no caixa",
+    "valor": 1000.0
+}
+
+- ver o saldo da conta 42 como ficou, tem 1000 de saldo credor (cuidado com a data, tem q ser a do dia)
+GET /contas/42/saldo/2021-12-03T00:00Z
+
+- ver o saldo da conta 18 como ficou, tem 1.000.001.000 (cuidado com a data, tem q ser a do dia)
+GET /contas/18/saldo/2021-12-03T00:00Z
+
+- realizar saque da conta 42 - POST /movimentacoes/saque
+{
+    "numeroConta":  42,
+    "descricao":"saque no caixa",
+    "valor": 399.0
+}
+
+- ver o saldo da conta 42 como ficou, tem 601 de saldo credor (cuidado com a data, tem q ser a do dia)
+GET /contas/42/saldo/2021-12-03T00:00Z
+
+- ver o saldo da conta 18 como ficou, tem 1.000.000.601 (cuidado com a data, tem q ser a do dia)
+GET /contas/18/saldo/2021-12-03T00:00Z
+
+- realizar transferenca da conta 42 para a conta 59 - POST /movimentacoes/transferencia
+{
+    "numeroContaDebito":  42,
+    "numeroContaCredito": 59,
+    "descricao":"teste 4",
+    "valor": 300.0
+}
+
+- ver o saldo da conta 42 como ficou, tem 301 de saldo credor (cuidado com a data, tem q ser a do dia)
+GET /contas/42/saldo/2021-12-03T00:00Z
+
+- ver o saldo da conta 59 como ficou, tem 300 (cuidado com a data, tem q ser a do dia)
+GET /contas/59/saldo/2021-12-03T00:00Z
+
+**** qq movimentacao em conta que nao tenha saldo, dispara a exception mais adequada.
+
+
+
+
+

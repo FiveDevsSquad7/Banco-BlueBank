@@ -2,7 +2,6 @@ package com.banco.bluebank.controller;
 
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
-import com.banco.bluebank.model.PeriodoInput;
 import com.banco.bluebank.model.dto.output.ContaOutputDTO;
 import com.banco.bluebank.model.dto.output.SaldoOutput;
 import com.banco.bluebank.service.ContaDisassemblerDTO;
