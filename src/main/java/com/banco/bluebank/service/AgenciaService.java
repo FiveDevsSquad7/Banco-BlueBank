@@ -25,7 +25,7 @@ public class AgenciaService {
         return agenciaRepository.save(agencia);
     }
 
-     public  List<Agencia> listar() {
+    public  List<Agencia> listar() {
         return agenciaRepository.findAll();
     }
 

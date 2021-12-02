@@ -4,6 +4,7 @@ import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.model.PeriodoInput;
 import com.banco.bluebank.model.dto.output.ContaOutputDTO;
+import com.banco.bluebank.model.dto.output.SaldoOutput;
 import com.banco.bluebank.service.ContaDisassemblerDTO;
 import com.banco.bluebank.service.ContaService;
 import com.banco.bluebank.service.MovimentacaoService;
@@ -50,8 +51,7 @@ public class ContaController {
 
 	@GetMapping(path = "/{id}/saldo/{data}")
 	@ResponseStatus(HttpStatus.OK)
-	public BigDecimal saldo(@PathVariable Long id, @PathVariable String data) {
-		System.out.println("Chegou no controller e recebeu "+data);
+	public SaldoOutput saldo(@PathVariable Long id, @PathVariable String data) {
 		return contaservice.buscarSaldo(id,OffsetDateTime.parse(data));
 	}
 

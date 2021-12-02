@@ -6,6 +6,7 @@ import com.banco.bluebank.exceptionhandler.exceptions.CorrentistaNaoEncontradoEx
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Correntista;
+import com.banco.bluebank.model.dto.output.SaldoOutput;
 import com.banco.bluebank.repository.AgenciaRepository;
 import com.banco.bluebank.repository.ContaRepository;
 import com.banco.bluebank.repository.CorrentistaRepository;
@@ -29,18 +30,27 @@ public class ContaService {
 	@Autowired
 	private AgenciaRepository agenciaRepository;
 
+	@Autowired
+	private ContaUtils contaUtils;
+
 	public List<Conta> listar() {
 		return contaRepository.findAll();
 	}
 
-	public BigDecimal buscarSaldo(Long numeroConta, OffsetDateTime data) {
-		System.out.println("Chegou no service");
-		return contaRepository.findSaldo(numeroConta, data);
+	public SaldoOutput buscarSaldo(Long numeroConta, OffsetDateTime data) {
+
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
+
+		Conta conta = this.buscar(numeroConta);
+		return contaRepository.findSaldo(numeroContaSemDigito, data);
 	}
 
-	public Conta buscar(Long id) {
-		return contaRepository.findById(id)
-				.orElseThrow( () -> new ContaNaoEncontradaException(id));
+	public Conta buscar(Long numeroConta) {
+
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
+
+		return contaRepository.findById(numeroContaSemDigito)
+				.orElseThrow( () -> new ContaNaoEncontradaException(numeroContaSemDigito));
 	}
 
 	public Conta salvar(Conta conta) {
@@ -64,8 +74,9 @@ public class ContaService {
 
 	}
 
-	public Conta atualizar(Long id, Conta contaAtual) {
-		Conta conta = buscar(id);
+	public Conta atualizar(Long numeroConta, Conta contaAtual) {
+
+		Conta conta = buscar(numeroConta);
 
 		Correntista correntista = correntistaRepository.findById(contaAtual.getIdCorrentista())
 				.orElseThrow( () -> new CorrentistaNaoEncontradoException(contaAtual.getIdCorrentista()));
@@ -80,12 +91,13 @@ public class ContaService {
 
 	}
 
-	public void excluir(Long id) {
+	public void excluir(Long numeroConta) {
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		try {
-			contaRepository.deleteById(id);
+			contaRepository.deleteById(numeroContaSemDigito);
 
 		} catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
+			throw new ContaNaoEncontradaException(numeroConta);
 
 		}
 	}

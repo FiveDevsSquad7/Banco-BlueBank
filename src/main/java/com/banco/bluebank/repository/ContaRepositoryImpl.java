@@ -1,5 +1,6 @@
 package com.banco.bluebank.repository;
 
+import com.banco.bluebank.model.dto.output.SaldoOutput;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -14,15 +15,17 @@ public class ContaRepositoryImpl implements ContaRepositoryQueries {
     private EntityManager manager;
 
     @Override
-    public BigDecimal findSaldo(Long numeroConta, OffsetDateTime data) {
-
-        System.out.println("Chegou no repositorio");
+    public SaldoOutput findSaldo(Long numeroConta, OffsetDateTime data) {
 
         var jpql = "select function('f_saldo_conta',:numeroConta , :data) as saldo from Conta p where p.numeroConta=:numeroConta";
 
-        return manager.createQuery(jpql, BigDecimal.class)
+        BigDecimal saldo = manager.createQuery(jpql, BigDecimal.class)
                 .setParameter("numeroConta", numeroConta)
                 .setParameter("data", data)
                 .getSingleResult();
+
+        return new SaldoOutput(numeroConta, data, saldo);
+
     }
+
 }

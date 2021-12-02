@@ -75,7 +75,7 @@ public class Correntista implements Serializable {
 
     @ApiModelProperty(value = "Campo da data ao criar Correntista")
     @CreationTimestamp
-    @Column(name = "data_cadastro", nullable = false, columnDefinition = "datetime")
+    @Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
     private OffsetDateTime dataCadastro;
 
     public OffsetDateTime getDataCadastro() {
