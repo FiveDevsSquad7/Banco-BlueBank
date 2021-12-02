@@ -17,12 +17,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 
-
+@ApiModel(value = "Saldo", description = "Entidade entitulada Saldo")
 @Entity
 @Table(name = "saldo")
 public class Saldo  implements Serializable {
@@ -31,16 +33,20 @@ public class Saldo  implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(value = "Campo referente ID")
     @Column(name="id_saldo")
     private Long id;
 
+	@ApiModelProperty(value = "Campo referente data de criação")
     @Column(name = "data_saldo", nullable = false, columnDefinition = "date")
     private OffsetDateTime dataSaldo;
-    
+
+	@ApiModelProperty(value = "Campo Objeto Conta relacionado Saldo ")
     @ManyToOne
     @JoinColumn(name = "num_conta")
     private Conta conta;
-    
+
+	@ApiModelProperty(value = "Campo Saldo em valor ")
     @NotNull(message = "Saldo deve ser preenchido")
     @Size(min = 1, max = 10, message = "Saldo deve ter entre 1:10 dígitos")
     @Column(length = 10, nullable = false)
