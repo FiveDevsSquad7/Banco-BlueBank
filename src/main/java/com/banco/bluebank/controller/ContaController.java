@@ -103,10 +103,12 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
-	@GetMapping(path = "/{id}/extrato")
+	@GetMapping(path = "/{id}/extrato/{dataInicial}/{dataFinal}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Movimentacao> extrato(@PathVariable Long id) {
-		return serviceMovimentacao.listar(id);
+	public List<Movimentacao> extrato(@PathVariable Long id,
+									  @PathVariable String dataInicial,
+									  @PathVariable String dataFinal) {
+		return serviceMovimentacao.listar(id,OffsetDateTime.parse(dataInicial),OffsetDateTime.parse(dataFinal));
 	}
 
 	@ApiOperation(value = "Faz atualização global das Contas pelo específico ID",  httpMethod = "PUT",
