@@ -54,7 +54,7 @@ public class ContatoCliente implements Serializable {
     private Correntista correntista;
 
 	@CreationTimestamp
-	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataCadastro;
 
 	public OffsetDateTime getDataCadastro() {

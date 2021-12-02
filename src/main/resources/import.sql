@@ -1,11 +1,18 @@
+SET GLOBAL log_bin_trust_function_creators = 1;
+
+CREATE DEFINER=`root`@`%` FUNCTION `f_saldo_conta`(`pConta` Long, `pData` date) RETURNS decimal(19,2) READS SQL DATA return (select (ifnull((select sum(a.valor) from movimentacao as a where a.num_conta_debito=pConta and cast(a.data_movimento as date) <= pData),0) - ifnull((select sum(a.valor) from movimentacao as a where a.num_conta_credito=pConta and cast(a.data_movimento as date) <= pData),0)));
+
 -- agencias, sendo a primeira, a global
 insert into agencia (agencia, nome_agencia, data_cadastro) values ('000-0', "Global", utc_timestamp);
 insert into agencia (agencia, nome_agencia, data_cadastro) values ('030-7', "Centro", utc_timestamp);
 insert into agencia (agencia, nome_agencia, data_cadastro) values ('080-2', "Petropolis", utc_timestamp);
 
 -- registro do proprio banco para criacao da conta interna do banco (sem enderecos e sem contatos)
+-- as contas de codigo 1 e 2 servirao para disponibilizacao do saldo inicial (a conta 1 tera codigo
+-- credor para a contrapartida nas contas dos correntistas)
 insert into correntista (cnpj,cpf,email_validacao,nome,rg,sms_validacao,pf_pj,data_cadastro) values ('99524991000179',null,null,'Blue Bank',null,null,'J', utc_timestamp);
 insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('AD',1,1, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('AC',1,1, utc_timestamp);
 
 -- registros de correntistas normais com seus enderecos e contatos
 insert into correntista (cnpj,cpf,email_validacao,nome,rg,sms_validacao,pf_pj,data_cadastro) values (null,'76712703000','carlos@sistelpa.com','Carlos Betiol','4444444-4','45991157171','F', utc_timestamp);
@@ -24,3 +31,5 @@ insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('
 insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',2,2, utc_timestamp);
 insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',3,3, utc_timestamp);
 insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',3,3, utc_timestamp);
+
+insert into movimentacao (data_movimento,descricao,num_conta_credito,num_conta_debito,valor) values (utc_timestamp,'Saldo inicial para a conta administrativa',1,2,1000000000.0);

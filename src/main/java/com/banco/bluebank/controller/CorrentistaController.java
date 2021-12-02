@@ -82,7 +82,7 @@ public class CorrentistaController {
     @ResponseStatus(HttpStatus.OK)
     public Correntista atualizar(@PathVariable Long id, @RequestBody Correntista correntista) {
         Correntista correntistaAtual = service.buscar(id);
-        BeanUtils.copyProperties(correntista, correntistaAtual, "id", "enderecos", "contatos");
+        BeanUtils.copyProperties(correntista, correntistaAtual, "id", "enderecos", "contatos", "dataCadastro");
         return service.update(correntistaAtual);
 
     }
