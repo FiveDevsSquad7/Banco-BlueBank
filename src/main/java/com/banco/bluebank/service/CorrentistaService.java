@@ -69,6 +69,7 @@ public class CorrentistaService {
                 .orElseThrow( () -> new CorrentistaNaoEncontradoException(correntistaId));
     }
 
+    @Transactional(readOnly = false)
     public void excluir(Long correntistaId) {
 
         buscar(correntistaId);
@@ -119,6 +120,7 @@ public class CorrentistaService {
 
     }
 
+    @Transactional(readOnly = false)
     public void excluirEndereco(Long correntistaId, Long enderecoId) {
 
         buscar(correntistaId);
@@ -132,6 +134,7 @@ public class CorrentistaService {
 
     }
 
+    @Transactional(readOnly = false)
     public void excluirContato(Long correntistaId, Long contatoId) {
 
         buscar(correntistaId);

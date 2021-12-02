@@ -32,4 +32,4 @@ insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('
 insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',3,3, utc_timestamp);
 insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',3,3, utc_timestamp);
 
-insert into movimentacao (data_movimento,descricao,num_conta_credito,num_conta_debito,valor) values (utc_timestamp,'Saldo inicial para a conta administrativa',1,2,1000000000.0);
+insert into movimentacao (data_movimento,descricao,num_conta_debito,num_conta_credito,valor) values (utc_timestamp,'Saldo inicial para a conta administrativa',1,2,1000000000.0);

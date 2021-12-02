@@ -2,7 +2,8 @@ package com.banco.bluebank.service;
 
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.MovimentacaoNaoEncontradaException;
-import com.banco.bluebank.exceptionhandler.exceptions.SaldoIndisponivelException;
+import com.banco.bluebank.exceptionhandler.exceptions.SaldoBancoIndisponivelException;
+import com.banco.bluebank.exceptionhandler.exceptions.SaldoCorrentistaIndisponivelException;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.model.dto.output.SaldoOutput;
@@ -21,6 +22,8 @@ import java.util.Objects;
 
 @Service
 public class MovimentacaoService {
+
+	private static final Integer PRIMEIRA_CONTA_CORRENTISTAS = 3;
 
 	@Autowired
 	private MovimentacaoRepository movimentacaoRepository;
@@ -45,10 +48,19 @@ public class MovimentacaoService {
 		Conta contaCredito = contaRepository.findById(contaCreditoSemDigito)
 				.orElseThrow(() -> new ContaNaoEncontradaException(contaCreditoSemDigito));
 
-		SaldoOutput saldo = contaRepository.findSaldo(contaDebitoSemDigito, OffsetDateTime.now());
+		if( contaDebitoSemDigito >= PRIMEIRA_CONTA_CORRENTISTAS) {
+			SaldoOutput saldo = contaRepository.findSaldo(contaDebitoSemDigito, OffsetDateTime.now());
+			if (saldo.getSaldo().add(movimentacao.getValor()).compareTo(BigDecimal.ZERO) >= 0) {
+				throw new SaldoCorrentistaIndisponivelException(contaDebitoSemDigito);
+			}
+		}
 
-		if (saldo.getSaldo().add(movimentacao.getValor()).compareTo(BigDecimal.ZERO) >= 0) {
-			throw new SaldoIndisponivelException(contaDebitoSemDigito);
+		if( contaCreditoSemDigito < PRIMEIRA_CONTA_CORRENTISTAS &&
+				contaDebitoSemDigito >= PRIMEIRA_CONTA_CORRENTISTAS ) {
+			SaldoOutput saldo = contaRepository.findSaldo(contaCreditoSemDigito, OffsetDateTime.now());
+			if (saldo.getSaldo().subtract(movimentacao.getValor()).compareTo(BigDecimal.ZERO) < 0) {
+				throw new SaldoBancoIndisponivelException();
+			}
 		}
 
 		movimentacao.setContaDebito(contaDebito);

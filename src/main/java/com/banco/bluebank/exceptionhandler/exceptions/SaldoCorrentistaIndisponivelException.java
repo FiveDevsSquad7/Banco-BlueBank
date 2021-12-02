@@ -1,14 +1,14 @@
 package com.banco.bluebank.exceptionhandler.exceptions;
 
-public class SaldoIndisponivelException extends BusinessException {
+public class SaldoCorrentistaIndisponivelException extends BusinessException {
 
 private static final long serialVersionUID = 1L;
 
-	public SaldoIndisponivelException(String mensagem) {
+	public SaldoCorrentistaIndisponivelException(String mensagem) {
 		super(mensagem);
 	}
 
-	public SaldoIndisponivelException(Long id) {
+	public SaldoCorrentistaIndisponivelException(Long id) {
 		this(String.format("Saldo indisponível para a conta %d", id));
 	}
 	

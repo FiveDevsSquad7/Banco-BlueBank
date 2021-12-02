@@ -3,6 +3,7 @@ package com.banco.bluebank.service;
 import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.CorrentistaNaoEncontradoException;
+import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Correntista;
@@ -11,8 +12,10 @@ import com.banco.bluebank.repository.AgenciaRepository;
 import com.banco.bluebank.repository.ContaRepository;
 import com.banco.bluebank.repository.CorrentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
@@ -20,6 +23,9 @@ import java.util.List;
 
 @Service
 public class ContaService {
+
+	private static final String MSG_CONTA_EM_USO
+			= "Conta de número %d não pode ser removida, pois está em uso";
 
 	@Autowired
 	private ContaRepository contaRepository;
@@ -53,6 +59,7 @@ public class ContaService {
 				.orElseThrow( () -> new ContaNaoEncontradaException(numeroContaSemDigito));
 	}
 
+	@Transactional(readOnly = false)
 	public Conta salvar(Conta conta) {
 
 		Conta finalConta = conta;
@@ -74,6 +81,7 @@ public class ContaService {
 
 	}
 
+	@Transactional(readOnly = false)
 	public Conta atualizar(Long numeroConta, Conta contaAtual) {
 
 		Conta conta = buscar(numeroConta);
@@ -91,6 +99,7 @@ public class ContaService {
 
 	}
 
+	@Transactional(readOnly = false)
 	public void excluir(Long numeroConta) {
 		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		try {
@@ -98,8 +107,11 @@ public class ContaService {
 
 		} catch (EmptyResultDataAccessException e) {
 			throw new ContaNaoEncontradaException(numeroConta);
-
+		} catch (DataIntegrityViolationException e) {
+			throw new EntidadeEmUsoException(
+					String.format(MSG_CONTA_EM_USO, numeroConta));
 		}
+
 	}
 
 }
