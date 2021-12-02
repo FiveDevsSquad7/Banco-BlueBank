@@ -13,9 +13,17 @@ import com.banco.bluebank.repository.EnderecoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.JpaSort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -59,14 +67,15 @@ public class CorrentistaService {
 
     }
 
-    public  List<Correntista> listar() {
-        return correntistaRepository.findAll();
+    @Transactional(readOnly = true)
+    public Page<Correntista> listar(Pageable pageable) {
+        return correntistaRepository.findAll(pageable);
     }
 
-
+    @Transactional(readOnly = false)
     public Correntista buscar(Long correntistaId) {
         return correntistaRepository.findById(correntistaId)
-                .orElseThrow( () -> new CorrentistaNaoEncontradoException(correntistaId));
+                .orElseThrow(() -> new CorrentistaNaoEncontradoException(correntistaId));
     }
 
     @Transactional(readOnly = false)
@@ -90,6 +99,14 @@ public class CorrentistaService {
         Correntista correntista = this.buscar(correntistaId);
         return correntista.getEnderecos();
     }
+
+    @Transactional(readOnly = true)
+    public Page<ContatoCliente> buscaDinamicaContatoCorrentista(Specification<ContatoCliente>
+                                                                            clienteSpecification,
+                                                                Pageable pageable) {
+        return contatoClienteRepository.findAll(pageable);
+    }
+
 
     public List<ContatoCliente> listarContatosPorCorrentista(Long correntistaId) {
         Correntista correntista = this.buscar(correntistaId);
@@ -145,6 +162,15 @@ public class CorrentistaService {
         } catch (EmptyResultDataAccessException e) {
             throw new ContatoNaoEncontradoException(contatoId);
         }
+    }
+
+    public Specification<ContatoCliente> toSpec(){
+        return (root, query, builder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            CharSequence infoRecado = null;
+            StringUtils.hasText(infoRecado);
+            return builder.and(predicates.toArray(new Predicate[0]));
+        };
     }
 }
 

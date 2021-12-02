@@ -4,9 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -17,6 +21,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -25,41 +31,41 @@ import javax.validation.constraints.Size;
 @Table(name = "contato_cliente")
 public class ContatoCliente implements Serializable {
 
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@ApiModelProperty(value = "Campo referente ID")
-    @Column(name="id_contato_cliente")
-    private Long id;
+	@Column(name = "id_contato_cliente")
+	private Long id;
 
 	@ApiModelProperty(required = true, value = "Campo referente ao telefone")
-    @NotBlank(message = "Telefone deve ser preenchido")
-    @Size(min = 8, max = 15, message = "Telefone deve ter no mínimo 8 e no máximo 15 números")
-    @Column(length = 15, nullable = true)
-    private String telefone;
+	@NotBlank(message = "Telefone deve ser preenchido")
+	@Size(min = 8, max = 15, message = "Telefone deve ter no mínimo 8 e no máximo 15 números")
+	@Column(length = 15, nullable = true)
+	private String telefone;
 
 	@ApiModelProperty(required = true, value = "Campo referente e-mail")
-    @NotBlank(message = "Email deve ser preenchido")
-    @Size(min = 10, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
-    @Column(length = 50, nullable = true)
-    private String email;
-	
+	@NotBlank(message = "Email deve ser preenchido")
+	@Size(min = 10, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
+	@Column(length = 50, nullable = true)
+	private String email;
+
 	@JsonIgnore
 	@Column(name = "id_correntista")
 	private Long idCorrentista;
 
 	@ApiModelProperty(required = true, value = "Campo referente Informações para recados")
-    @NotBlank(message = "Recado deve ser preenchido")
-    @Size(min = 10, max = 50, message = "Recado deve ter no mínimo 10 e no máximo 50 caracteres")
-    @Column(name="info_recado",length = 50, nullable = true)
-    private String infoRecado;
+	@NotBlank(message = "Recado deve ser preenchido")
+	@Size(min = 10, max = 50, message = "Recado deve ter no mínimo 10 e no máximo 50 caracteres")
+	@Column(name = "info_recado", length = 50, nullable = true)
+	private String infoRecado;
 
 	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
-    @ManyToOne(optional=false)
-    @JoinColumn(name="id_correntista", insertable = false, updatable = false)
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_correntista", insertable = false, updatable = false)
 	@JsonIgnore
-    private Correntista correntista;
+	private Correntista correntista;
 
 	@ApiModelProperty(value = "Campo referente data de criação")
 	@CreationTimestamp
@@ -105,7 +111,7 @@ public class ContatoCliente implements Serializable {
 	public void setInfoRecado(String infoRecado) {
 		this.infoRecado = infoRecado;
 	}
-	
+
 	public Correntista getCorrentista() {
 		return correntista;
 	}
@@ -129,9 +135,9 @@ public class ContatoCliente implements Serializable {
 	}
 
 	public ContatoCliente() {
-		
+
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -154,6 +160,4 @@ public class ContatoCliente implements Serializable {
 		return "ContatoCliente [id=" + id + ", telefone=" + telefone + ", email=" + email + ", infoRecado=" + infoRecado
 				+ ", correntista=" + correntista + "]";
 	}
-	
-	
 }

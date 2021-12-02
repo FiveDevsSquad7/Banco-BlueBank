@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiResponses;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +41,8 @@ public class CorrentistaController {
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
     @GetMapping
-    public List<Correntista> listar() {
-        return service.listar();
+    public Page<Correntista> listar(Pageable pageable) {
+        return service.listar(pageable);
     }
 
     @ApiOperation(value = "Pesquisa Correntista pelo código gerado no Banco de Dados",  httpMethod = "GET",
@@ -158,6 +160,20 @@ public class CorrentistaController {
     @ResponseStatus(HttpStatus.OK)
     public List<ContatoCliente> listarContatos(@PathVariable Long id) {
         return service.listarContatosPorCorrentista(id);
+    }
+
+    @ApiOperation(value = "Busca todos os Todos os Contatos relacionados Correntistas na Base de Dadosmeio do ID passado!")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retornar SUCESSO após exclusão"),
+            @ApiResponse(code = 401, message = "Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado"),
+            @ApiResponse(code = 403, message = "Você não tem AUTENTICAÇAO para acessar este recurso"),
+            @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
+            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
+    })
+    @GetMapping(path = "/busca-dinamica")
+    @ResponseStatus(HttpStatus.OK)
+    public String listarDinamicaContatos(CorrentistaService correntistaService, Pageable pageable) {
+        return service.buscaDinamicaContatoCorrentista(correntistaService.toSpec(), pageable).toString();
     }
 
     @ApiOperation(value = "Insere um novo Contato")
