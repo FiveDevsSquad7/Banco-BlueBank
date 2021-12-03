@@ -13,6 +13,8 @@ import io.swagger.annotations.ApiResponses;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,8 +41,8 @@ public class CorrentistaController {
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
     @GetMapping
-    public List<Correntista> listar() {
-        return service.listar();
+    public Page<Correntista> listar(Pageable pageable) {
+        return service.listar(pageable);
     }
 
     @ApiOperation(value = "Pesquisa Correntista pelo código gerado no Banco de Dados",  httpMethod = "GET",
