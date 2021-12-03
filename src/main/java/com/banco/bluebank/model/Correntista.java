@@ -36,7 +36,7 @@ public class Correntista implements Serializable {
 
     @ApiModelProperty(value = " Campo CPF")
     @Size(min = 2, max = 11, message = "CPF deve conter um valor válido")
-    @Column(name = "cpf", length = 11, nullable = true)
+    @Column(name = "cpf", length = 11)
     private String cpf;
 
     @ApiModelProperty(value = "Campo RG")
@@ -53,7 +53,7 @@ public class Correntista implements Serializable {
     @NotNull(message = "O tipo pessoa deve ser preenchido")
     @Size(min = 1, max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
     @Column(name = "pf_pj", length = 1, nullable = false)
-    private char tipoPessoa;
+    private String tipoPessoa;
 
     @ApiModelProperty(value = " Campo E-mail para notificar movimentação")
     @Size(min = 5, max = 50, message = "O email deve conter um valor válido")
@@ -128,11 +128,11 @@ public class Correntista implements Serializable {
         this.cnpj = cnpj;
     }
 
-    public char getTipoPessoa() {
+    public String getTipoPessoa() {
         return tipoPessoa;
     }
 
-    public void setTipoPessoa(char tipoPessoa) {
+    public void setTipoPessoa(String tipoPessoa) {
         this.tipoPessoa = tipoPessoa;
     }
 
@@ -168,7 +168,7 @@ public class Correntista implements Serializable {
         this.contatos = contatos;
     }
 
-    public Correntista(String nome, String cpf, String rg, String cnpj, char tipopessoa, String emailValidacao, String smsValidacao) {
+    public Correntista(String nome, String cpf, String rg, String cnpj, String tipopessoa, String emailValidacao, String smsValidacao) {
         this.nome = nome;
         this.cpf = cpf;
         this.rg = rg;
