@@ -10,7 +10,7 @@
 
 - resolvido problema de retornar null para datacadastro nos metodos PUT nos controllers: AgenciaController, ContaController e CorrentistaController. A solução foi ignorar o campo dataCadastro no BeanUtils.copyProperties dentro do método de PUT.
 
-- o endpoint POST /movimentacoes foi modificado para POST /modificacoes/transferencias (para ficar mais fácil de entender). Este endpoint continua chamando salvar do service de movimentacoes.
+- o endpoint POST /movimentacoes foi modificado para POST /modificacoes/transferencia (para ficar mais fácil de entender). Este endpoint continua chamando salvar do service de movimentacoes.
 exemplo de payload:
 {
     "numeroContaDebito":  42,
