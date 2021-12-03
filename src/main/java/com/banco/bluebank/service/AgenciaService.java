@@ -44,7 +44,7 @@ public class AgenciaService {
             throw new AgenciaNaoEncontradaException(agenciaId);
 
         } catch (DataIntegrityViolationException e) {
-            throw new EntidadeEmUsoException(
+             throw new EntidadeEmUsoException(
                     String.format(MSG_AGENCIA_EM_USO, agenciaId));
         }
     }
