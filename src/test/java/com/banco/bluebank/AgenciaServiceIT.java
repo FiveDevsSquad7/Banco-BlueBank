@@ -1,5 +1,6 @@
 package com.banco.bluebank;
 
+import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.model.Conta;
@@ -11,13 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ConstraintViolationException;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-class AgenciaServiceIntegrationTests {
+class AgenciaServiceIT {
 
 	@Autowired
 	private AgenciaService agenciaService;
@@ -152,7 +154,6 @@ class AgenciaServiceIntegrationTests {
 		novaConta.setAgencia(agenciaService.buscar(novaAgencia.getId()));
 		novaConta.setIdAgencia(novaConta.getAgencia().getId());
 
-		System.out.println("novaconta: "+novaConta.toString());
 		contaService.salvar(novaConta);
 
 		Agencia finalNovaAgencia = novaAgencia;
@@ -166,5 +167,16 @@ class AgenciaServiceIntegrationTests {
 
 	}
 
+	@Test
+	void deveFalharAoExcluirAgencia_QuandoAgenciaNaoExistente() {
+
+		AgenciaNaoEncontradaException erroEsperado =
+				Assertions.assertThrows(AgenciaNaoEncontradaException.class, () -> {
+					agenciaService.excluir(999998L);
+				});
+
+		Assertions.assertNotNull(erroEsperado);
+
+	}
 
 }

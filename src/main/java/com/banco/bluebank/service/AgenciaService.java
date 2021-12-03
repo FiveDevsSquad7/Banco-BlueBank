@@ -35,9 +35,9 @@ public class AgenciaService {
                 .orElseThrow( () -> new AgenciaNaoEncontradaException(agenciaId));
     }
 
-    @Transactional(readOnly = false)
     public void excluir(Long agenciaId) {
         try {
+
             agenciaRepository.deleteById(agenciaId);
 
         } catch (EmptyResultDataAccessException e) {
@@ -47,5 +47,6 @@ public class AgenciaService {
              throw new EntidadeEmUsoException(
                     String.format(MSG_AGENCIA_EM_USO, agenciaId));
         }
+
     }
 }
