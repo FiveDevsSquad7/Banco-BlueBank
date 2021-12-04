@@ -8,11 +8,10 @@ import java.util.TimeZone;
 
 @EnableAsync
 @SpringBootApplication
-public class BluebankApplication {
+public class BluebankApplication{
 
 	public static void main(String[] args) {
 		TimeZone.setDefault(TimeZone.getTimeZone("UTC"));
 		SpringApplication.run(BluebankApplication.class, args);
 	}
-
 }
