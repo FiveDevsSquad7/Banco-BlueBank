@@ -2,6 +2,8 @@ package com.banco.bluebank.repository;
 
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.model.dto.output.SaldoOutput;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,19 +20,19 @@ public class MovimentacaoRepositoryImpl implements MovimentacaoRepositoryQueries
     private EntityManager manager;
 
     @Override
-    public List<Movimentacao> findByConta(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal) {
+    public Page<Movimentacao> findByConta(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal) {
 
         dataFinal = dataFinal.plusDays(1);
         var jpql = "select p from Movimentacao p where (p.numeroContaCredito=:numeroConta or p.numeroContaDebito=:numeroConta) "+
                 "and p.dataMovimento>=:dataInicial and p.dataMovimento<:dataFinal";
 
-        List<Movimentacao> lista = manager.createQuery(jpql, Movimentacao.class)
+        List<Movimentacao> lista =  manager.createQuery(jpql, Movimentacao.class)
                 .setParameter("numeroConta", numeroConta)
                 .setParameter("dataInicial", dataInicial)
                 .setParameter("dataFinal", dataFinal)
                 .getResultList();
-
-        return lista;
+        Page<Movimentacao> page = new PageImpl<>(lista);
+        return page;
 
     }
 }

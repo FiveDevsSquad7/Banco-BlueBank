@@ -8,6 +8,8 @@ import com.banco.bluebank.repository.ContaRepository;
 import com.banco.bluebank.repository.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -73,7 +75,7 @@ public class MovimentacaoService {
 
 	}
 
-	public List<Movimentacao> listar(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal) {
+	public Page<Movimentacao> listar(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal, Pageable pageable) {
 
 		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		Conta conta = contaRepository.findById(numeroContaSemDigito)
