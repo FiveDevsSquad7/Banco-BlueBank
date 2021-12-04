@@ -7,11 +7,9 @@ import com.banco.bluebank.repository.AgenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
 
 @Service
 public class AgenciaService {
@@ -26,9 +24,9 @@ public class AgenciaService {
         return agenciaRepository.save(agencia);
     }
 
-    public  List<Agencia> listar() {
-        return agenciaRepository.findAll();
-    }
+     public Page<Agencia> listar(Pageable pageable) {
+        return agenciaRepository.findAll(pageable);
+     }
 
     public Agencia buscar(Long agenciaId) {
         return agenciaRepository.findById(agenciaId)

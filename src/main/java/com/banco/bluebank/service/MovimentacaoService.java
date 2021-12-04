@@ -84,7 +84,9 @@ public class MovimentacaoService {
 		if(dataFinal.compareTo(dataInicial)<0) {
 			throw new PeriodoInvalidoException();
 		}
-		return movimentacaoRepository.findByConta(numeroContaSemDigito, dataInicial, dataFinal);
+
+		dataFinal = dataFinal.plusDays(1);
+		return movimentacaoRepository.findByConta(numeroContaSemDigito, dataInicial, dataFinal, pageable);
 
 	}
 

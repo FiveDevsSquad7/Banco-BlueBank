@@ -6,9 +6,10 @@ import com.banco.bluebank.model.dto.output.ContaOutputDTO;
 import com.banco.bluebank.model.dto.output.CorrentistaOutputDTO;
 import com.banco.bluebank.utils.DigitoVerificadorLuhn;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Component;
 
-import java.text.Format;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -47,10 +48,12 @@ public class ContaDisassemblerDTO {
 
     }
 
-    public List<ContaOutputDTO> toCollectionModelDTO(List<Conta> contas){
-        return contas.stream()
+    public Page<ContaOutputDTO> toCollectionModelDTO(Page<Conta> contas){
+       List<ContaOutputDTO> contasAux = contas.stream()
                 .map(conta -> toModelDTO(conta))
                 .collect(Collectors.toList());
+       Page<ContaOutputDTO> page = new PageImpl<>(contasAux);
+       return page;
     }
 
 }
