@@ -72,7 +72,6 @@ public class CorrentistaService {
                 .orElseThrow( () -> new CorrentistaNaoEncontradoException(correntistaId));
     }
 
-    @Transactional(readOnly = false)
     public void excluir(Long correntistaId) {
 
         buscar(correntistaId);
