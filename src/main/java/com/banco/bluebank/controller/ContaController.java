@@ -44,8 +44,8 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
 	@GetMapping
-	public List<ContaOutputDTO> listar() {
-		return mapper.toCollectionModelDTO(contaservice.listar());
+	public Page<ContaOutputDTO> listar(Pageable pageable) {
+		return mapper.toCollectionModelDTO(contaservice.listar(pageable));
 	}
 
 	@ApiOperation(value = "Pesquisa Contas pelo código gerado no Banco de Dados",  httpMethod = "GET",
