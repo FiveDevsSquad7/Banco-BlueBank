@@ -8,6 +8,8 @@ import com.banco.bluebank.service.ContaService;
 import com.banco.bluebank.service.MovimentacaoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,8 +29,8 @@ public class ContaController {
 	private MovimentacaoService serviceMovimentacao;
 
 	@GetMapping
-	public List<ContaOutputDTO> listar() {
-		return mapper.toCollectionModelDTO(contaservice.listar());
+	public Page<ContaOutputDTO> listar(Pageable pageable) {
+		return mapper.toCollectionModelDTO(contaservice.listar(pageable));
 	}
 
 	@GetMapping("/{id}")

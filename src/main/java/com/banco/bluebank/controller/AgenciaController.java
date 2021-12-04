@@ -4,10 +4,10 @@ import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.service.AgenciaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/agencias")
@@ -17,8 +17,8 @@ public class AgenciaController {
     private AgenciaService service;
 
     @GetMapping
-    public List<Agencia> listar() {
-        return service.listar();
+    public Page<Agencia> listar(Pageable pageable) {
+        return service.listar(pageable);
     }
 
     @GetMapping(path = "/{id}")

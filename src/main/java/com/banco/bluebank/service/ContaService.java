@@ -11,6 +11,8 @@ import com.banco.bluebank.repository.ContaRepository;
 import com.banco.bluebank.repository.CorrentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,8 +31,8 @@ public class ContaService {
 	@Autowired
 	private AgenciaRepository agenciaRepository;
 
-	public List<Conta> listar() {
-		return contaRepository.findAll();
+	public Page<Conta> listar(Pageable pageable) {
+		return contaRepository.findAll(pageable);
 	}
 
 	public Conta buscar(Long id) {
