@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -105,10 +107,10 @@ public class ContaController {
 	})
 	@GetMapping(path = "/{id}/extrato/{dataInicial}/{dataFinal}")
 	@ResponseStatus(HttpStatus.OK)
-	public List<Movimentacao> extrato(@PathVariable Long id,
+	public Page<Movimentacao> extrato(@PathVariable Long id,
 									  @PathVariable String dataInicial,
-									  @PathVariable String dataFinal) {
-		return serviceMovimentacao.listar(id,OffsetDateTime.parse(dataInicial),OffsetDateTime.parse(dataFinal));
+									  @PathVariable String dataFinal, Pageable pageable) {
+		return serviceMovimentacao.listar(id,OffsetDateTime.parse(dataInicial),OffsetDateTime.parse(dataFinal), pageable);
 	}
 
 	@ApiOperation(value = "Faz atualização global das Contas pelo específico ID",  httpMethod = "PUT",
