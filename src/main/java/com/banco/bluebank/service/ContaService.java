@@ -99,7 +99,6 @@ public class ContaService {
 
 	}
 
-	@Transactional(readOnly = false)
 	public void excluir(Long numeroConta) {
 		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		try {

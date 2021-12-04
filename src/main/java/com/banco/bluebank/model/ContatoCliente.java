@@ -35,13 +35,13 @@ public class ContatoCliente implements Serializable {
 
 	@ApiModelProperty(required = true, value = "Campo referente ao telefone")
     @NotBlank(message = "Telefone deve ser preenchido")
-    @Size(min = 8, max = 15, message = "Telefone deve ter no mínimo 8 e no máximo 15 números")
+    @Size(min = 1, max = 15, message = "Telefone deve ter no mínimo 8 e no máximo 15 números")
     @Column(length = 15, nullable = true)
     private String telefone;
 
 	@ApiModelProperty(required = true, value = "Campo referente e-mail")
     @NotBlank(message = "Email deve ser preenchido")
-    @Size(min = 10, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
+    @Size(min = 1, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
     @Column(length = 50, nullable = true)
     private String email;
 	
@@ -51,7 +51,7 @@ public class ContatoCliente implements Serializable {
 
 	@ApiModelProperty(required = true, value = "Campo referente Informações para recados")
     @NotBlank(message = "Recado deve ser preenchido")
-    @Size(min = 10, max = 50, message = "Recado deve ter no mínimo 10 e no máximo 50 caracteres")
+    @Size(min = 1, max = 50, message = "Recado deve ter no mínimo 10 e no máximo 50 caracteres")
     @Column(name="info_recado",length = 50, nullable = true)
     private String infoRecado;
 
