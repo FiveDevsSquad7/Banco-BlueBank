@@ -1,22 +1,28 @@
 package com.banco.bluebank.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.*;
+import com.banco.bluebank.model.Conta;
+import com.banco.bluebank.model.Movimentacao;
+import com.banco.bluebank.model.dto.output.SaldoOutput;
+import com.banco.bluebank.repository.ContaRepository;
+import com.banco.bluebank.repository.MovimentacaoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.banco.bluebank.exceptionhandler.exceptions.MovimentacaoNaoEncontradaException;
-import com.banco.bluebank.model.Conta;
-import com.banco.bluebank.model.Movimentacao;
-import com.banco.bluebank.repository.ContaRepository;
-import com.banco.bluebank.repository.MovimentacaoRepository;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 @Service
 public class MovimentacaoService {
+
+	private static final Integer PRIMEIRA_CONTA_CORRENTISTAS = 3;
 
 	@Autowired
 	private MovimentacaoRepository movimentacaoRepository;
@@ -24,28 +30,62 @@ public class MovimentacaoService {
 	@Autowired
 	private ContaRepository contaRepository;
 
+	@Autowired ContaUtils contaUtils;
+
+	@Autowired
+	private ApplicationEventPublisher eventPublisher;
+
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
-		Conta contaDebito = contaRepository.findById(movimentacao.getNumeroContaDebito())
-				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getNumeroContaDebito()));
-		Conta contaCredito = contaRepository.findById(movimentacao.getNumeroContaCredito())
-				.orElseThrow(() -> new ContaNaoEncontradaException(movimentacao.getNumeroContaCredito()));
+
+		Long contaDebitoSemDigito = contaUtils.verificaNumeroConta(movimentacao.getNumeroContaDebito());
+		Long contaCreditoSemDigito = contaUtils.verificaNumeroConta(movimentacao.getNumeroContaCredito());
+
+		Conta contaDebito = contaRepository.findById(contaDebitoSemDigito)
+				.orElseThrow(() -> new ContaNaoEncontradaException(contaDebitoSemDigito));
+
+		Conta contaCredito = contaRepository.findById(contaCreditoSemDigito)
+				.orElseThrow(() -> new ContaNaoEncontradaException(contaCreditoSemDigito));
+
+		if( contaDebitoSemDigito >= PRIMEIRA_CONTA_CORRENTISTAS) {
+			SaldoOutput saldo = contaRepository.findSaldo(contaDebitoSemDigito, OffsetDateTime.now());
+			if (saldo.getSaldo().add(movimentacao.getValor()).compareTo(BigDecimal.ZERO) >= 0) {
+				throw new SaldoCorrentistaIndisponivelException(contaDebitoSemDigito);
+			}
+		}
+
+		if( contaCreditoSemDigito < PRIMEIRA_CONTA_CORRENTISTAS &&
+				contaDebitoSemDigito >= PRIMEIRA_CONTA_CORRENTISTAS ) {
+			SaldoOutput saldo = contaRepository.findSaldo(contaCreditoSemDigito, OffsetDateTime.now());
+			if (saldo.getSaldo().subtract(movimentacao.getValor()).compareTo(BigDecimal.ZERO) < 0) {
+				throw new SaldoBancoIndisponivelException();
+			}
+		}
+
 		movimentacao.setContaDebito(contaDebito);
 		movimentacao.setContaCredito(contaCredito);
+		movimentacao.setNumeroContaDebito(contaDebitoSemDigito);
+		movimentacao.setNumeroContaCredito(contaCreditoSemDigito);
 
-		return movimentacaoRepository.save(movimentacao);
+		movimentacao = movimentacaoRepository.save(movimentacao);
+
+		eventPublisher.publishEvent(new MovimentacaoRealizadaEvent(movimentacao));
+
+		return movimentacao;
+
 	}
 
-	public List<Movimentacao> listar(long numeroConta) {
-		ArrayList<Movimentacao> lista = (ArrayList<Movimentacao>) movimentacaoRepository.findAll();
-		ArrayList<Movimentacao> lista2 = new ArrayList<Movimentacao>();
-		for (Movimentacao m1 : lista) {
-			if (m1.getNumeroContaCredito() == numeroConta || m1.getNumeroContaDebito() == numeroConta) {
-				lista2.add(m1);
-			}
+	public Page<Movimentacao> listar(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal, Pageable pageable) {
 
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
+		Conta conta = contaRepository.findById(numeroContaSemDigito)
+				.orElseThrow( () -> new ContaNaoEncontradaException(numeroContaSemDigito));
+
+		if(dataFinal.compareTo(dataInicial)<0) {
+			throw new PeriodoInvalidoException();
 		}
-		return lista2;
+		return movimentacaoRepository.findByConta(numeroContaSemDigito, dataInicial, dataFinal);
+
 	}
 
 	public Movimentacao buscarPorId(Long idMovimentacao) {
@@ -53,12 +93,4 @@ public class MovimentacaoService {
 				.orElseThrow(() -> new MovimentacaoNaoEncontradaException(idMovimentacao));
 	}
 
-	public void excluir(Long idMovimentacao) {
-		try {
-			movimentacaoRepository.deleteById(idMovimentacao);
-
-		} catch (EmptyResultDataAccessException e) {
-			throw new MovimentacaoNaoEncontradaException(idMovimentacao);
-		}
-	}
 }

@@ -3,22 +3,29 @@ package com.banco.bluebank.service;
 import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.CorrentistaNaoEncontradoException;
+import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Correntista;
+import com.banco.bluebank.model.dto.output.SaldoOutput;
 import com.banco.bluebank.repository.AgenciaRepository;
 import com.banco.bluebank.repository.ContaRepository;
 import com.banco.bluebank.repository.CorrentistaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
-
+import java.time.OffsetDateTime;
 
 @Service
 public class ContaService {
+
+	private static final String MSG_CONTA_EM_USO
+			= "Conta de número %d não pode ser removida, pois está em uso";
 
 	@Autowired
 	private ContaRepository contaRepository;
@@ -29,15 +36,31 @@ public class ContaService {
 	@Autowired
 	private AgenciaRepository agenciaRepository;
 
-	public List<Conta> listar() {
-		return contaRepository.findAll();
+
+	public Page<Conta> listar(Pageable pageable) {
+		return contaRepository.findAll(pageable);
+	}
+	@Autowired
+	private ContaUtils contaUtils;
+
+
+	public SaldoOutput buscarSaldo(Long numeroConta, OffsetDateTime data) {
+
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
+
+		Conta conta = this.buscar(numeroConta);
+		return contaRepository.findSaldo(numeroContaSemDigito, data);
 	}
 
-	public Conta buscar(Long id) {
-		return contaRepository.findById(id)
-				.orElseThrow( () -> new ContaNaoEncontradaException(id));
+	public Conta buscar(Long numeroConta) {
+
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
+
+		return contaRepository.findById(numeroContaSemDigito)
+				.orElseThrow( () -> new ContaNaoEncontradaException(numeroContaSemDigito));
 	}
 
+	@Transactional(readOnly = false)
 	public Conta salvar(Conta conta) {
 
 		Conta finalConta = conta;
@@ -59,8 +82,10 @@ public class ContaService {
 
 	}
 
-	public Conta atualizar(Long id, Conta contaAtual) {
-		Conta conta = buscar(id);
+	@Transactional(readOnly = false)
+	public Conta atualizar(Long numeroConta, Conta contaAtual) {
+
+		Conta conta = buscar(numeroConta);
 
 		Correntista correntista = correntistaRepository.findById(contaAtual.getIdCorrentista())
 				.orElseThrow( () -> new CorrentistaNaoEncontradoException(contaAtual.getIdCorrentista()));
@@ -75,14 +100,18 @@ public class ContaService {
 
 	}
 
-	public void excluir(Long id) {
+	public void excluir(Long numeroConta) {
+		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		try {
-			contaRepository.deleteById(id);
+			contaRepository.deleteById(numeroContaSemDigito);
 
 		} catch (EmptyResultDataAccessException e) {
-			throw new ContaNaoEncontradaException(id);
-
+			throw new ContaNaoEncontradaException(numeroConta);
+		} catch (DataIntegrityViolationException e) {
+			throw new EntidadeEmUsoException(
+					String.format(MSG_CONTA_EM_USO, numeroConta));
 		}
+
 	}
 
 }
