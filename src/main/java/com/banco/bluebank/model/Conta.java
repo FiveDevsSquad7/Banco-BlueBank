@@ -14,8 +14,11 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
 
+@ApiModel(value = "Conta", description = "Entidade entitulada Conta")
 @Entity
 @Table(name = "conta")
 public class Conta  implements Serializable {
@@ -24,32 +27,41 @@ public class Conta  implements Serializable {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(value = "Campo ID")
     @Column(name="num_conta")
     private Long numeroConta;
-    
+
+	@ApiModelProperty(required = true, value = "Campo referente tipo de conta no momento do cadastro a ser cadastrado")
     @NotBlank(message = "Tipo da Conta deve ser preenchido")
     @Size(max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
     @Column(name="tipo_conta",length = 2, nullable = false)
     private String tipoConta;
-   
+
+	@ApiModelProperty(value = "Campo referente OBJETO CORRENTISTA",
+			reference = "Relacionamento Muitas Contas para um Correntista")
     @ManyToOne
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
-    
+
+	@ApiModelProperty(value = "Campo referente OBJETO AGENCIA",
+			reference = "Relacionamento Muitas Contas para uma Agencia")
     @ManyToOne(optional=false)
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
-    
+
+	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
     @JsonIgnore
     @Column(name = "id_correntista")
     private Long idCorrentista;
-    
+
+	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
     @JsonIgnore
     @Column(name = "id_agencia")
     private Long idAgencia;
 
+
 	@CreationTimestamp
-	@Column(name = "data_cadastro",nullable = false, columnDefinition = "datetime")
+	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataCadastro;
 
 	public OffsetDateTime getDataCadastro() {

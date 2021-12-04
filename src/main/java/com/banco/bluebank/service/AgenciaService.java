@@ -11,11 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-
-
-import org.springframework.transaction.annotation.Transactional;
-
-
 @Service
 public class AgenciaService {
 
@@ -28,10 +23,10 @@ public class AgenciaService {
     public Agencia salvar(Agencia agencia){
         return agenciaRepository.save(agencia);
     }
-   
+
      public Page<Agencia> listar(Pageable pageable) {
         return agenciaRepository.findAll(pageable);
-    }
+     }
 
     public Agencia buscar(Long agenciaId) {
         return agenciaRepository.findById(agenciaId)
@@ -40,14 +35,16 @@ public class AgenciaService {
 
     public void excluir(Long agenciaId) {
         try {
+
             agenciaRepository.deleteById(agenciaId);
 
         } catch (EmptyResultDataAccessException e) {
             throw new AgenciaNaoEncontradaException(agenciaId);
 
         } catch (DataIntegrityViolationException e) {
-            throw new EntidadeEmUsoException(
+             throw new EntidadeEmUsoException(
                     String.format(MSG_AGENCIA_EM_USO, agenciaId));
         }
+
     }
 }
