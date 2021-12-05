@@ -97,7 +97,7 @@ public class SpringfoxSwaggerConfig {
                 "DEVE-SE INFORMAR VERSÃO",
                 "DEVE-SE COLOCAR TERMO DE SERVIÇO - SUGESTÃO - PODEMOS COLOCAR UM DOC EM HTML EXPLICANDO O TERMO-" +
                         "NÃO SERIA FRONT-END",
-                new Contact("SQUAD-7-FIVEDEV", "https://WWW.NOMOMENTOQUEESTIVERNAAWS",
+                new Contact("Squad 6Devs\n", "https://bluebank.6devs.com.br\n",
                         "faleconosco@bluebank.com.br"),
                 "Apache License Version 2.0",
                 "https://www.apache.org/licenses/LICENSE-2.0", new ArrayList<VendorExtension>());
