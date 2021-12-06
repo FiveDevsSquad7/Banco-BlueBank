@@ -20,13 +20,12 @@ public class NotificadorEmail implements Notificador {
         if (correntista.getEmailValidacao() != null) {
 
             simpleMailMessage.setTo(correntista.getEmailValidacao());
-            simpleMailMessage.setSubject("Esse email automático informa movimentação na conta atrelada a essa conta de e-mail");
-            String texto = String.format("Prezado(a) %s ,\n\n Conforme nosso cadstro, informa por meio desse %s (PREVIAMENTE CERTICADO!) que: %s\n",
-                    correntista.getNome(), correntista.getEmailValidacao(), mensagem);
+            simpleMailMessage.setSubject("BlueBank 6Devs - Notificação de movimentação em conta bancária");
+            String texto = String.format("Prezado(a) %s,\n\nPor motivo de segurança informamos que: %s\n",
+                    correntista.getNome(), mensagem);
             simpleMailMessage.setText(texto);
             javaMailSender.send(simpleMailMessage);
 
-            System.out.println(texto);
         }
     }
 }
