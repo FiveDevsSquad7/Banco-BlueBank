@@ -20,10 +20,10 @@ public class NotificadorEmail implements Notificador {
         if (correntista.getEmailValidacao() != null) {
 
             simpleMailMessage.setTo(correntista.getEmailValidacao());
-            String texto = String.format("Notificando %s através do e-mail %s: %s\n",
+            simpleMailMessage.setSubject("Esse email automático informa movimentação na conta atrelada a essa conta de e-mail");
+            String texto = String.format("Prezado(a) %s ,\n\n Conforme nosso cadstro, informa por meio desse %s (PREVIAMENTE CERTICADO!) que: %s\n",
                     correntista.getNome(), correntista.getEmailValidacao(), mensagem);
             simpleMailMessage.setText(texto);
-            simpleMailMessage.setSubject("Notificação referente conta");
             javaMailSender.send(simpleMailMessage);
 
             System.out.println(texto);
