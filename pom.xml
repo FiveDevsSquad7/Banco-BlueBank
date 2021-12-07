@@ -12,7 +12,7 @@
     <artifactId>bluebank</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>bluebank</name>
-    <description>bluebank project for Spring Boot</description>
+    <description>BlueBank API</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -83,6 +83,10 @@
             <artifactId>mockito-core</artifactId>
             <version>3.9.0</version><!--$NO-MVN-MAN-VER$-->
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-security</artifactId>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
