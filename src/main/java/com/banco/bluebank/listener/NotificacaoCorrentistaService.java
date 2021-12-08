@@ -51,9 +51,7 @@ public class NotificacaoCorrentistaService {
     public void enviarEmailContaDebitoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) {
 
         notificadorEmail.notificar(event.getMovimentacao().getContaDebito().getCorrentista(),
-                String.format("Sua conta %d%s sofreu uma movimentação de débito no valor de R$ %.2f.\n\n\n" +
-                                "Estamos a sua disposição para maiores esclarecimentos através do email fivedevssq7@gmail.com" +
-                                " ou se preferir entre em contato com o gerente da sua conta!\n\n\nAtenciosamente, BlueBank 6Devs.",
+                String.format(" %d%s  debito no valor de R$ %.2f.\n\n\n",
                         event.getMovimentacao().getContaDebito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaDebito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
@@ -65,9 +63,7 @@ public class NotificacaoCorrentistaService {
     public void enviarEmailContaCreditoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) {
 
         notificadorEmail.notificar(event.getMovimentacao().getContaCredito().getCorrentista(),
-                String.format("Sua conta %d%s sofreu uma movimentação de crédito no valor de R$ %.2f.\n\n\n" +
-                                "Estamos a sua disposição para maiores esclarecimentos através do email fivedevssq7@gmail.com" +
-                                " ou se preferir entre em contato com o gerente da sua conta!\n\n\nAtenciosamente, BlueBank 6Devs.",
+                String.format(" %d%s credito no valor de R$ %.2f.\n\n\n",
                         event.getMovimentacao().getContaCredito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaCredito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
