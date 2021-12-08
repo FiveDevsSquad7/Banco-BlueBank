@@ -27,6 +27,7 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -200,6 +201,29 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 				.build();
 
 		return handleExceptionInternal(ex, problem, headers, status, request);
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<?> handleConstraintViolation(ConstraintViolationException ex,
+														 WebRequest request) {
+
+		HttpStatus status = HttpStatus.BAD_REQUEST;
+		ProblemType problemType = ProblemType.ERRO_NEGOCIO;
+		String detail = ex.getMessage();
+		final String TEXTO_BUSCAR1 = "messageTemplate='";
+		final String TEXTO_BUSCAR2 = "'}";
+		if(detail.contains(TEXTO_BUSCAR1)){
+			detail = detail.substring(detail.indexOf(TEXTO_BUSCAR1)+TEXTO_BUSCAR1.length());
+			if(detail.contains(TEXTO_BUSCAR2)) {
+				detail = detail.substring(0, detail.indexOf(TEXTO_BUSCAR2));
+			}
+		}
+
+		Problem problem = createProblemBuilder(status, problemType, detail)
+				.userMessage(detail)
+				.build();
+
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
