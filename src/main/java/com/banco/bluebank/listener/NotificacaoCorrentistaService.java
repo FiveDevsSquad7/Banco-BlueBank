@@ -9,6 +9,8 @@ import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
+import javax.mail.MessagingException;
+
 
 @Component
 public class NotificacaoCorrentistaService {
@@ -39,7 +41,7 @@ public class NotificacaoCorrentistaService {
     public void enviarSmsContaCreditoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) {
 
         notificadorSMS.notificar(event.getMovimentacao().getContaCredito().getCorrentista(),
-                String.format("Sua conta %d%s sofreu uma movimentação de crédito no valor de R$ %.2f.",
+                String.format("Sua conta %d%s sofreu uma movimentação de débito no valor de R$ %.2f.",
                         event.getMovimentacao().getContaCredito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaCredito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
@@ -48,10 +50,10 @@ public class NotificacaoCorrentistaService {
 
     @Async
     @EventListener
-    public void enviarEmailContaDebitoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) {
+    public void enviarEmailContaDebitoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) throws ClassNotFoundException, MessagingException {
 
         notificadorEmail.notificar(event.getMovimentacao().getContaDebito().getCorrentista(),
-                String.format(" %d%s  debito no valor de R$ %.2f.\n\n\n",
+                String.format(" %d%s tenha ciência que houve movimentacao debito no valor de R$ %.2f.\n\n\n",
                         event.getMovimentacao().getContaDebito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaDebito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
@@ -60,10 +62,10 @@ public class NotificacaoCorrentistaService {
 
     @Async
     @EventListener
-    public void enviarEmailContaCreditoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) {
+    public void enviarEmailContaCreditoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) throws ClassNotFoundException, MessagingException {
 
         notificadorEmail.notificar(event.getMovimentacao().getContaCredito().getCorrentista(),
-                String.format(" %d%s credito no valor de R$ %.2f.\n\n\n",
+                String.format(" %d%s  tenha ciência que  houve movimentacao credito no valor de R$ %.2f.\n\n\n",
                         event.getMovimentacao().getContaCredito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaCredito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
