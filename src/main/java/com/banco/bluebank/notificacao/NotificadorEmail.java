@@ -1,96 +1,80 @@
 package com.banco.bluebank.notificacao;
 
 import com.banco.bluebank.model.Correntista;
-import org.apache.commons.mail.EmailAttachment;
-import org.apache.commons.mail.HtmlEmail;
+import com.banco.bluebank.utils.ContentIdGenerator;
+import com.sun.istack.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import javax.mail.BodyPart;
+import javax.mail.MessagingException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeBodyPart;
+import javax.mail.internet.MimeMessage;
+import java.util.Date;
+import java.util.Random;
 
 @Component
 public class NotificadorEmail implements Notificador {
 
-    HtmlEmail email = new HtmlEmail();
+    int numero = random().nextInt(9999);
+    int emailProtocolo = 1 + numero;
 
-    @Value("${bluebank.emailpassword}")
-    private String emailPassword;
+    public static Random random(){
+        return new Random();
+    }
 
+    @Autowired
+    private JavaMailSender javaMailSender;
 
     @Override
-    public void notificar(Correntista correntista, String mensagem) {
+    public void notificar(Correntista correntista, String mensagem) throws ClassNotFoundException, MessagingException {
 
+        String filename = "logo-6devs.png";
+        BodyPart image = new MimeBodyPart();
+        image.setDisposition(MimeBodyPart.INLINE);
+        image.setFileName(filename);
+        image.setHeader("Content-ID", "<"+filename+">");
 
+        MimeMessage mimeMessage;
         try {
+                InternetAddress from = new InternetAddress("fivedevssq7@gmail.com", "BlueBank 6Devs");
 
+                mimeMessage = javaMailSender.createMimeMessage();
+                mimeMessage.setSubject("BlueBank 6Devs - Notificação de movimentação em conta bancária - Protocolo: "+ emailProtocolo);
 
+                MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-            File file1=new File("");
-            List<File> files=new ArrayList<>();
-            files.add(file1);
+                helper.setValidateAddresses(!correntista.getEmailValidacao().isEmpty());
+                helper.setSentDate(new Date());
+                helper.setFrom(from);
+                helper.setTo(correntista.getEmailValidacao());
 
-            if (correntista.getEmailValidacao() != null && files.size() > 0) {
+                String contentId = ContentIdGenerator.getContentId();
 
-                //sending one or more attachments
-                EmailAttachment attachment = new EmailAttachment();
-                attachment.setDisposition(EmailAttachment.ATTACHMENT);
+                String texto = String.format(" %s da conta cujo numero %s  ", correntista.getNome(), mensagem);
+                helper.setText(texto);
 
-                //for each in files
-                for(File fileIn:files){
-                    if(fileIn != null && fileIn.isFile()){
-                        int indexOfExtension=fileIn.getName().indexOf(".");
-                        indexOfExtension=indexOfExtension == -1 ? 0 :indexOfExtension;
-                        attachment.setDescription(fileIn.getName().substring(indexOfExtension));//extenção
-                        attachment.setName(fileIn.getName());
-                        attachment.setURL(fileIn.toURI().toURL());//set file local, convert in URL
-                        email.attach(attachment);
-                    }
-                }
+                String htmlText = (
+                        "Prezado Cliente<br><br>Primando qualidade em seguranca, julga-se necessario que Sr(a):<br><br>" +
+                        "O(a) gestor"+texto+
+                        "<br><br>Estamos a sua disposicao para maiores esclarecimentos por meio do email fivedevssq7@gmail.com ou se preferir entre em contato com o gerente da sua conta!\"\n" +
+                        "<br><br><br><br>Atenciosamente,<br><br><br><br> BlueBank 6Devs." +
+                        "<a href=\"https://bluebank.6devs.com.br\">"+
+                        "<td style=\"width:114px;padding-top:19px>\""+
+                        "<img src=\"cid:"+ contentId + "</td>"+
+                        "</a>");
+                helper.setText(htmlText, true);
+                ClassPathResource classPathResource = new ClassPathResource("static\\image\\logo-6devs.png");
+                helper.addInline(contentId, classPathResource);
+                javaMailSender.send(mimeMessage);
 
-                //show log
-                email.setDebug(true);
-                //set port
-                email.setSmtpPort(587);
-                //check this rules for security
-                email.setStartTLSEnabled(true);
-                //email.setSSLCheckServerIdentity(true);
-
-                email.setHostName("smtp.gmail.com");//server SMTP for Hotmail, alter other
-                email.setAuthentication("fivedevssq7@gmail.com", emailPassword);
-                email.setFrom("fivedevssq7@gmail.com", "BlueBank 6Devs");
-
-                email.addTo(correntista.getEmailValidacao());
-                email.setSubject("BlueBank 6Devs - Notificação de movimentação em conta bancária");
-                String texto = String.format(" %s da conta cujo numero %s houve movimentacao ",
-                        correntista.getNome(), mensagem);
-                email.setTextMsg(texto);
-
-                String cid = email.embed(new File("resources\\static\\image\\logo-6devs.png"));
-                //javaMailSender.send(simpleMailMessage);
-
-                String txtHtml =
-                        "<html>"
-                                + "Prezado Cliente<br><br>Primando qualidade em seguranca, julga-se necessario que Sr(a):<br><br>" +
-                                "O(a) gestor"+texto
-                                + "<br><br>Estamos a sua disposicao para maiores esclarecimentos por meio do email fivedevssq7@gmail.com ou se preferir entre em contato com o gerente da sua conta!"
-                                + " <br><br><br><br>Atenciosamente, BlueBank 6Devs.<br><br><br><br>"
-                                + "<a href=\"https://bluebank.6devs.com.br\">"
-                                + "<img src=\"cid:"+cid+ "style=\"width:30000px;height:20000px;\">"
-                                + "</a>"
-                                + "</html>";
-                // set the html message
-                email.setHtmlMsg(txtHtml);
-                // send the email
-                email.send();
-
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        }
+        catch (Exception e) {
+            Logger.getLogger(Class.forName(e.getMessage()));
         }
     }
 }
