@@ -88,7 +88,7 @@ public class MovimentacaoController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-
+    @CheckSecurity.Movimentacoes.PodeConsultar
     @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Movimentacao buscar(@PathVariable Long id) {
