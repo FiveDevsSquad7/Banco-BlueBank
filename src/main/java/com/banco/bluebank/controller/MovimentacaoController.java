@@ -2,6 +2,7 @@ package com.banco.bluebank.controller;
 
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.model.MovimentacaoInput;
+import com.banco.bluebank.security.CheckSecurity;
 import com.banco.bluebank.service.MovimentacaoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -27,7 +28,7 @@ public class MovimentacaoController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-
+    @CheckSecurity.Movimentacoes.PodeTransferir
     @PostMapping(path="/transferencia")
     @ResponseStatus(HttpStatus.CREATED)
     public Movimentacao salvar(@RequestBody Movimentacao movimentacao) {
@@ -45,7 +46,7 @@ public class MovimentacaoController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-
+    @CheckSecurity.Movimentacoes.PodeDepositar
     @PostMapping(path = "/deposito")
     @ResponseStatus(HttpStatus.CREATED)
     public Movimentacao depositar(@RequestBody MovimentacaoInput movimentacaoInput) {
@@ -66,7 +67,7 @@ public class MovimentacaoController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
-
+    @CheckSecurity.Movimentacoes.PodeSacar
     @PostMapping(path = "/saque")
     @ResponseStatus(HttpStatus.CREATED)
     public Movimentacao sacar(@RequestBody MovimentacaoInput movimentacaoInput) {

@@ -4,6 +4,7 @@ package com.banco.bluebank.controller;
 import com.banco.bluebank.model.ContatoCliente;
 import com.banco.bluebank.model.Correntista;
 import com.banco.bluebank.model.Endereco;
+import com.banco.bluebank.security.CheckSecurity;
 import com.banco.bluebank.service.CorrentistaService;
 import com.banco.bluebank.service.MovimentacaoService;
 
@@ -40,6 +41,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeConsultar
     @GetMapping
     public Page<Correntista> listar(Pageable pageable) {
         return service.listar(pageable);
@@ -54,6 +56,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeConsultar
     @GetMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Correntista buscar(@PathVariable Long id) {
@@ -69,6 +72,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeEditar
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Correntista salvar(@RequestBody Correntista correntista) {
@@ -83,6 +87,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeEditar
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Correntista atualizar(@PathVariable Long id, @RequestBody Correntista correntista) {
@@ -100,6 +105,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeEditar
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id) {
@@ -114,6 +120,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeConsultar
     @GetMapping(path = "/{id}/enderecos")
     @ResponseStatus(HttpStatus.OK)
     public List<Endereco> listarEnderecos(@PathVariable Long id) {
@@ -128,6 +135,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeConsultar
     @PostMapping(path = "/{id}/enderecos")
     @ResponseStatus(HttpStatus.CREATED)
     public List<Endereco> adicionarEndereco(@PathVariable Long id, @RequestBody Endereco endereco) {
@@ -142,6 +150,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeEditar
     @DeleteMapping("/{id}/enderecos/{enderecoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removerEndereco(@PathVariable Long id, @PathVariable Long enderecoId) {
@@ -156,6 +165,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeConsultar
     @GetMapping(path = "/{id}/contatos")
     @ResponseStatus(HttpStatus.OK)
     public List<ContatoCliente> listarContatos(@PathVariable Long id) {
@@ -170,6 +180,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeEditar
     @PostMapping(path = "/{id}/contatos")
     @ResponseStatus(HttpStatus.CREATED)
     public List<ContatoCliente> adicionarContato(@PathVariable Long id, @RequestBody ContatoCliente contato) {
@@ -186,6 +197,7 @@ public class CorrentistaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Correntistas.PodeEditar
     @DeleteMapping("/{id}/contatos/{contatoId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void removerContato(@PathVariable Long id, @PathVariable Long contatoId) {

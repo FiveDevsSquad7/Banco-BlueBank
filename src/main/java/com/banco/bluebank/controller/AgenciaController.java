@@ -1,6 +1,7 @@
 package com.banco.bluebank.controller;
 
 import com.banco.bluebank.model.Agencia;
+import com.banco.bluebank.security.CheckSecurity;
 import com.banco.bluebank.service.AgenciaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -28,8 +30,11 @@ public class AgenciaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Agencias.PodeConsultar
     @GetMapping
     public Page<Agencia> listar(Pageable pageable) {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
+
         return service.listar(pageable);
     }
 
@@ -42,6 +47,7 @@ public class AgenciaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Agencias.PodeConsultar
     @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Agencia buscar(@PathVariable Long id) {
@@ -57,6 +63,7 @@ public class AgenciaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Agencias.PodeEditar
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public Agencia salvar(@RequestBody Agencia agencia) {
@@ -74,6 +81,7 @@ public class AgenciaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Agencias.PodeEditar
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     public Agencia atualizar(@PathVariable Long id, @RequestBody Agencia agencia) {
@@ -93,6 +101,7 @@ public class AgenciaController {
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
+    @CheckSecurity.Agencias.PodeEditar
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void remover(@PathVariable Long id) {

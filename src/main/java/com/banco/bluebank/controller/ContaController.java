@@ -4,6 +4,7 @@ import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Movimentacao;
 import com.banco.bluebank.model.dto.output.ContaOutputDTO;
 import com.banco.bluebank.model.dto.output.SaldoOutput;
+import com.banco.bluebank.security.CheckSecurity;
 import com.banco.bluebank.service.ContaDisassemblerDTO;
 import com.banco.bluebank.service.ContaService;
 import com.banco.bluebank.service.MovimentacaoService;
@@ -43,6 +44,7 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
+	@CheckSecurity.Contas.PodeConsultar
 	@GetMapping
 	public Page<ContaOutputDTO> listar(Pageable pageable) {
 		return mapper.toCollectionModelDTO(contaservice.listar(pageable));
@@ -57,6 +59,7 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
+	@CheckSecurity.Contas.PodeConsultar
 	@GetMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ContaOutputDTO buscar(@PathVariable Long id) {
@@ -73,6 +76,7 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
+	@CheckSecurity.Contas.PodeEditar
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public ContaOutputDTO salvar(@RequestBody Conta conta) {
@@ -88,13 +92,13 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Foi gerada uma exceção"),
 	})
-  
+
+  	@CheckSecurity.Contas.PodeConsultarExtrato
 	@GetMapping(path = "/{id}/saldo/{data}")
 	@ResponseStatus(HttpStatus.OK)
 	public SaldoOutput saldo(@PathVariable Long id, @PathVariable String data) {
 		return contaservice.buscarSaldo(id,OffsetDateTime.parse(data));
 	}
-  
 
 	@ApiOperation(value = "Busca todas as transações efetuadas e retorna o extrato",  httpMethod = "GET",
 		notes = "Busca todas as transações efetuadas e retorna o extrato")	
@@ -105,6 +109,7 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
+	@CheckSecurity.Contas.PodeConsultarExtrato
 	@GetMapping(path = "/{id}/extrato/{dataInicial}/{dataFinal}")
 	@ResponseStatus(HttpStatus.OK)
 	public Page<Movimentacao> extrato(@PathVariable Long id,
@@ -124,6 +129,7 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
+	@CheckSecurity.Contas.PodeEditar
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
 	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody Conta conta){
@@ -133,7 +139,7 @@ public class ContaController {
 		return mapper.toModelDTO(contaModificada);
 	}
 
-	@ApiOperation(value = "Exclui Conta exclisivo por meio do ID passado!",  httpMethod = "DELETE",
+	@ApiOperation(value = "Exclui Conta exclusivo por meio do ID passado!",  httpMethod = "DELETE",
 			notes = "Exclui Conta via ID")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "Retornar SUCESSO após EXCLUSÃO"),
@@ -144,6 +150,7 @@ public class ContaController {
 			@ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
+	@CheckSecurity.Contas.PodeEditar
 	@DeleteMapping("/{id}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void remover (@PathVariable Long id) {
