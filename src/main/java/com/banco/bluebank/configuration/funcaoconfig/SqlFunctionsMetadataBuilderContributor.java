@@ -1,4 +1,4 @@
-package com.banco.bluebank.configuration;
+package com.banco.bluebank.configuration.funcaoconfig;
 
 import org.hibernate.boot.MetadataBuilder;
 import org.hibernate.boot.spi.MetadataBuilderContributor;
