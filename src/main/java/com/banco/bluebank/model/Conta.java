@@ -49,6 +49,11 @@ public class Conta  implements Serializable {
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
 
+	@ApiModelProperty(value = "Senha para acesso à conta")
+	@NotBlank(message = "A senha é obrigatória")
+	@Column(name = "senha")
+	private String senha;
+
 	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
     @JsonIgnore
     @Column(name = "id_correntista")
@@ -63,6 +68,14 @@ public class Conta  implements Serializable {
 	@CreationTimestamp
 	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataCadastro;
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public OffsetDateTime getDataCadastro() {
 		return dataCadastro;
