@@ -97,7 +97,7 @@ public class ContaController {
 	@GetMapping(path = "/{id}/saldo/{data}")
 	@ResponseStatus(HttpStatus.OK)
 	public SaldoOutput saldo(@PathVariable Long id, @PathVariable String data) {
-		return contaservice.buscarSaldo(id,OffsetDateTime.parse(data));
+		return contaservice.buscarSaldo(id,data);
 	}
 
 	@ApiOperation(value = "Busca todas as transações efetuadas e retorna o extrato",  httpMethod = "GET",
@@ -115,7 +115,7 @@ public class ContaController {
 	public Page<Movimentacao> extrato(@PathVariable Long id,
 									  @PathVariable String dataInicial,
 									  @PathVariable String dataFinal, Pageable pageable) {
-		return serviceMovimentacao.listar(id,OffsetDateTime.parse(dataInicial),OffsetDateTime.parse(dataFinal), pageable);
+		return serviceMovimentacao.listar(id,dataInicial,dataFinal, pageable);
 	}
 
 	@ApiOperation(value = "Faz atualização global das Contas pelo específico ID",  httpMethod = "PUT",

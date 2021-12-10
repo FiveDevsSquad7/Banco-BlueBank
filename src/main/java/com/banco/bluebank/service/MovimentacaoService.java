@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -75,7 +76,21 @@ public class MovimentacaoService {
 
 	}
 
-	public Page<Movimentacao> listar(Long numeroConta, OffsetDateTime dataInicial, OffsetDateTime dataFinal, Pageable pageable) {
+	public Page<Movimentacao> listar(Long numeroConta, String dataInicial, String dataFinal, Pageable pageable) {
+
+		OffsetDateTime dtInicial,dtFinal;
+
+		try {
+			dtInicial = OffsetDateTime.parse(dataInicial);
+		} catch (DateTimeParseException e) {
+			throw new FormatoDataInvalidoException();
+		}
+
+		try {
+			dtFinal = OffsetDateTime.parse(dataFinal);
+		} catch (DateTimeParseException e) {
+			throw new FormatoDataInvalidoException();
+		}
 
 		Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 		Conta conta = contaRepository.findById(numeroContaSemDigito)
@@ -85,8 +100,8 @@ public class MovimentacaoService {
 			throw new PeriodoInvalidoException();
 		}
 
-		dataFinal = dataFinal.plusDays(1);
-		return movimentacaoRepository.findByConta(numeroContaSemDigito, dataInicial, dataFinal, pageable);
+		dtFinal = dtFinal.plusDays(1);
+		return movimentacaoRepository.findByConta(numeroContaSemDigito, dtInicial, dtFinal, pageable);
 
 	}
 

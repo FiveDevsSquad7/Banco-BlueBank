@@ -1,9 +1,6 @@
 package com.banco.bluebank.service;
 
-import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
-import com.banco.bluebank.exceptionhandler.exceptions.ContaNaoEncontradaException;
-import com.banco.bluebank.exceptionhandler.exceptions.CorrentistaNaoEncontradoException;
-import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
+import com.banco.bluebank.exceptionhandler.exceptions.*;
 import com.banco.bluebank.model.Agencia;
 import com.banco.bluebank.model.Conta;
 import com.banco.bluebank.model.Correntista;
@@ -23,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.ConstraintViolationException;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeParseException;
 
 @Service
 public class ContaService {
@@ -50,12 +48,20 @@ public class ContaService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public SaldoOutput buscarSaldo(Long numeroConta, OffsetDateTime data) {
+    public SaldoOutput buscarSaldo(Long numeroConta, String data) {
+
+        OffsetDateTime dt;
+
+        try {
+            dt = OffsetDateTime.parse(data);
+        } catch (DateTimeParseException e) {
+            throw new FormatoDataInvalidoException();
+        }
 
         Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 
         Conta conta = this.buscar(numeroConta);
-        return contaRepository.findSaldo(numeroContaSemDigito, data);
+        return contaRepository.findSaldo(numeroContaSemDigito, dt);
     }
 
     public Conta buscar(Long numeroConta) {
