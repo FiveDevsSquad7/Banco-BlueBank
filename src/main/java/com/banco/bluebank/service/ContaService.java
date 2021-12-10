@@ -11,11 +11,13 @@ import com.banco.bluebank.model.dto.output.SaldoOutput;
 import com.banco.bluebank.repository.AgenciaRepository;
 import com.banco.bluebank.repository.ContaRepository;
 import com.banco.bluebank.repository.CorrentistaRepository;
+import com.banco.bluebank.security.SysSecurity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -45,6 +47,8 @@ public class ContaService {
     @Autowired
     private ContaUtils contaUtils;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public SaldoOutput buscarSaldo(Long numeroConta, OffsetDateTime data) {
 
@@ -77,6 +81,8 @@ public class ContaService {
 
         conta.setIdAgencia(agencia.getId());
 
+        conta.setSenha(passwordEncoder.encode(conta.getSenha()));
+
         conta = contaRepository.save(conta);
         conta.setCorrentista(correntista);
         conta.setAgencia(agencia);
@@ -95,6 +101,8 @@ public class ContaService {
 
         Agencia agencia = agenciaRepository.findById(contaAtual.getIdAgencia())
                 .orElseThrow(() -> new AgenciaNaoEncontradaException(contaAtual.getIdAgencia()));
+
+        conta.setSenha(passwordEncoder.encode(conta.getSenha()));
 
         conta = contaRepository.save(conta);
         conta.setCorrentista(correntista);
