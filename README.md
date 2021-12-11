@@ -398,6 +398,10 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
 
 ## 💻 Iniciando
 
+<p>
+<a href="https://github.com/FiveDevsSquad7/Banco-BlueBank-Auth">É NECESSÁRIO QUE CLONE API DE AUTENTICAÇÃO, CLIQUE PARA SER REDIRENCIONADO!</a>
+</p>
+
 1️⃣
 
 <p>
