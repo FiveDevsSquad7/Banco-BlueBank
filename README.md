@@ -440,13 +440,13 @@ Inserindo um Correntista, porém será usado o Swagger:
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center"  src="https://i.imgur.com/o5vjKao.png" style="max-width:100%;">
+    <img align="center" src="https://i.imgur.com/ntj5m78.png" style="max-width:100%;">
   </a>
 </p>
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" src="https://i.imgur.com/v54srxt.png" style="max-width:100%;">
+    <img align="center"  src="https://i.imgur.com/u6WDwg9.png" style="max-width:100%;">
   </a>
 </p>
 
@@ -455,5 +455,22 @@ Inserindo um Correntista, porém será usado o Swagger:
 <p>
 Inserindo um Correntista, porém será usado o Swagger:
 </p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/rwRYsgB.png" style="max-width:100%;">
+  </a>
+</p>
+
+<p>
+Retorno:
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/aomXZta.png" style="max-width:100%;">
+  </a>
+</p>
+
 
 
