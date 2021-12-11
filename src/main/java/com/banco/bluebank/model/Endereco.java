@@ -33,48 +33,47 @@ public class Endereco implements Serializable {
     private Long id;
 
 	@ApiModelProperty(required = true, value = "Campo logradouro")
-    @NotBlank(message = "O logradouro pessoa deve ser preenchido")
-    @Size(min = 5, max = 50, message = "O logradouro deve ter entre 50 caracteres")
-    @Column(length = 50, nullable = true)
+    @NotBlank(message = "O logradouro deve ser preenchido")
+    @Size(min = 1, max = 50, message = "O logradouro deve ter no máximo 50 caracteres")
+    @Column(length = 50, nullable = false)
     private String logradouro;
 
 	@ApiModelProperty(required = true, value = "Campo número")
     @NotBlank(message = "O número da pessoa deve ser preenchido")
-    @Size(min = 1, max = 10, message = "O logradouro deve ter entre 1:10 números")
-    @Column(length = 10,nullable = true)    
+    @Size(min = 1, max = 10, message = "O logradouro deve ter no máximo 10 caracteres")
+    @Column(length = 10,nullable = false)
     private String numero;
 
 	@ApiModelProperty(value = "Campo complemento referente cadastro do endereço")
-    @Size(max = 25, message = "O complemento deve ter entre 1:25 carecteres")
+    @Size(max = 25, message = "O complemento deve ter no máximo 25 carecteres")
     @Column(length = 25,nullable = true)  
     private String complemento;
 
 	@ApiModelProperty(required = true, value = "Campo CEP")
     @NotBlank(message = "O CEP deve ser preenchido")
-    @Size(min = 8, max = 8, message = "O CEP deve ter entre 1:8 números")
+    @Size(min = 8, max = 8, message = "O CEP deve ter 8 números")
     @Column(length = 8, nullable = false)  
     private String cep;
 
 	@ApiModelProperty(required = true, value = "Campo bairro")
     @NotBlank(message = "O bairro deve ser preenchido")
-    @Size(min = 5, max = 25, message = "O bairro deve ter entre 1:25 caracteres")
-    @Column(length = 25, nullable = true)
+    @Size(min = 1, max = 25, message = "O bairro deve ter no máximo 25 caracteres")
+    @Column(length = 25, nullable = false)
     private String bairro;
 
 	@ApiModelProperty(required = true, value = "Campo cidade")
     @NotBlank(message = "A cidade deve ser preenchido")
-    @Size(min = 5, max = 30, message = "A cidade deve ter entre 1:30 caracteres")
+    @Size(min = 1, max = 30, message = "A cidade deve ter no máximo 30 caracteres")
     @Column(length = 30, nullable = false)
     private String cidade;
 
 	@ApiModelProperty(required = true, value = "Campo estado")
     @NotBlank(message = "O estado deve ser preenchido")
     @Size(min = 2, max = 2, message = "O estado deve ter 2 carecteres")
-    @Column(length = 2, nullable = true)
+    @Column(length = 2, nullable = false)
     private String estado;
 
-	@ApiModelProperty(value = "Campo Chave Estrangeira")
-	@Column(name = "id_correntista")
+	@Column(name = "id_correntista", nullable = false)
 	@JsonIgnore
 	private Long idCorrentista;
 

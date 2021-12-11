@@ -35,27 +35,28 @@ public class ContatoCliente implements Serializable {
 
 	@ApiModelProperty(required = true, value = "Campo referente ao telefone")
     @NotBlank(message = "Telefone deve ser preenchido")
-    @Size(min = 1, max = 15, message = "Telefone deve ter no mínimo 8 e no máximo 15 números")
-    @Column(length = 15, nullable = true)
+    @Size(min = 1, max = 15, message = "Telefone deve ter no máximo 15 caracteres")
+    @Column(length = 15, nullable = false)
     private String telefone;
 
 	@ApiModelProperty(required = true, value = "Campo referente e-mail")
     @NotBlank(message = "Email deve ser preenchido")
-    @Size(min = 1, max = 50, message = "Email deve ter no mínimo 10 e no máximo 50 carecteres")
+    @Size(max = 50, message = "Email deve ter no máximo 50 caracteres")
     @Column(length = 50, nullable = true)
     private String email;
 	
 	@JsonIgnore
-	@Column(name = "id_correntista")
+	@Column(name = "id_correntista", nullable = false)
 	private Long idCorrentista;
 
 	@ApiModelProperty(required = true, value = "Campo referente Informações para recados")
     @NotBlank(message = "Recado deve ser preenchido")
-    @Size(min = 1, max = 50, message = "Recado deve ter no mínimo 10 e no máximo 50 caracteres")
+    @Size(max = 50, message = "Recado deve ter no máximo 50 caracteres")
     @Column(name="info_recado",length = 50, nullable = true)
     private String infoRecado;
 
-	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
+	@ApiModelProperty(value = "Campo referente OBJETO CORRENTISTA",
+			reference = "Relacionamento Muitas Contas para um Correntista")
     @ManyToOne(optional=false)
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
 	@JsonIgnore
