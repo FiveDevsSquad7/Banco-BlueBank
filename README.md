@@ -1,9 +1,8 @@
 <h1 align="center">
 <img src="https://i.imgur.com/iQXVg0O.png" title="Logo da equipe" />
 </h1>
- <h1 align="center">
-  <p style="color: bleu;">BlueBank</p>
-</h1>
+
+---
 
 <p align="center">
   <a href="#-sobre-o-projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -406,7 +405,7 @@ Com a autorização realizada cujo Token, o sistema permite realizar algumas ope
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/m3bxpLm.jpg" style="max-width:100%;">
+    <img align="center"  src="https://i.imgur.com/m3bxpLm.jpg" style="max-width:100%;">
   </a>
 </p>
 
@@ -417,59 +416,44 @@ Inserindo um Correntista, porém será usado o Swagger:
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/orX9XjB.png" style="max-width:100%;">
+    <img align="center"  src="https://i.imgur.com/orX9XjB.png" style="max-width:100%;">
   </a>
 </p>
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/hGHMZm9.png" style="max-width:100%;">
+    <img align="center" src="https://i.imgur.com/hGHMZm9.png" style="max-width:100%;">
   </a>
 </p>
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/eZSabGL.png" style="max-width:100%;">
+    <img align="center"  src="https://i.imgur.com/eZSabGL.png" style="max-width:100%;">
   </a>
 </p>
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/6WWERN3.png" style="max-width:100%;">
+    <img align="center"  src="https://i.imgur.com/6WWERN3.png" style="max-width:100%;">
   </a>
 </p>
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/o5vjKao.png" style="max-width:100%;">
+    <img align="center"  src="https://i.imgur.com/o5vjKao.png" style="max-width:100%;">
   </a>
 </p>
 
 <p align="center">
   <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/v54srxt.png" style="max-width:100%;">
+    <img align="center" src="https://i.imgur.com/v54srxt.png" style="max-width:100%;">
   </a>
 </p>
 
+3️⃣
 
-## Criar um projeto com aws-lambda
+<p>
+Inserindo um Correntista, porém será usado o Swagger:
+</p>
 
-Com o comando abaixo vai ser criado um projeto padrão para criar a lambda
-com framework Serverless Framework (https://www.serverless.com/)
 
- ~~~bash
-  $ serverless create --template aws-java-maven --name nomedoseuservico
- ~~~
-
-Após a implementação, configuração das credencias e região da AWS para fazer o
-deploy basta:
-
-~~~bash
-$ serverless deploy
-~~~
-
-Para testar sua lambda localmente:
-
-~~~bash
-$ serverless invoke local -f nomedasuafuncao 
-~~~
