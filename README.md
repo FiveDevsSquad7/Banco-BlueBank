@@ -453,7 +453,7 @@ Inserindo um Correntista, porém será usado o Swagger:
 3️⃣
 
 <p>
-Inserindo um Correntista, porém será usado o Swagger:
+Inserindo uma Conta:
 </p>
 
 <p align="center">
@@ -471,6 +471,32 @@ Retorno:
     <img align="center" src="https://i.imgur.com/aomXZta.png" style="max-width:100%;">
   </a>
 </p>
+
+<p>
+Por meio da Conta n° 18, cujo acesso seria ao funcionário, logo se pode realizar algumas requisições, por exemplo buscar 
+todos Correntistas na Base de Dados.
+Conforme a imagem abaixo, a API contém a Estratégia de Paginação, já que tal tecnica melhora a performace! Assim, 
+a medida que a há aumento de dados, a API contém a responsabilidade para tratar tais dados, e não ficando a incumbência APENAS Squad do Front.
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/nazmHj5.png" style="max-width:100%;">
+  </a>
+</p>
+
+<p>
+Retorno:
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/yIIyPE0.png" style="max-width:100%;">
+  </a>
+</p>
+
+
+4️⃣
 
 
 
