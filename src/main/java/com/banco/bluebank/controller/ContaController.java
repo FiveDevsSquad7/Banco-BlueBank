@@ -45,6 +45,7 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
 	@CheckSecurity.Contas.PodeConsultar
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
 	public Page<ContaOutputDTO> listar(Pageable pageable) {
 		return mapper.toCollectionModelDTO(contaservice.listar(pageable));

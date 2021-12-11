@@ -42,6 +42,7 @@ public class CorrentistaController {
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
     @CheckSecurity.Correntistas.PodeConsultar
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public Page<Correntista> listar(Pageable pageable) {
         return service.listar(pageable);

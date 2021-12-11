@@ -31,6 +31,7 @@ public class AgenciaController {
             @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
     })
     @CheckSecurity.Agencias.PodeConsultar
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public Page<Agencia> listar(Pageable pageable) {
         System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
