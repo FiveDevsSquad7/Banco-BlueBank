@@ -1,6 +1,12 @@
 package com.banco.bluebank.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.io.Serializable;
+import java.time.OffsetDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -11,7 +17,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 
+@ApiModel(value = "Endereco", description = "Entidade entitulada Endereco")
 @Entity
 @Table(name = "endereco")
 public class Endereco implements Serializable {
@@ -19,27 +28,76 @@ public class Endereco implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@ApiModelProperty(value = "Campo referente ID")
     @Column(name="id_endereco")
     private Long id;
-    
+
+	@ApiModelProperty(required = true, value = "Campo logradouro")
+    @NotBlank(message = "O logradouro pessoa deve ser preenchido")
+    @Size(min = 5, max = 50, message = "O logradouro deve ter entre 50 caracteres")
+    @Column(length = 50, nullable = true)
     private String logradouro;
-    
+
+	@ApiModelProperty(required = true, value = "Campo número")
+    @NotBlank(message = "O número da pessoa deve ser preenchido")
+    @Size(min = 1, max = 10, message = "O logradouro deve ter entre 1:10 números")
+    @Column(length = 10,nullable = true)    
     private String numero;
-    
+
+	@ApiModelProperty(value = "Campo complemento referente cadastro do endereço")
+    @Size(max = 25, message = "O complemento deve ter entre 1:25 carecteres")
+    @Column(length = 25,nullable = true)  
     private String complemento;
-    
+
+	@ApiModelProperty(required = true, value = "Campo CEP")
+    @NotBlank(message = "O CEP deve ser preenchido")
+    @Size(min = 8, max = 8, message = "O CEP deve ter entre 1:8 números")
+    @Column(length = 8, nullable = false)  
     private String cep;
-    
+
+	@ApiModelProperty(required = true, value = "Campo bairro")
+    @NotBlank(message = "O bairro deve ser preenchido")
+    @Size(min = 5, max = 25, message = "O bairro deve ter entre 1:25 caracteres")
+    @Column(length = 25, nullable = true)
     private String bairro;
-    
+
+	@ApiModelProperty(required = true, value = "Campo cidade")
+    @NotBlank(message = "A cidade deve ser preenchido")
+    @Size(min = 5, max = 30, message = "A cidade deve ter entre 1:30 caracteres")
+    @Column(length = 30, nullable = false)
     private String cidade;
-    
+
+	@ApiModelProperty(required = true, value = "Campo estado")
+    @NotBlank(message = "O estado deve ser preenchido")
+    @Size(min = 2, max = 2, message = "O estado deve ter 2 carecteres")
+    @Column(length = 2, nullable = true)
     private String estado;
-    
+
+	@ApiModelProperty(value = "Campo Chave Estrangeira")
+	@Column(name = "id_correntista")
+	@JsonIgnore
+	private Long idCorrentista;
+
+	@ApiModelProperty(value = "Campo referente OBJETO CORRENTISTA",
+			reference = "Relacionamento Muitas Contas para um Correntista")
     @ManyToOne(optional=false)
-    @JoinColumn(name="id_correntista")
+    @JoinColumn(name="id_correntista", insertable = false, updatable = false)
+	@JsonIgnore
     private Correntista correntista;
-    
+
+	@ApiModelProperty(value = "Campo referente data da criação")
+	@CreationTimestamp
+	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
+	private OffsetDateTime dataCadastro;
+
+	public OffsetDateTime getDataCadastro() {
+		return dataCadastro;
+	}
+
+	public void setDataCadastro(OffsetDateTime dataCadastro) {
+		this.dataCadastro = dataCadastro;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -126,7 +184,15 @@ public class Endereco implements Serializable {
 	public Endereco() {
 		
 	}
-	
+
+	public Long getIdCorrentista() {
+		return idCorrentista;
+	}
+
+	public void setIdCorrentista(Long idCorrentista) {
+		this.idCorrentista = idCorrentista;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
