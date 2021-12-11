@@ -318,6 +318,17 @@ Tecnologias, Framework e Metodologias utilizadas:
         - _Campo referente valor_
         - Type: `number`
         - <i id="#/definitions/Movimentacao/properties/valor">path: #/definitions/Movimentacao/properties/valor</i>
+
+<p>
+Diagramação.
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/XpeYJBj.png" style="max-width:100%;">
+  </a>
+</p>
+
 ---
         
 ## ⚙️ Funcionalidades
