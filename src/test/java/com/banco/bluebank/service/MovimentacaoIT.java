@@ -3,6 +3,8 @@ package com.banco.bluebank.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,8 +55,12 @@ public class MovimentacaoIT {
 		Pageable pageable = PageRequest.of(0, 10);
 		OffsetDateTime dataInicial = OffsetDateTime.now().minusDays(1);
 		OffsetDateTime dataFinal = OffsetDateTime.now();
-		
-		service.listar(18L, dataInicial, dataFinal, pageable);
+		String dtInicial = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+						.format(dataInicial);
+		String dtFinal = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.format(dataFinal);
+
+		service.listar(18L, dtInicial, dtFinal, pageable);
 	}
 	
 	@Test(expected = ContaNaoEncontradaException.class)
@@ -62,8 +68,11 @@ public class MovimentacaoIT {
 		Pageable pageable = PageRequest.of(0, 10);
 		OffsetDateTime dataInicial = OffsetDateTime.now().minusDays(1);
 		OffsetDateTime dataFinal = OffsetDateTime.now();
-		
-		service.listar(9999996L, dataInicial, dataFinal, pageable);
+		String dtInicial = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.format(dataInicial);
+		String dtFinal = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.format(dataFinal);
+		service.listar(9999996L, dtInicial, dtFinal, pageable);
 	}
 	
 	@Test(expected = PeriodoInvalidoException.class)
@@ -71,8 +80,11 @@ public class MovimentacaoIT {
 		Pageable pageable = PageRequest.of(0, 10);
 		OffsetDateTime dataInicial = OffsetDateTime.now();
 		OffsetDateTime dataFinal = OffsetDateTime.now().minusDays(1);
-		
-		service.listar(18L, dataInicial, dataFinal, pageable);
+		String dtInicial = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.format(dataInicial);
+		String dtFinal = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss'Z'")
+				.format(dataFinal);
+		service.listar(18L, dtInicial, dtFinal, pageable);
 	}
 	
 	@Test

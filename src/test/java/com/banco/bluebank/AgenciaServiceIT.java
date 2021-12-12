@@ -153,6 +153,7 @@ class AgenciaServiceIT {
 		novaConta.setIdCorrentista(novaConta.getCorrentista().getId());
 		novaConta.setAgencia(agenciaService.buscar(novaAgencia.getId()));
 		novaConta.setIdAgencia(novaConta.getAgencia().getId());
+		novaConta.setSenha("123456");
 
 		contaService.salvar(novaConta);
 

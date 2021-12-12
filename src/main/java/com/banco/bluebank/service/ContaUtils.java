@@ -12,7 +12,8 @@ public class ContaUtils {
     private DigitoVerificadorLuhn dv;
 
     public Long verificaNumeroConta(Long numeroConta) {
-        if (! dv.verificaDigitoVerificador(numeroConta.toString())) {
+
+        if (!dv.verificaDigitoVerificador(numeroConta.toString())) {
             throw new DigitoVerificadorInvalidoException(numeroConta);
         }
         String stringNumeroConta = numeroConta.toString();

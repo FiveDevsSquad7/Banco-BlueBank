@@ -12,7 +12,8 @@ public enum ProblemType {
 	RECURSO_NAO_ENCONTRADO("/recurso-nao-encontrado", "Recurso não encontrado"),
 	ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"),
 	ERRO_NEGOCIO("/erro-negocio", "Violação de regra de negócio"),
-	ACESSO_NEGADO("/acesso-negado", "Acesso negado");
+	ACESSO_NEGADO("/acesso-negado", "Acesso negado"),
+	RECURSO_BLOQUEADO("/recurso-bloqueado", "Recurso bloqueado");
 
 	private String title;
 	private String uri;

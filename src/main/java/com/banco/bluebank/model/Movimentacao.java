@@ -1,25 +1,18 @@
 package com.banco.bluebank.model;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.time.OffsetDateTime;
-import java.util.Objects;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
-
-import javax.validation.constraints.Size;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
+
+import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.time.OffsetDateTime;
+import java.util.Objects;
 
 @ApiModel(value = "Movimentacao", description = "Entidade entitulada Movimentacao")
 @Entity
@@ -48,25 +41,29 @@ public class Movimentacao implements Serializable {
 	@JsonIgnore
 	private Conta contaCredito;
 
-	@ApiModelProperty(value = "Campo referente número da Conta Crédito")
-	@Column(name = "num_conta_credito")
+	@ApiModelProperty(required = true, value = "Campo referente número da Conta Crédito")
+	@NotNull(message = "O número da conta de crédito deve ser preenchido")
+	@Column(name = "num_conta_credito", nullable = false)
 	private Long numeroContaCredito;
 
-	@ApiModelProperty(value = "Campo referente número da Conta Debito")
-	@Column(name = "num_conta_debito")
+	@ApiModelProperty(required = true, value = "Campo referente número da Conta Debito")
+	@NotNull(message = "O número da conta de débito deve ser preenchido")
+	@Column(name = "num_conta_debito", nullable = false)
 	private Long numeroContaDebito;
 
-	@ApiModelProperty(value = "Campo referente data de criação")
 	@CreationTimestamp
 	@Column(name = "data_movimento",nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataMovimento;
 
 	@ApiModelProperty(value = "Campo referente valor")
+	@NotNull(message = "O valor deve ser preenchido")
+	@DecimalMin(value="0.0", inclusive = false, message = "Valor inválido para o movimento")
+	@Column(nullable = false)
 	private BigDecimal valor;
 
 	@ApiModelProperty(value = "Campo referente descrição")
-	@Size(min = 1, max = 45, message = "Descrição entre 1 e 45 caracteres.")
-	@Column(length = 45)
+	@Size(max = 100, message = "A descrição deve ter no máximo 100 caracteres.")
+	@Column(length = 100, nullable = true)
 	private String descricao;
 
 	public Long getId() {
