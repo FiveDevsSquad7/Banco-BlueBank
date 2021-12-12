@@ -418,6 +418,8 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
 <a href="https://github.com/FiveDevsSquad7/Banco-BlueBank-Auth">CLIQUE PARA SER REDIRENCIONADO!</a>
 </p>
 
+---
+
 <p><b>
 Obter acesso cuja API externa de Segurança cuja estratégia aplicada foi para separar as responsabilidades, assim segue a imagem:
 
@@ -511,6 +513,8 @@ c6z4aMdNWMhcu5wRoFrTJ87Ur5M3uSF5c-RlMKsML32uWVeVGa0WAu-G4siyvwp7NufVwSf90tbA83mG
 Retorno:
 </p>
 
+---
+
 <p align="center">
   <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
     <img align="center" src="https://i.imgur.com/aomXZta.png" title="Imagem Swagger retorno Status 201 após criar Conta" />
@@ -540,6 +544,8 @@ a medida que a há aumento de dados, a API contém a responsabilidade para trata
 Retorno:
 </p>
 
+---
+
 <p align="center">
   <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
     <img align="center" src="https://i.imgur.com/yIIyPE0.png" title="Imagem Swagger bucar Conta da busca com Paginação" />
@@ -552,6 +558,8 @@ Retorno:
 Por meio da Conta n° 18, pode-se atualizar Correntista
 </p>
 
+---
+
 <p align="center">
   <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
     <img align="center" src="https://i.imgur.com/gt9dkyk.png" title="Imagem Swagger atualizar Correntista" />
@@ -563,6 +571,8 @@ Por meio da Conta n° 18, pode-se atualizar Correntista
 <p>
 Por meio da Conta n° 18, pode-se excluir Correntista, mas antes busque um Correntista especifico pelo ID, no caso ID = 2
 </p>
+
+---
 
 <p align="center">
   <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
@@ -601,6 +611,8 @@ DEVIDO ESSA PASSAGEM EQUIVOCADA, FOI OPORTUNO PARA DEMONSTRAR A FUNCIONALIDADE D
 FEITO A OBSERVAÇÃO, VOLTA-SE À EXCLUSÃO DO ID = 2, VEJA A IMAGEM:
 </p>
 
+---
+
 <p align="center">
   <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
     <img align="center" src="https://i.imgur.com/ZV7Ey2k.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
@@ -611,5 +623,54 @@ FEITO A OBSERVAÇÃO, VOLTA-SE À EXCLUSÃO DO ID = 2, VEJA A IMAGEM:
 
 ### 4️⃣  🔄  Criar Movimentações em Conta
 
+<b> 
+<p>
+REGRA DE NEGOCIO:
 
+Conforme o modelo é o Correntista com ID = 5, então, segue-se com esse para exeplicar o Fluxo de Movimentação cuja Entidade pode-se ser melhor compreendida pela a imagem abaixo:
+</p>
+</b>
 
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/ZBu2vNp.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/v8UiKfq.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+<p>
+Retorno:
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/3gNREWb.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+### 5️⃣  ✉️ Notificação envida ao email do Cliente com PROTOCOLO:
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/2iasABM.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
