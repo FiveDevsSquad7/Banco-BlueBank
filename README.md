@@ -663,7 +663,7 @@ Retorno:
 
 ---
 
-### 5️⃣  ✉️ Notificação envida ao email do Cliente com PROTOCOLO:
+### 5️⃣  ✉️ Notificação enviada ao email do Cliente com PROTOCOLO:
 
 ---
 
