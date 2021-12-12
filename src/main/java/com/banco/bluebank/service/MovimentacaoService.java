@@ -39,6 +39,9 @@ public class MovimentacaoService {
 	@Transactional(readOnly = false)
 	public Movimentacao salvar(Movimentacao movimentacao) {
 
+		if(movimentacao.getNumeroContaDebito()==null) throw new DadoRequeridoException("O número da conta de débito é requerido");
+		if(movimentacao.getNumeroContaCredito()==null) throw new DadoRequeridoException("O número da conta de crédito é requerido");
+
 		Long contaDebitoSemDigito = contaUtils.verificaNumeroConta(movimentacao.getNumeroContaDebito());
 		Long contaCreditoSemDigito = contaUtils.verificaNumeroConta(movimentacao.getNumeroContaCredito());
 
@@ -77,6 +80,8 @@ public class MovimentacaoService {
 	}
 
 	public Page<Movimentacao> listar(Long numeroConta, String dataInicial, String dataFinal, Pageable pageable) {
+
+		if(numeroConta==null) throw new DadoRequeridoException("O número da conta é requerido");
 
 		OffsetDateTime dtInicial,dtFinal;
 

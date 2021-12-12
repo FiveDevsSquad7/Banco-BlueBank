@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Locale;
 
 @Service
 public class CorrentistaService {
@@ -36,6 +37,8 @@ public class CorrentistaService {
 
     @Transactional(readOnly = false)
     public Correntista create(Correntista correntista) {
+
+        if(correntista.getTipoPessoa()!=null) correntista.setTipoPessoa(correntista.getTipoPessoa().toUpperCase());
 
         Correntista novoCorrentista = correntistaRepository.save(correntista);
 
@@ -56,6 +59,8 @@ public class CorrentistaService {
 
     @Transactional(readOnly = false)
     public Correntista update(Correntista correntista) {
+
+        if(correntista.getTipoPessoa()!=null) correntista.setTipoPessoa(correntista.getTipoPessoa().toUpperCase());
 
         return correntistaRepository.save(correntista);
 

@@ -18,6 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @ApiModel(value = "Endereco", description = "Entidade entitulada Endereco")
@@ -33,14 +35,14 @@ public class Endereco implements Serializable {
     private Long id;
 
 	@ApiModelProperty(required = true, value = "Campo logradouro")
-    @NotBlank(message = "O logradouro deve ser preenchido")
+    @NotEmpty(message = "O logradouro deve ser preenchido")
     @Size(min = 1, max = 50, message = "O logradouro deve ter no máximo 50 caracteres")
     @Column(length = 50, nullable = false)
     private String logradouro;
 
 	@ApiModelProperty(required = true, value = "Campo número")
-    @NotBlank(message = "O número da pessoa deve ser preenchido")
-    @Size(min = 1, max = 10, message = "O logradouro deve ter no máximo 10 caracteres")
+    @NotEmpty(message = "O número deve ser preenchido")
+    @Size(min = 1, max = 10, message = "O número deve ter no máximo 10 caracteres")
     @Column(length = 10,nullable = false)
     private String numero;
 
@@ -50,29 +52,30 @@ public class Endereco implements Serializable {
     private String complemento;
 
 	@ApiModelProperty(required = true, value = "Campo CEP")
-    @NotBlank(message = "O CEP deve ser preenchido")
+    @NotEmpty(message = "O CEP deve ser preenchido")
     @Size(min = 8, max = 8, message = "O CEP deve ter 8 números")
     @Column(length = 8, nullable = false)  
     private String cep;
 
 	@ApiModelProperty(required = true, value = "Campo bairro")
-    @NotBlank(message = "O bairro deve ser preenchido")
+    @NotEmpty(message = "O bairro deve ser preenchido")
     @Size(min = 1, max = 25, message = "O bairro deve ter no máximo 25 caracteres")
     @Column(length = 25, nullable = false)
     private String bairro;
 
 	@ApiModelProperty(required = true, value = "Campo cidade")
-    @NotBlank(message = "A cidade deve ser preenchido")
+    @NotEmpty(message = "A cidade deve ser preenchido")
     @Size(min = 1, max = 30, message = "A cidade deve ter no máximo 30 caracteres")
     @Column(length = 30, nullable = false)
     private String cidade;
 
 	@ApiModelProperty(required = true, value = "Campo estado")
-    @NotBlank(message = "O estado deve ser preenchido")
+    @NotEmpty(message = "O estado deve ser preenchido")
     @Size(min = 2, max = 2, message = "O estado deve ter 2 carecteres")
     @Column(length = 2, nullable = false)
     private String estado;
 
+	@NotNull(message = "O id do correntista deve ser preenchido")
 	@Column(name = "id_correntista", nullable = false)
 	@JsonIgnore
 	private Long idCorrentista;
@@ -84,7 +87,6 @@ public class Endereco implements Serializable {
 	@JsonIgnore
     private Correntista correntista;
 
-	@ApiModelProperty(value = "Campo referente data da criação")
 	@CreationTimestamp
 	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
 	private OffsetDateTime dataCadastro;

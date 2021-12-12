@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -32,36 +34,34 @@ public class Conta  implements Serializable {
     private Long numeroConta;
 
 	@ApiModelProperty(required = true, value = "Campo referente tipo de conta no momento do cadastro a ser cadastrado")
-    @NotBlank(message = "Tipo da Conta deve ser preenchido")
+    @NotEmpty(message = "Tipo da Conta deve ser preenchido")
     @Size(max = 2, message = "Tipo da Conta deve CC para conta corrente e PP para poupanca")
     @Column(name="tipo_conta",length = 2, nullable = false)
     private String tipoConta;
 
-	@ApiModelProperty(value = "Campo referente OBJETO CORRENTISTA",
-			reference = "Relacionamento Muitas Contas para um Correntista")
+	@ApiModelProperty(required = true, value = "O id do correntista é obrigatório")
     @ManyToOne
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
 
-	@ApiModelProperty(value = "Campo referente OBJETO AGENCIA",
-			reference = "Relacionamento Muitas Contas para uma Agencia")
+	@ApiModelProperty(required = true, value = "O id da agencia é obrigatório")
     @ManyToOne(optional=false)
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
 
-	@ApiModelProperty(value = "Senha para acesso à conta")
-	@NotBlank(message = "A senha é obrigatória")
-	@Column(name = "senha")
+	@ApiModelProperty(required = true, value = "Senha para acesso à conta")
+	@NotEmpty(message = "A senha é obrigatória")
+	@Column(name = "senha", length = 255, nullable = false)
 	private String senha;
 
-	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
-    @JsonIgnore
-    @Column(name = "id_correntista")
+	@JsonIgnore
+	@NotNull(message = "O id do correntista é obrigatório")
+    @Column(name = "id_correntista", nullable = false)
     private Long idCorrentista;
 
-	@ApiModelProperty(value = "Campo referente Chave Estrangeira")
     @JsonIgnore
-    @Column(name = "id_agencia")
+	@NotNull(message = "O id da agencia é obrigatório")
+    @Column(name = "id_agencia", nullable = false)
     private Long idAgencia;
 
 

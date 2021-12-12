@@ -50,6 +50,8 @@ public class ContaService {
 
     public SaldoOutput buscarSaldo(Long numeroConta, String data) {
 
+        if(numeroConta==null) throw new DadoRequeridoException("O número da conta é requerido");
+
         OffsetDateTime dt;
 
         try {
@@ -65,6 +67,8 @@ public class ContaService {
     }
 
     public Conta buscar(Long numeroConta) {
+
+        if(numeroConta==null) throw new DadoRequeridoException("O número da conta é requerido");
 
         Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
 
@@ -118,6 +122,7 @@ public class ContaService {
     }
 
     public void excluir(Long numeroConta) {
+        if(numeroConta==null) throw new DadoRequeridoException("O número da conta é requerido");
         Long numeroContaSemDigito = contaUtils.verificaNumeroConta(numeroConta);
         try {
             contaRepository.deleteById(numeroContaSemDigito);

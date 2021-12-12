@@ -1,5 +1,7 @@
 package com.banco.bluebank.model;
 
+import com.banco.bluebank.utils.CpfCnpj;
+import com.banco.bluebank.utils.TipoPessoa;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,9 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 
 @ApiModel(value = "Correntista", description = "Entidade entitulada Correntista")
 @Entity
@@ -28,40 +28,40 @@ public class Correntista implements Serializable {
     @Column(name = "id_correntista")
     private Long id;
 
-    @ApiModelProperty(required = true, value = "Campo Nome da pessoa")
+    @ApiModelProperty(required = true, value = "Campo Nome do correntista")
     @Column(length = 50, nullable = false)
-    @NotBlank(message = "Nome do correntista deve ser preenchido")
-    @Size(min = 2, max = 50, message = "Nome do correntista deve ter entre 2 e 50 letras")
+    @NotEmpty(message = "O nome do correntista deve ser preenchido")
+    @Size(min = 1, max = 50, message = "Nome do correntista deve ter no máximo 50 caracteres")
     private String nome;
 
-    @ApiModelProperty(value = " Campo CPF")
-    @Size(min = 2, max = 11, message = "CPF deve conter um valor válido")
-    @Column(name = "cpf", length = 11)
+    @ApiModelProperty(value = "Campo CPF")
+    @CpfCnpj(message = "Número de CPF inválido")
+    @Column(name = "cpf", length = 11, nullable = true)
     private String cpf;
 
     @ApiModelProperty(value = "Campo RG")
-    @Size(min = 2, max = 11, message = "RG do correntista deve ter entre 2 e 20 caracteres")
-    @Column(length = 11, nullable = true)
+    @Size(min = 2, max = 11, message = "O RG do correntista deve até 20 caracteres")
+    @Column(length = 20, nullable = true)
     private String rg;
 
     @ApiModelProperty(value = "Campo CNPJ")
-    @Size(min = 2, max = 14, message = "CNPJ deve conter um valor válido")
+    @CpfCnpj(message = "Número de CNPJ inválido")
     @Column(name = "cnpj", length = 14, nullable = true)
     private String cnpj;
 
     @ApiModelProperty(required = true, value = "Campo Tipo de Pessoa: Fisica ou Juridica")
-    @NotNull(message = "O tipo pessoa deve ser preenchido")
-    @Size(min = 1, max = 1, message = "O tipo de pessoa deve ser F para física e J para jurídica")
+    @NotEmpty(message = "O campo tipo de pessoa deve ser preenchido")
+    @TipoPessoa(message = "O tipo de pessoa deve ser 'F' para física ou 'J' para jurídica")
     @Column(name = "pf_pj", length = 1, nullable = false)
     private String tipoPessoa;
 
-    @ApiModelProperty(value = " Campo E-mail para notificar movimentação")
-    @Size(min = 5, max = 50, message = "O email deve conter um valor válido")
+    @ApiModelProperty(value = "Campo E-mail para notificar movimentação")
+    @Email(message = "O email deve conter um valor válido")
     @Column(name = "email_validacao", length = 50, nullable = true)
     private String emailValidacao;
 
-    @ApiModelProperty(value = " Campo SMS para notificar movimentação")
-    @Size(min = 5, max = 20, message = "O telefone para SMS deve ter entre 5 a 20 caracteres")
+    @ApiModelProperty(value = "Campo SMS para notificar movimentação")
+    @Size(max = 20, message = "O telefone para SMS deve ter no máximo 20 caracteres")
     @Column(name = "sms_validacao", length = 20, nullable = true)
     private String smsValidacao;
 
@@ -75,7 +75,6 @@ public class Correntista implements Serializable {
     @Column(insertable = false, updatable = false)
     private List<ContatoCliente> contatos = new ArrayList<>();
 
-    @ApiModelProperty(value = "Campo da data ao criar Correntista")
     @CreationTimestamp
     @Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
     private OffsetDateTime dataCadastro;
