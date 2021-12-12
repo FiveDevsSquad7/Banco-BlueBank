@@ -510,6 +510,58 @@ Retorno:
   </a>
 </p>
 
+<p>
+Por meio da Conta n° 18, pode-se atualizar Correntista
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/gt9dkyk.png" style="max-width:100%;">
+  </a>
+</p>
+
+<p>
+Por meio da Conta n° 18, pode-se excluir Correntista, mas antes busque um Correntista especifico pelo ID, no caso ID = 2
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/6ii9GUz.png" style="max-width:100%;">
+  </a>
+</p>
+
+<p>
+Por meio da Conta n° 18, pode-se excluir Correntista, agora basta excluir!
+OBSERVAÇÃO: AO TENTAR EXCLUIR O USÁRIO DO ID = 2, ERRONIAMENTE FOI INSERIDO NO PARAM O ID = 5, O QUAL É ESSE QUE FAZ TODAS OPERAÇÕES DA API!
+DEVIDO ESSA PASSAGEM EQUIVOCADA, FOI OPORTUNO PARA DEMONSTRAR A FUNCIONALIDADE DO TRATAMENTO DE ERRO, VEJA A IMAGEM:<b>
+
+{
+"status": 409,
+"timestamp": "2021-12-11T23:35:22.3690515Z",
+"type": "https://bluebank.6devs.com.br/entidade-em-uso",
+"title": "Entidade em uso",
+"detail": "Correntista de id 5 não pode ser removido, pois está em uso",
+"userMessage": "Correntista de id 5 não pode ser removido, pois está em uso"
+}
+
+</b>
+
+</p>
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/61qUrMs.png" style="max-width:100%;">
+  </a>
+</p>
+
+<p>
+FEITO A OBSERVAÇÃO, VOLTA-SE À EXCLUSÃO DO ID = 2, VEJA A IMAGEM:
+</p>
+
+<p align="center">
+  <a href="https://docbleubankdev6.netlify.app/">
+    <img align="center" src="https://i.imgur.com/ZV7Ey2k.png" style="max-width:100%;">
+  </a>
+</p>
 
 4️⃣
 
