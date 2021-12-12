@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -80,7 +81,7 @@ public class ContaController {
 	@CheckSecurity.Contas.PodeEditar
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ContaOutputDTO salvar(@RequestBody Conta conta) {
+	public ContaOutputDTO salvar(@RequestBody @Valid Conta conta) {
 		Conta novaConta = contaservice.salvar(conta);
 		return mapper.toModelDTO(novaConta);
 	}
@@ -133,10 +134,8 @@ public class ContaController {
 	@CheckSecurity.Contas.PodeEditar
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody Conta conta){
-		Conta contaAtual = contaservice.buscar(id);
-		BeanUtils.copyProperties(conta, contaAtual, "numeroConta", "dataCadastro");
-		Conta contaModificada = contaservice.salvar(contaAtual);
+	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody @Valid Conta conta){
+		Conta contaModificada = contaservice.atualizar(id,conta);
 		return mapper.toModelDTO(contaModificada);
 	}
 

@@ -17,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @CrossOrigin(origins = "*")
@@ -76,7 +78,7 @@ public class CorrentistaController {
     @CheckSecurity.Correntistas.PodeEditar
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Correntista salvar(@RequestBody Correntista correntista) {
+    public Correntista salvar(@RequestBody @Valid Correntista correntista) {
         return service.create(correntista);
     }
 
@@ -91,7 +93,7 @@ public class CorrentistaController {
     @CheckSecurity.Correntistas.PodeEditar
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Correntista atualizar(@PathVariable Long id, @RequestBody Correntista correntista) {
+    public Correntista atualizar(@PathVariable Long id, @RequestBody @Valid Correntista correntista) {
         Correntista correntistaAtual = service.buscar(id);
         BeanUtils.copyProperties(correntista, correntistaAtual, "id", "enderecos", "contatos", "dataCadastro");
         return service.update(correntistaAtual);
@@ -139,7 +141,7 @@ public class CorrentistaController {
     @CheckSecurity.Correntistas.PodeConsultar
     @PostMapping(path = "/{id}/enderecos")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<Endereco> adicionarEndereco(@PathVariable Long id, @RequestBody Endereco endereco) {
+    public List<Endereco> adicionarEndereco(@PathVariable Long id, @RequestBody @Valid Endereco endereco) {
         return service.adicionarEndereco(id, endereco);
     }
 
@@ -184,7 +186,7 @@ public class CorrentistaController {
     @CheckSecurity.Correntistas.PodeEditar
     @PostMapping(path = "/{id}/contatos")
     @ResponseStatus(HttpStatus.CREATED)
-    public List<ContatoCliente> adicionarContato(@PathVariable Long id, @RequestBody ContatoCliente contato) {
+    public List<ContatoCliente> adicionarContato(@PathVariable Long id, @RequestBody @Valid ContatoCliente contato) {
         return service.adicionarContato(id, contato);
     }
 

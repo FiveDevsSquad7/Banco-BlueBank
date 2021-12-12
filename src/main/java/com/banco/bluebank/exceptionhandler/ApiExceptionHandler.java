@@ -3,6 +3,7 @@ package com.banco.bluebank.exceptionhandler;
 import com.banco.bluebank.exceptionhandler.exceptions.BusinessException;
 import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
 import com.banco.bluebank.exceptionhandler.exceptions.EntidadeNaoEncontradaException;
+import com.banco.bluebank.exceptionhandler.exceptions.RecursoComBloqueioException;
 import com.fasterxml.jackson.databind.JsonMappingException.Reference;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.PropertyBindingException;
@@ -206,28 +207,28 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, headers, status, request);
 	}
 
-	@ExceptionHandler(ConstraintViolationException.class)
-	public ResponseEntity<?> handleConstraintViolation(ConstraintViolationException ex,
-														 WebRequest request) {
-
-		HttpStatus status = HttpStatus.BAD_REQUEST;
-		ProblemType problemType = ProblemType.ERRO_NEGOCIO;
-		String detail = ex.getMessage();
-		final String TEXTO_BUSCAR1 = "messageTemplate='";
-		final String TEXTO_BUSCAR2 = "'}";
-		if(detail.contains(TEXTO_BUSCAR1)){
-			detail = detail.substring(detail.indexOf(TEXTO_BUSCAR1)+TEXTO_BUSCAR1.length());
-			if(detail.contains(TEXTO_BUSCAR2)) {
-				detail = detail.substring(0, detail.indexOf(TEXTO_BUSCAR2));
-			}
-		}
-
-		Problem problem = createProblemBuilder(status, problemType, detail)
-				.userMessage(detail)
-				.build();
-
-		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
-	}
+//	@ExceptionHandler(ConstraintViolationException.class)
+//	public ResponseEntity<?> handleConstraintViolation(ConstraintViolationException ex,
+//														 WebRequest request) {
+//
+//		HttpStatus status = HttpStatus.BAD_REQUEST;
+//		ProblemType problemType = ProblemType.ERRO_NEGOCIO;
+//		String detail = ex.getMessage();
+//		final String TEXTO_BUSCAR1 = "messageTemplate='";
+//		final String TEXTO_BUSCAR2 = "'}";
+//		if(detail.contains(TEXTO_BUSCAR1)){
+//			detail = detail.substring(detail.indexOf(TEXTO_BUSCAR1)+TEXTO_BUSCAR1.length());
+//			if(detail.contains(TEXTO_BUSCAR2)) {
+//				detail = detail.substring(0, detail.indexOf(TEXTO_BUSCAR2));
+//			}
+//		}
+//
+//		Problem problem = createProblemBuilder(status, problemType, detail)
+//				.userMessage(detail)
+//				.build();
+//
+//		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+//	}
 
 	@ExceptionHandler(InvalidDataAccessApiUsageException.class)
 	public ResponseEntity<?> handleInvalidDataAccessApiUsageException(InvalidDataAccessApiUsageException ex,
@@ -258,6 +259,21 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
 	}
 
+	@ExceptionHandler(RecursoComBloqueioException.class)
+	public ResponseEntity<?> handleEntidadeNaoEncontrada(RecursoComBloqueioException ex,
+														 WebRequest request) {
+
+		HttpStatus status = HttpStatus.FORBIDDEN;
+		ProblemType problemType = ProblemType.RECURSO_BLOQUEADO;
+		String detail = ex.getMessage();
+
+		Problem problem = createProblemBuilder(status, problemType, detail)
+				.userMessage(detail)
+				.build();
+
+		return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+	}
+	
 	@ExceptionHandler(EntidadeNaoEncontradaException.class)
 	public ResponseEntity<?> handleEntidadeNaoEncontrada(EntidadeNaoEncontradaException ex,
 														 WebRequest request) {

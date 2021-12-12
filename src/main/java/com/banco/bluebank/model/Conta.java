@@ -40,11 +40,13 @@ public class Conta  implements Serializable {
     private String tipoConta;
 
 	@ApiModelProperty(required = true, value = "O id do correntista é obrigatório")
+	@NotNull(message = "O id do correntista é obrigatório")
     @ManyToOne
     @JoinColumn(name="id_correntista", insertable = false, updatable = false)
     private Correntista correntista;
 
 	@ApiModelProperty(required = true, value = "O id da agencia é obrigatório")
+	@NotNull(message = "O id da agencia é obrigatório")
     @ManyToOne(optional=false)
     @JoinColumn(name = "id_agencia", insertable = false, updatable = false)
     private Agencia agencia;
@@ -55,15 +57,12 @@ public class Conta  implements Serializable {
 	private String senha;
 
 	@JsonIgnore
-	@NotNull(message = "O id do correntista é obrigatório")
     @Column(name = "id_correntista", nullable = false)
     private Long idCorrentista;
 
     @JsonIgnore
-	@NotNull(message = "O id da agencia é obrigatório")
     @Column(name = "id_agencia", nullable = false)
     private Long idAgencia;
-
 
 	@CreationTimestamp
 	@Column(name = "data_cadastro", insertable = true, updatable = false, nullable = false, columnDefinition = "datetime")
@@ -172,6 +171,7 @@ public class Conta  implements Serializable {
 				", idCorrentista=" + idCorrentista +
 				", idAgencia=" + idAgencia +
 				", dataCadastro=" + dataCadastro +
+				", senha=" + senha +
 				'}';
 	}
 }

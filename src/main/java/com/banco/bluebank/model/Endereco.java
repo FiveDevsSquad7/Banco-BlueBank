@@ -75,7 +75,6 @@ public class Endereco implements Serializable {
     @Column(length = 2, nullable = false)
     private String estado;
 
-	@NotNull(message = "O id do correntista deve ser preenchido")
 	@Column(name = "id_correntista", nullable = false)
 	@JsonIgnore
 	private Long idCorrentista;

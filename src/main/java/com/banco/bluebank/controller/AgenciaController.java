@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/agencias")
 public class AgenciaController {
@@ -67,7 +69,7 @@ public class AgenciaController {
     @CheckSecurity.Agencias.PodeEditar
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Agencia salvar(@RequestBody Agencia agencia) {
+    public Agencia salvar(@RequestBody @Valid Agencia agencia) {
         return service.salvar(agencia);
     }
 
@@ -85,7 +87,7 @@ public class AgenciaController {
     @CheckSecurity.Agencias.PodeEditar
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public Agencia atualizar(@PathVariable Long id, @RequestBody Agencia agencia) {
+    public Agencia atualizar(@PathVariable Long id, @RequestBody @Valid Agencia agencia) {
         Agencia agenciaAtual = service.buscar(id);
         BeanUtils.copyProperties(agencia, agenciaAtual, "id", "dataCadastro");
         return service.salvar(agenciaAtual);
