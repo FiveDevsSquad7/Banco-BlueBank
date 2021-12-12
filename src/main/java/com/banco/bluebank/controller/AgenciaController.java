@@ -23,32 +23,30 @@ public class AgenciaController {
     @Autowired
     private AgenciaService service;
 
-    @ApiOperation(value = "Busca todas as Agencias na Base de Dados",  httpMethod = "GET",
+    @ApiOperation(value = "Busca todas as Agencias na Base de Dados", httpMethod = "GET",
             notes = "Busca todas as Agencias na Base de Dados")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de Agencias"),
             @ApiResponse(code = 401, message = "Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado"),
             @ApiResponse(code = 403, message = "Você não tem AUTENTICAÇAO para acessar este recurso"),
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
-            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
+            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor"),
     })
     @CheckSecurity.Agencias.PodeConsultar
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
     public Page<Agencia> listar(Pageable pageable) {
-        System.out.println(SecurityContextHolder.getContext().getAuthentication().getAuthorities());
-
         return service.listar(pageable);
     }
 
-    @ApiOperation(value = "Pesquisa Agencia pelo código gerado no Banco de Dados",  httpMethod = "GET",
+    @ApiOperation(value = "Pesquisa Agencia pelo código gerado no Banco de Dados", httpMethod = "GET",
             notes = "Busca Agencias pelo ID Base de Dados")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de agencias"),
             @ApiResponse(code = 401, message = "Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado"),
             @ApiResponse(code = 403, message = "Você não tem AUTENTICAÇAO para acessar este recurso"),
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
-            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
+            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor"),
     })
     @CheckSecurity.Agencias.PodeConsultar
     @GetMapping(path = "/{id}")
@@ -57,14 +55,14 @@ public class AgenciaController {
         return service.buscar(id);
     }
 
-    @ApiOperation(value = "Insere uma nova agencia",  httpMethod = "POST",
+    @ApiOperation(value = "Insere uma nova agencia", httpMethod = "POST",
             notes = "Insere nova agencia")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Retornar SUCESSO após criação"),
             @ApiResponse(code = 401, message = "Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado"),
             @ApiResponse(code = 403, message = "Você não tem AUTENTICAÇAO para acessar este recurso"),
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
-            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
+            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor"),
     })
     @CheckSecurity.Agencias.PodeEditar
     @PostMapping
@@ -73,7 +71,7 @@ public class AgenciaController {
         return service.salvar(agencia);
     }
 
-    @ApiOperation(value = "Faz atualização global do Agencia específico pelo ID",  httpMethod = "PUT",
+    @ApiOperation(value = "Faz atualização global do Agencia específico pelo ID", httpMethod = "PUT",
             notes = "Atualiza agencia via ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retornar SUCESSO após atualização"),
@@ -82,7 +80,7 @@ public class AgenciaController {
             @ApiResponse(code = 401, message = "Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado"),
             @ApiResponse(code = 403, message = "Você não tem AUTENTICAÇAO para acessar este recurso"),
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
-            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
+            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor"),
     })
     @CheckSecurity.Agencias.PodeEditar
     @PutMapping("/{id}")
@@ -93,7 +91,7 @@ public class AgenciaController {
         return service.salvar(agenciaAtual);
     }
 
-    @ApiOperation(value = "Exclui Agencia exclisivo por meio do ID passado!",  httpMethod = "DELETE",
+    @ApiOperation(value = "Exclui Agencia exclisivo por meio do ID passado!", httpMethod = "DELETE",
             notes = "Exclui agencia via ID")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retornar SUCESSO após EXCLUSÃO"),
@@ -102,7 +100,7 @@ public class AgenciaController {
             @ApiResponse(code = 401, message = "Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado"),
             @ApiResponse(code = 403, message = "Você não tem AUTENTICAÇAO para acessar este recurso"),
             @ApiResponse(code = 404, message = "O servidor não conseguiu encontrar o URL solicitado"),
-            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
+            @ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor"),
     })
     @CheckSecurity.Agencias.PodeEditar
     @DeleteMapping("/{id}")

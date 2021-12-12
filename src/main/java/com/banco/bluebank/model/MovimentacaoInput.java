@@ -2,6 +2,7 @@ package com.banco.bluebank.model;
 
 import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -19,6 +20,7 @@ public class MovimentacaoInput {
 
     @ApiModelProperty(value = "Campo referente valor")
     @NotNull(message = "O valor deve ser preenchido")
+    @DecimalMin(value="0.0", inclusive = false, message = "Valor inválido para o movimento")
     private BigDecimal valor;
 
     public Long getNumeroConta() {
