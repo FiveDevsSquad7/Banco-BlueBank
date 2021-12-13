@@ -36,7 +36,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 
 
 <p align="center">
-  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/" >
+  <a>
     <img align="center" src="https://i.imgur.com/Lrotjg6.gif" style="max-width:100%;">
   </a>
 </p>
