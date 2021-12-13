@@ -34,11 +34,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
 
 
-<p align="center">
-  <a>
-    <img align="center" src="https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif">
-  </a>
-</p>
+![dscatalog-catalog](https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif)
 
 ---
 
@@ -416,11 +412,7 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
         - Atualizar Movimentacao pelo id
         - Deleta Movimentacao pelo i a lista de agencias
 
-<p align="center">
-  <a>
-    <img align="center" src="https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20demo.gif">
-  </a>
-</p>
+![dscatalog-catalog](https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20demo.gif)
 
 ---
 
