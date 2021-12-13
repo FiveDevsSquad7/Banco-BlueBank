@@ -33,12 +33,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Taisis Marinelo](https://www.linkedin.com/in/taisis-marinelo/)
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
 
-
-<p align="center">
-  <a>
-    <img align="center" src="https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif">
-  </a>
-</p>
+![Imgur](https://imgur.com/A353ADT)
 
 ---
 
@@ -415,6 +410,8 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
         - Buscar Movimentacao exclusiva por id de identificação
         - Atualizar Movimentacao pelo id
         - Deleta Movimentacao pelo i a lista de agencias
+        
+<img alt="squad-dev6" height="300" src="https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20.gif" title="squad-dev6" width="400"/>
 
 ---
 
