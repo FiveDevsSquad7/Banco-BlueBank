@@ -53,7 +53,7 @@ public class NotificacaoCorrentistaService {
     public void enviarEmailContaDebitoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) throws ClassNotFoundException, MessagingException {
 
         notificadorEmail.notificar(event.getMovimentacao().getContaDebito().getCorrentista(),
-                String.format(" %d%s tenha ciencia que houve movimentacao debito no valor de R$ %.2f.\n\n\n",
+                String.format("Sua conta %d%s sofreu uma movimentacao de debito no valor de R$ %.2f.",
                         event.getMovimentacao().getContaDebito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaDebito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
@@ -65,7 +65,7 @@ public class NotificacaoCorrentistaService {
     public void enviarEmailContaCreditoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) throws ClassNotFoundException, MessagingException {
 
         notificadorEmail.notificar(event.getMovimentacao().getContaCredito().getCorrentista(),
-                String.format(" %d%s  tenha ciencia que  houve movimentacao credito no valor de R$ %.2f.\n\n\n",
+                String.format("Sua conta %d%s sofreu uma movimentacao de credito no valor de R$ %.2f.",
                         event.getMovimentacao().getContaCredito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaCredito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
