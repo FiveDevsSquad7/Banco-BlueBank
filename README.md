@@ -33,9 +33,8 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Taisis Marinelo](https://www.linkedin.com/in/taisis-marinelo/)
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
 
-![dscatalog-catalog](https://imgur.com/A353ADT)
 
-![img]https://i.imgur.com/A353ADT.gif[/img]
+<img alt="postman-dev6"  src="https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif" title="postman-dev6"/>
 
 ---
 
