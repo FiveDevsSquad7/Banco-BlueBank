@@ -37,7 +37,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 
 <p align="center">
   <a>
-    <img align="center" src="https://i.imgur.com/Lrotjg6.gif" style="max-width:100%;">
+    <img align="center" src="https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif">
   </a>
 </p>
 
