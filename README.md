@@ -22,7 +22,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 </p>
 </b>
 
-
+---
 
 ## 💻 Desenvolvedores
 
@@ -33,11 +33,14 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Taisis Marinelo](https://www.linkedin.com/in/taisis-marinelo/)
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
 
+
+
 <p align="center">
   <a href="https://bluebank.6devs.com.br/swagger-ui.html#/" >
     <img align="center" src="https://i.imgur.com/Lrotjg6.gif" style="max-width:100%;">
   </a>
 </p>
+
 
 ---
 
