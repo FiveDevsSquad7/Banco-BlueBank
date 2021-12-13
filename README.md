@@ -1,7 +1,7 @@
 <h1 align="center">
 <img src="https://i.imgur.com/iQXVg0O.png" title="Logo da equipe sem Link de Redirecionamento" />
 </h1>
-
+ 
 ---
 
 <p align="center">
@@ -32,6 +32,12 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Richardson Bruno](https://www.linkedin.com/in/richardson-bruno-889b7944/)
 - [Taisis Marinelo](https://www.linkedin.com/in/taisis-marinelo/)
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/" >
+    <img align="center" src="https://i.imgur.com/Lrotjg6.gif" style="max-width:100%;">
+  </a>
+</p>
 
 ---
 
@@ -674,3 +680,5 @@ Retorno:
 </p>
 
 ---
+
+
