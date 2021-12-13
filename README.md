@@ -1,9 +1,8 @@
 <h1 align="center">
-<img src="https://i.imgur.com/iQXVg0O.png" title="Logo da equipe" />
+<img src="https://i.imgur.com/iQXVg0O.png" title="Logo da equipe sem Link de Redirecionamento" />
 </h1>
- <h1 align="center">
-  <p style="color: bleu;">BlueBank</p>
-</h1>
+ 
+---
 
 <p align="center">
   <a href="#-sobre-o-projeto">Sobre o projeto</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -14,17 +13,32 @@
 
 ## 👨🏻‍💻 Sobre o projeto
 
-- <p style="color: red;">Banco BlueBank é projeto final referente ao de treinamento com BACK-END em Java ofertado pelo Banco Pan cuja Parceria da Gama Academy!</p>
+<b>
+<p style="color: red;">Banco BlueBank é projeto final referente ao treinamento sobre BACK-END em Java ofertado pelo Banco Pan cuja Parceria Gama Academy!
+ 
+Para ver a DOCUMENTAÇÃO **api**, clique aqui: [BlueBank DOC da API](https://docbleubankdev6.netlify.app/)  
 
-Para ver a **api**, clique aqui: [BlueBank api](https://docbleubankdev6.netlify.app/)</br>
+Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/swagger-ui.html#/) 
+</p>
+</b>
 
-### 💻 Desenvolvedores
+---
+
+## 💻 Desenvolvedores
+
 - [Carlos Betiol](https://www.linkedin.com/in/carlosbetiol/)
 - [Cassiano Augusto](https://www.linkedin.com/in/cassiano-augusto-b89b6124/)
 - [Jonas William](https://www.linkedin.com/in/jonas-william-a882971a4/)
 - [Richardson Bruno](https://www.linkedin.com/in/richardson-bruno-889b7944/)
 - [Taisis Marinelo](https://www.linkedin.com/in/taisis-marinelo/)
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
+
+
+<p align="center">
+  <a>
+    <img align="center" src="https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif">
+  </a>
+</p>
 
 ---
 
@@ -51,9 +65,18 @@ Tecnologias, Framework e Metodologias utilizadas:
 
 ---
 
+## 📋 Diagramação.
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/" >
+    <img align="center" src="https://i.imgur.com/XpeYJBj.png" style="max-width:100%;">
+  </a>
+</p>
+
 ## ✔️ Definições das Entidades e DTO
 
 - ###  Agencia
+
 - _Entidade entitulada Agencia_
 - Type: `object`
 - <i id="#/definitions/ Agencia">path: #/definitions/ Agencia</i>
@@ -77,6 +100,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/ Agencia/properties/nome">path: #/definitions/ Agencia/properties/nome</i>
 
 ### AgenciaOutputDTO
+
 - Type: `object`
 - <i id="#/definitions/AgenciaOutputDTO">path: #/definitions/AgenciaOutputDTO</i>
 - **_Properties_**
@@ -91,6 +115,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/AgenciaOutputDTO/properties/nome">path: #/definitions/AgenciaOutputDTO/properties/nome</i>
 
 ### Conta
+
 - _Entidade entitulada Conta_
 - Type: `object`
 - <i id="#/definitions/Conta">path: #/definitions/Conta</i>
@@ -117,6 +142,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/Conta/properties/tipoConta">path: #/definitions/Conta/properties/tipoConta</i>
 
 ### ContaOutputDTO
+
 - Type: `object`
 - <i id="#/definitions/ContaOutputDTO">path: #/definitions/ContaOutputDTO</i>
 - **_Properties_**
@@ -144,6 +170,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/ContaOutputDTO/properties/tipoConta">path: #/definitions/ContaOutputDTO/properties/tipoConta</i>
 
 ### ContatoCliente
+
 - _Entidade entitulada ContatoCliente_
 - Type: `object`
 - <i id="#/definitions/ContatoCliente">path: #/definitions/ContatoCliente</i>
@@ -171,6 +198,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/ContatoCliente/properties/telefone">path: #/definitions/ContatoCliente/properties/telefone</i>
 
 ### Correntista
+
 - _Entidade entitulada Correntista_
 - Type: `object`
 - <i id="#/definitions/Correntista">path: #/definitions/Correntista</i>
@@ -227,6 +255,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/Correntista/properties/tipoPessoa">path: #/definitions/Correntista/properties/tipoPessoa</i>
 
 ### CorrentistaOutputDTO
+
 - Type: `object`
 - <i id="#/definitions/CorrentistaOutputDTO">path: #/definitions/CorrentistaOutputDTO</i>
 - **_Properties_**
@@ -247,6 +276,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/CorrentistaOutputDTO/properties/rg">path: #/definitions/CorrentistaOutputDTO/properties/rg</i>
 
 ### Endereco
+
 - _Entidade entitulada Endereco_
 - Type: `object`
 - <i id="#/definitions/Endereco">path: #/definitions/Endereco</i>
@@ -290,6 +320,7 @@ Tecnologias, Framework e Metodologias utilizadas:
         - <i id="#/definitions/Endereco/properties/numero">path: #/definitions/Endereco/properties/numero</i>
 
 ### Movimentacao
+
 - _Entidade entitulada Movimentacao_
 - Type: `object`
 - <i id="#/definitions/Movimentacao">path: #/definitions/Movimentacao</i>
@@ -319,41 +350,8 @@ Tecnologias, Framework e Metodologias utilizadas:
         - _Campo referente valor_
         - Type: `number`
         - <i id="#/definitions/Movimentacao/properties/valor">path: #/definitions/Movimentacao/properties/valor</i>
----
-        
-## ⚙️ Funcionalidades
 
-    1. Agencia 
-        - Listar todas Agencias
-        - Gravar Agencia 
-        - Buscar Agencia exclusiva por id de identificação
-        - Atualizar Agencia pelo id
-        - Deleta Agencia pelo id
-    2. Conta
-        - Listar todas Contas
-        - Gravar Conta
-        - Buscar Conta exclusiva por id de identificação
-        - Atualizar Conta pelo id
-        - Deleta Conta pelo id
-    3. Correntista
-        - Listar todas Correntistas
-        - Gravar Correntista
-        - Buscar Correntista exclusiva por id de identificação
-        - Atualizar Correntista pelo id
-        - Deleta Correntista pelo id
-        - Buscar Contato de Correntista exclusivo por id de identificação
-        - Gravar Contato de Correntista pelo id
-        - Deleta Contato de Correntista pelo id
-        - Buscar Endereço de Correntista exclusiva por id de identificação
-        - Gravar Endereço de Correntista pelo id
-    4. Movimentacao
-        - Listar todas Movimentacao
-        - Gravar Movimentacao
-        - Buscar Movimentacao exclusiva por id de identificação
-        - Atualizar Movimentacao pelo id
-        - Deleta Movimentacao pelo id
-                                                                                                                                                                                | int32                                   | paged                                 | query                               | false                                     | boolean                               | sort.sorted                           | query                               | false                                     | boolean                               | sort.unsorted                         | query                               | false                                     | boolean                               | unpaged                               | query                               | false                                     | boolean                               | Retorna a lista de Agencias                   | #/definitions/Page« Agencia»                  | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor           | false                          | agencia-controller          | Insere uma nova agencia      | Insere nova agencia              | salvarUsingPOST                  | application/json                | */*                             | body                                 | agencia                                | agencia                                       | true                                       | #/definitions/ Agencia                        | Retornar SUCESSO após criação                  | #/definitions/ Agencia                         | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor            | false                           | agencia-controller              | Pesquisa Agencia pelo código gerado no Banco de Dados | Busca Agencias pelo ID Base de Dados | buscarUsingGET                       | */*                                 | id                                         | path                                     | id                                                | true                                           | integer                                    | int64                                        | Retorna a lista de agencias                        | #/definitions/ Agencia                             | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor                | false                               | agencia-controller              | Faz atualização global do Agencia específico pelo ID | Atualiza agencia via ID              | atualizarUsingPUT                    | application/json                    | */*                                 | body                                     | agencia                                    | agencia                                           | true                                           | #/definitions/ Agencia                            | id                                         | path                                     | id                                                | true                                           | integer                                    | int64                                        | Retornar SUCESSO após atualização                  | #/definitions/ Agencia                             | Retornar SUCESSO após criação                      | #/definitions/ Agencia                             | Retornar SUCESSO SEM ALTERAR CONTEÚDO              | #/definitions/ Agencia                             | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor                | false                               | agencia-controller                 | Exclui Agencia exclisivo por meio do ID passado! | Exclui agencia via ID                   | removerUsingDELETE                      | */*                                    | id                                            | path                                        | id                                                   | true                                              | integer                                       | int64                                           | Retornar SUCESSO após EXCLUSÃO                        | Retornar SUCESSO DE RECEBIMENTO, PORÉM A REQUISIÇÃO não pode atuar NO MOMENTO | Retornar SUCESSO SEM ALTERAR CONTEÚDO                 | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso   | O servidor não conseguiu encontrar o URL solicitado   | Ocorreu um erro interno do servidor                   | false                                  | conta-controller         | Busca todas as Contas na Base de Dados | Busca todas as Contas na Base de Dados | listarUsingGET_1              | */*                          | offset                              | query                             | false                                   | integer                             | int64                                 | pageNumber                          | query                             | false                                   | integer                             | int32                                 | pageSize                            | query                             | false                                   | integer                             | int32                                 | paged                               | query                             | false                                   | boolean                             | sort.sorted                         | query                             | false                                   | boolean                             | sort.unsorted                       | query                             | false                                   | boolean                             | unpaged                             | query                             | false                                   | boolean                             | Retorna a lista de Contas                   | #/definitions/Page«ContaOutputDTO»          | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor         | false                        | conta-controller          | Insere uma nova Conta      | Insere nova Conta              | salvarUsingPOST_1              | application/json              | */*                           | body                               | conta                                | conta                                       | true                                     | #/definitions/Conta                         | Retornar SUCESSO após criação                | #/definitions/ContaOutputDTO                 | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor          | false                         | conta-controller              | Pesquisa Contas pelo código gerado no Banco de Dados | Busca Conta pelo ID Base de Dados  | buscarUsingGET_1                   | */*                               | id                                       | path                                   | id                                              | true                                         | integer                                  | int64                                      | Retorna a lista de contas                        | #/definitions/ContaOutputDTO                     | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor              | false                             | conta-controller              | Faz atualização global das Contas pelo específico ID | Atualiza Conta via ID              | atualizarUsingPUT_1                | application/json                  | */*                               | body                                   | conta                                    | conta                                           | true                                         | #/definitions/Conta                             | id                                       | path                                   | id                                              | true                                         | integer                                  | int64                                      | Retornar SUCESSO após atualização                | #/definitions/ContaOutputDTO                     | Retornar SUCESSO após criação                    | #/definitions/ContaOutputDTO                     | Retornar SUCESSO SEM ALTERAR CONTEÚDO            | #/definitions/ContaOutputDTO                     | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor              | false                             | conta-controller                 | Exclui Conta exclisivo por meio do ID passado! | Exclui Conta via ID                   | removerUsingDELETE_1                  | */*                                  | id                                          | path                                      | id                                                 | true                                            | integer                                     | int64                                         | Retornar SUCESSO após EXCLUSÃO                      | Retornar SUCESSO DE RECEBIMENTO, PORÉM A REQUISIÇÃO não pode atuar NO MOMENTO | Retornar SUCESSO SEM ALTERAR CONTEÚDO               | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor                 | false                                | conta-controller                                                | Busca todas as transações efetuadas e retorna o extrato          | Busca todas as transações efetuadas e retorna o extrato              | extratoUsingGET                                                      | */*                                                                 | dataFinal                                                                  | path                                                                     | dataFinal                                                                         | true                                                                           | string                                                                     | dataInicial                                                                | path                                                                     | dataInicial                                                                       | true                                                                           | string                                                                     | id                                                                         | path                                                                     | id                                                                                | true                                                                           | integer                                                                    | int64                                                                        | offset                                                                     | query                                                                    | false                                                                          | integer                                                                    | int64                                                                        | pageNumber                                                                 | query                                                                    | false                                                                          | integer                                                                    | int32                                                                        | pageSize                                                                   | query                                                                    | false                                                                          | integer                                                                    | int32                                                                        | paged                                                                      | query                                                                    | false                                                                          | boolean                                                                    | sort.sorted                                                                | query                                                                    | false                                                                          | boolean                                                                    | sort.unsorted                                                              | query                                                                    | false                                                                          | boolean                                                                    | unpaged                                                                    | query                                                                    | false                                                                          | boolean                                                                    | Retorna o extrato da conta                                                         | #/definitions/Page«Movimentacao»                                                   | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado                 | Você não tem AUTENTICAÇAO para acessar este recurso                                | O servidor não conseguiu encontrar o URL solicitado                                | Ocorreu um erro interno do servidor                                                | false                                                               | conta-controller                           | Busca o saldo de uma conta ao final de um determinado dia | saldoUsingGET                                   | */*                                            | data                                                  | path                                                | data                                                         | true                                                      | string                                                | id                                                    | path                                                | id                                                           | true                                                      | integer                                               | int64                                                   | Retorna o saldo                                               | #/definitions/SaldoOutput                                     | Você não tem permissão para acessar, desde que não esteja logado | Você não tem permissão para acessar este recurso              | O servidor não conseguiu encontrar o URL solicitado           | Foi gerada uma exceção                                        | false                                          | correntista-controller         | Busca todos Correntistas na Base de Dados | Busca todos Correntistas na Base de Dados | listarUsingGET_2                    | */*                                | offset                                    | query                                   | false                                         | integer                                   | int64                                       | pageNumber                                | query                                   | false                                         | integer                                   | int32                                       | pageSize                                  | query                                   | false                                         | integer                                   | int32                                       | paged                                     | query                                   | false                                         | boolean                                   | sort.sorted                               | query                                   | false                                         | boolean                                   | sort.unsorted                             | query                                   | false                                         | boolean                                   | unpaged                                   | query                                   | false                                         | boolean                                   | Retorna a lista de Correntistas                   | #/definitions/Page«Correntista»                   | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor               | false                              | correntista-controller          | Insere uma novo Correntista      | Insere nova Correntista              | salvarUsingPOST_2                    | application/json                    | */*                                 | body                                     | correntista                                | correntista                                       | true                                           | #/definitions/Correntista                         | Retornar SUCESSO após criação                      | #/definitions/Correntista                          | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso | O servidor não conseguiu encontrar o URL solicitado | Ocorreu um erro interno do servidor                | false                               | correntista-controller              | Pesquisa Correntista pelo código gerado no Banco de Dados | Busca Correntista pelo ID Base de Dados  | buscarUsingGET_2                         | */*                                     | id                                             | path                                         | id                                                    | true                                               | integer                                        | int64                                            | Retorna a lista de pessoa                              | #/definitions/Correntista                              | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso    | O servidor não conseguiu encontrar o URL solicitado    | Ocorreu um erro interno do servidor                    | false                                   | correntista-controller              | Faz atualização global do Correntista específico pelo ID | atualizarUsingPUT_2                      | application/json                        | */*                                     | body                                         | correntista                                    | correntista                                           | true                                               | #/definitions/Correntista                             | id                                             | path                                         | id                                                    | true                                               | integer                                        | int64                                            | Retornar SUCESSO após atualização                      | #/definitions/Correntista                              | Created                                                | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso    | O servidor não conseguiu encontrar o URL solicitado    | Ocorreu um erro interno do servidor                    | false                                   | correntista-controller                 | Exclui Correntista exclisivo por meio do ID passado! | removerUsingDELETE_2                        | */*                                        | id                                                | path                                            | id                                                       | true                                                  | integer                                           | int64                                               | Retornar SUCESSO após exclusão                            | No Content                                                | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso       | O servidor não conseguiu encontrar o URL solicitado       | Ocorreu um erro interno do servidor                       | false                                      | correntista-controller                       | Busca todos os Todos os Contatos relacionados Correntistas na Base de Dadosmeio do ID passado! | listarContatosUsingGET                            | */*                                              | id                                                      | path                                                  | id                                                             | true                                                        | integer                                                 | int64                                                     | Retornar SUCESSO após exclusão                                  | array                                                           | #/definitions/ContatoCliente                                          | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso             | O servidor não conseguiu encontrar o URL solicitado             | Ocorreu um erro interno do servidor                             | false                                            | correntista-controller                        | Insere um novo Contato                         | adicionarContatoUsingPOST                          | application/json                                  | */*                                               | body                                                   | contato                                                  | contato                                                         | true                                                         | #/definitions/ContatoCliente                                    | id                                                       | path                                                   | id                                                              | true                                                         | integer                                                  | int64                                                      | Retorna a contato                                                | array                                                            | #/definitions/ContatoCliente                                           | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso              | O servidor não conseguiu encontrar o URL solicitado              | Ocorreu um erro interno do servidor                              | false                                             | correntista-controller                                      | Exclui Contato do Correntista exclisivo por meio do ID passado! | removerContatoUsingDELETE                                        | */*                                                             | contatoId                                                              | path                                                                 | contatoId                                                                     | true                                                                       | integer                                                                | int64                                                                    | id                                                                     | path                                                                 | id                                                                            | true                                                                       | integer                                                                | int64                                                                    | Retornar SUCESSO após EXCLUSÃO                                                 | Retornar SUCESSO DE RECEBIMENTO, PORÉM A REQUISIÇÃO não pode atuar NO MOMENTO  | Retornar SUCESSO SEM ALTERAR CONTEÚDO                                          | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado             | Você não tem AUTENTICAÇAO para acessar este recurso                            | O servidor não conseguiu encontrar o URL solicitado                            | Ocorreu um erro interno do servidor                                            | false                                                           | correntista-controller                        | Busca todos os Todos os Endereços relacionados Correntistas na Base de Dadosmeio do ID passado! | listarEnderecosUsingGET                            | */*                                               | id                                                       | path                                                   | id                                                              | true                                                         | integer                                                  | int64                                                      | Retornar SUCESSO após exclusão                                   | array                                                            | #/definitions/Endereco                                                 | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso              | O servidor não conseguiu encontrar o URL solicitado              | Ocorreu um erro interno do servidor                              | false                                             | correntista-controller                         | Insere um novo Endereço                         | adicionarEnderecoUsingPOST                          | application/json                                   | */*                                                | body                                                    | endereco                                                  | endereco                                                         | true                                                          | #/definitions/Endereco                                           | id                                                        | path                                                    | id                                                               | true                                                          | integer                                                   | int64                                                       | Retorna a lista de endereço                                       | array                                                             | #/definitions/Endereco                                                  | Created                                                           | array                                                             | #/definitions/Endereco                                                  | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado | Você não tem AUTENTICAÇAO para acessar este recurso               | O servidor não conseguiu encontrar o URL solicitado               | Ocorreu um erro interno do servidor                               | false                                              | correntista-controller                                        | Exclui Endereço do Correntista exclisivo por meio do ID passado! | removerEnderecoUsingDELETE                                         | */*                                                               | enderecoId                                                               | path                                                                   | enderecoId                                                                      | true                                                                         | integer                                                                  | int64                                                                      | id                                                                       | path                                                                   | id                                                                              | true                                                                         | integer                                                                  | int64                                                                      | Retornar SUCESSO após exclusão                                                   | No Content                                                                       | Você não tem AUTORIZAÇÃO para acessar, desde que não esteja logado               | Você não tem AUTENTICAÇAO para acessar este recurso                              | O servidor não conseguiu encontrar o URL solicitado                              | Ocorreu um erro interno do servidor                                              | false                                                             | movimentacao-controller                   | Cria uma nova Movimentacao de deposito     | depositarUsingPOST                             | application/json                              | */*                                           | body                                               | movimentacaoInput                                    | movimentacaoInput                                           | true                                                     | #/definitions/MovimentacaoInput                             | Retornar SUCESSO após criação                                | #/definitions/Movimentacao                                   | Created                                                      | #/definitions/Movimentacao                                   | Você não tem permissão para acessar, desde que não esteja logado | Você não tem permissão para acessar este recurso             | O servidor não conseguiu encontrar o URL solicitado          | Foi gerada uma exceção                                       | false                                         | movimentacao-controller                | Cria uma nova Movimentacao de saque     | sacarUsingPOST                              | application/json                           | */*                                        | body                                            | movimentacaoInput                                 | movimentacaoInput                                        | true                                                  | #/definitions/MovimentacaoInput                          | Retornar SUCESSO após criação                             | #/definitions/Movimentacao                                | Created                                                   | #/definitions/Movimentacao                                | Você não tem permissão para acessar, desde que não esteja logado | Você não tem permissão para acessar este recurso          | O servidor não conseguiu encontrar o URL solicitado       | Foi gerada uma exceção                                    | false                                      | movimentacao-controller                        | Cria uma nova Movimentacao de transferencia     | salvarUsingPOST_3                                   | application/json                                   | */*                                                | body                                                    | movimentacao                                              | movimentacao                                                     | true                                                          | #/definitions/Movimentacao                                       | Retornar SUCESSO após criação                                     | #/definitions/Movimentacao                                        | Created                                                           | #/definitions/Movimentacao                                        | Você não tem permissão para acessar, desde que não esteja logado  | Você não tem permissão para acessar este recurso                  | O servidor não conseguiu encontrar o URL solicitado               | Foi gerada uma exceção                                            | false                                              | movimentacao-controller              | Busca movimentacao por id             | buscarUsingGET_3                          | */*                                      | id                                              | path                                          | id                                                     | true                                                | integer                                         | int64                                             | Retorna um recurso de movimentacoes específico          | #/definitions/Movimentacao                              | Você não tem permissão para acessar, desde que não esteja logado | Você não tem permissão para acessar este recurso        | O servidor não conseguiu encontrar o URL solicitado     | Foi gerada uma exceção                                  | false                                    | object                    | string                                       | Campo referente nome juridico da Agencia            | string                                            | date-time                                           | Campo referente data da criação                          | integer                                 | int64                                     | Campo ID                                       | string                                    | Campo referente nome fantasia da Agencia         |  Agencia                   | Entidade entitulada Agencia      | object                            | string                                               | integer                                         | int64                                             | string                                            | AgenciaOutputDTO                   | object                 | tipoConta                    | Campo referente OBJETO AGENCIA                   | #/definitions/ Agencia                    | Campo referente OBJETO CORRENTISTA                   | #/definitions/Correntista                     | string                                         | date-time                                        | integer                                       | int64                                           | Campo ID                                             | string                                      | Campo referente tipo de conta no momento do cadastro a ser cadastrado | Conta                   | Entidade entitulada Conta     | object                          | #/definitions/AgenciaOutputDTO                     | #/definitions/CorrentistaOutputDTO                     | string                                                  | date-time                                                 | string                                            | integer                                                | int64                                                    | string                                                         | string                                               | ContaOutputDTO                   | object                          | email                                 | infoRecado                            | telefone                              | string                                                  | date-time                                                 | Campo referente data de criação                                | string                                           | Campo referente e-mail                                  | integer                                       | int64                                           | Campo referente ID                                   | string                                                | Campo referente Informações para recados                     | string                                              | Campo referente ao telefone                                | ContatoCliente                   | Entidade entitulada ContatoCliente     | object                       | nome                               | tipoPessoa                         | string                                       | Campo CNPJ                                          | array                                            | Campo Objeto Contato relacionado Correntista            | #/definitions/ContatoCliente                           | string                                      |  Campo CPF                                         | string                                               | date-time                                              | Campo da data ao criar Correntista                          | string                                                 |  Campo E-mail para notificar movimentação                     | array                                             | Campo Endereço do correntista                            | #/definitions/Endereco                                  | integer                                    | int64                                        | Campo ID                                          | string                                       | Campo Nome da pessoa                                | string                                     | Campo RG                                          | string                                      | string                                             | Campo Tipo de Pessoa: Fisica ou Juridica                  | Correntista                   | Entidade entitulada Correntista     | object                                | string                                                | string                                               | integer                                             | int64                                                 | string                                                | string                                              | CorrentistaOutputDTO                   | object                    | bairro                          | cep                             | cidade                          | estado                          | logradouro                      | numero                          | string                                      | Campo bairro                                       | string                                   | Campo CEP                                       | string                                      | Campo cidade                                       | string                                           | Campo complemento referente cadastro do endereço        | string                                            | date-time                                           | Campo referente data da criação                          | string                                      | Campo estado                                       | integer                                 | int64                                     | Campo referente ID                             | string                                          | Campo logradouro                                       | string                                      | Campo número                                       | Endereco                   | Entidade entitulada Endereco     | object                        | string                                                 | date-time                                                | Campo referente data de criação                               | string                                             | Campo referente descrição                                 | integer                                     | int64                                         | Campo referente ID                                 | integer                                                     | int64                                                         | Campo referente número da Conta Crédito                            | integer                                                    | int64                                                        | Campo referente número da Conta Debito                            | number                                         | Campo referente valor                                 | Movimentacao                   | Entidade entitulada Movimentacao     | object                             | string                                                  | integer                                                   | int64                                                       | number                                              | MovimentacaoInput                   | object                    | integer                                     | int64                                         | integer                                         | int32                                             | integer                                       | int32                                           | boolean                                    | #/definitions/Sort                        | boolean                                      | Pageable                   | object                          | array                                              | #/definitions/ Agencia                                   | boolean                                          | boolean                                          | boolean                                         | integer                                           | int32                                               | integer                                                     | int32                                                         | #/definitions/Pageable                              | integer                                         | int32                                             | #/definitions/Sort                              | integer                                                  | int64                                                      | integer                                               | int32                                                   | Page« Agencia»                   | object                                | array                                                    | #/definitions/ContaOutputDTO                                   | boolean                                                | boolean                                                | boolean                                               | integer                                                 | int32                                                     | integer                                                           | int32                                                               | #/definitions/Pageable                                    | integer                                               | int32                                                   | #/definitions/Sort                                    | integer                                                        | int64                                                            | integer                                                     | int32                                                         | Page«ContaOutputDTO»                   | object                             | array                                                 | #/definitions/Correntista                                   | boolean                                             | boolean                                             | boolean                                            | integer                                              | int32                                                  | integer                                                        | int32                                                            | #/definitions/Pageable                                 | integer                                            | int32                                                | #/definitions/Sort                                 | integer                                                     | int64                                                         | integer                                                  | int32                                                      | Page«Correntista»                   | object                              | array                                                  | #/definitions/Movimentacao                                   | boolean                                              | boolean                                              | boolean                                             | integer                                               | int32                                                   | integer                                                         | int32                                                             | #/definitions/Pageable                                  | integer                                             | int32                                                 | #/definitions/Sort                                  | integer                                                      | int64                                                          | integer                                                   | int32                                                       | Page«Movimentacao»                   | object                       | string                                       | date-time                                      | integer                                             | int64                                                 | number                                        | SaldoOutput                   | object                | boolean                                | boolean                                 | boolean                                   | Sort                   |
-## TABELA DE ENDPOINT
+##  ✔️Tabela de EndPoint
 
 HTTP METHOD | ENDPOINT | NO PARAMETERS & BODY | FUNÇÃO
  --------|-----|---|---|
@@ -386,90 +384,302 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
 
 ---
 
+## ⚙️ Funcionalidades
+
+    1. Agencia 
+        - Listar todas Agencias
+        - Gravar Agencia 
+        - Buscar Agencia exclusiva por id de identificação
+        - Atualizar Agencia pelo id
+        - Deleta Agencia pelo id
+    2. Conta
+        - Listar todas Contas
+        - Gravar Conta
+        - Buscar Conta exclusiva por id de identificação
+        - Atualizar Conta pelo id
+        - Deleta Conta pelo id
+    3. Correntista
+        - Listar todas Correntistas
+        - Gravar Correntista
+        - Buscar Correntista exclusiva por id de identificação
+        - Atualizar Correntista pelo id
+        - Deleta Correntista pelo id
+        - Buscar Contato de Correntista exclusivo por id de identificação
+        - Gravar Contato de Correntista pelo id
+        - Deleta Contato de Correntista pelo id
+        - Buscar Endereço de Correntista exclusiva por id de identificação
+        - Gravar Endereço de Correntista pelo id
+    4. Movimentacao
+        - Listar todas Movimentacao
+        - Gravar Movimentacao
+        - Buscar Movimentacao exclusiva por id de identificação
+        - Atualizar Movimentacao pelo id
+        - Deleta Movimentacao pelo i a lista de agencias
+
+---
+
 ## 💻 Iniciando
 
-1️⃣
-
+### 1️⃣  ⚠️É NECESSÁRIO QUE CLONE API DE AUTENTICAÇÃO ❗
 <p>
+<a href="https://github.com/FiveDevsSquad7/Banco-BlueBank-Auth">CLIQUE PARA SER REDIRENCIONADO!</a>
+</p>
+
+---
+
+<p><b>
 Obter acesso cuja API externa de Segurança cuja estratégia aplicada foi para separar as responsabilidades, assim segue a imagem:
 
 Com a autorização realizada cujo Token, o sistema permite realizar algumas operações:
 
 {
-"access_token": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyMTMxOTIsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMDg5MDg3ODAtMTAxNi00ZWU5LTk1MmMtYWI2NjA5ODk5OWMzIiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.c6z4aMdNWMhcu5wRoFrTJ87Ur5M3uSF5c-RlMKsML32uWVeVGa0WAu-G4siyvwp7NufVwSf90tbA83mGQmLtc_Pig8vxpAwhIb1QRriFiQ_d0ZrljpnudSQAiyT4rgLn77jwvKwb1Yfu1j4E1BonsrSUINp2S6a2Uu3nzABVJ18DAaSaFupNGjtPylNPD5ZspNz0fnqsq2WXzKpbNnSv8gWiuvu1Tyx1nwoTg3KQJtUMFClJjQ5j_-G5s7Te02nVbtn_QaZ-aJcj4FntGNMkVwVWejgOARSCyhgkKT4mPn2IifNOkEzlnFLbOq9O59NKUntkex-aMB5hVX2YqOTqeA",
+"access_token":
+"eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.
+eyJleHAiOjE2MzkyMTMxOTIsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMDg5MDg3ODAtMTAxNi00ZWU5LTk1MmMtYWI2NjA5ODk5OWMzIiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.
+c6z4aMdNWMhcu5wRoFrTJ87Ur5M3uSF5c-RlMKsML32uWVeVGa0WAu-G4siyvwp7NufVwSf90tbA83mGQmLtc_Pig8vxpAwhIb1QRriFiQ_d0ZrljpnudSQAiyT4rgLn77jwvKwb1Yfu1j4E1BonsrSUINp2S6a2Uu3nzABVJ18DAaSaFupNGjtPylNPD5ZspNz0fnqsq2WXzKpbNnSv8gWiuvu1Tyx1nwoTg3KQJtUMFClJjQ5j_-G5s7Te02nVbtn_QaZ-aJcj4FntGNMkVwVWejgOARSCyhgkKT4mPn2IifNOkEzlnFLbOq9O59NKUntkex-aMB5hVX2YqOTqeA",
+
 "token_type": "bearer",
 "expires_in": 43199,
 "scope": "READ WRITE",
 "jti": "08908780-1016-4ee9-952c-ab66098999c3"
 }
-</p>
+
+----
+
+</p></b>
 
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/m3bxpLm.jpg" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center"  src="https://i.imgur.com/m3bxpLm.jpg" title="Imagem Postman Link de Redirecionamento para API" />
   </a>
 </p>
 
-2️⃣ 
+----
+
+### 2️⃣  🔗 Inserindo um Correntista, porém será usado o Swagger:
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center"  src="https://i.imgur.com/orX9XjB.png" title="Imagem Swagger Authorize Link de Redirecionamento para API" />
+  </a>
+</p>
+
+----
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/hGHMZm9.png" title="Imagem Swagger Authorize com procedimento para aplicar o token Link de Redirecionamento para API" />
+  </a>
+</p>
+
+----
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center"  src="https://i.imgur.com/eZSabGL.png" title="Imagem Swagger Authorize com procedimento para aplicar a sintaxe no Authorize Link de Redirecionamento para API" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center"  src="https://i.imgur.com/6WWERN3.png" title="Imagem Swagger Authorize com procedimento para fechar o Authorize Link de Redirecionamento para API" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/ntj5m78.png" title="Imagem Swagger para criar Correntista" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center"  src="https://i.imgur.com/u6WDwg9.png" title="Imagem Swagger retorno Status 201 após criar Correntista" />
+  </a>
+</p>
+
+---
+
+### 3️⃣ 💲 Inserindo uma Conta:
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/rwRYsgB.png" title="Imagem Swagger para criar Conta" />
+  </a>
+</p>
+
+---
+
 <p>
-Inserindo um Correntista, porém será usado o Swagger:
+Retorno:
 </p>
 
+---
+
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/orX9XjB.png" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/aomXZta.png" title="Imagem Swagger retorno Status 201 após criar Conta" />
   </a>
 </p>
 
+---
+
+<p>
+Por meio da Conta n° 18, cujo acesso seria ao funcionário, logo se pode realizar algumas requisições, por exemplo buscar 
+todos Correntistas na Base de Dados.
+Conforme a imagem abaixo, a API contém a Estratégia de Paginação, já que tal tecnica melhora a performace! Assim, 
+a medida que a há aumento de dados, a API contém a responsabilidade para tratar tais dados, e não ficando a incumbência APENAS Squad do Front.
+</p>
+
+---
+
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/hGHMZm9.png" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/nazmHj5.png" title="Imagem Swagger bucar Conta por ID embora com Paginação" />
   </a>
 </p>
 
+---
+
+<p>
+Retorno:
+</p>
+
+---
+
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/eZSabGL.png" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/yIIyPE0.png" title="Imagem Swagger bucar Conta da busca com Paginação" />
   </a>
 </p>
 
+---
+
+<p>
+Por meio da Conta n° 18, pode-se atualizar Correntista
+</p>
+
+---
+
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/6WWERN3.png" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/gt9dkyk.png" title="Imagem Swagger atualizar Correntista" />
   </a>
 </p>
 
+---
+
+<p>
+Por meio da Conta n° 18, pode-se excluir Correntista, mas antes busque um Correntista especifico pelo ID, no caso ID = 2
+</p>
+
+---
+
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/o5vjKao.png" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/6ii9GUz.png" title="Imagem Swagger buscar Correntista por ID" />
   </a>
 </p>
 
+---
+
+<p>
+Por meio da Conta n° 18, pode-se excluir Correntista, agora basta excluir!
+OBSERVAÇÃO: AO TENTAR EXCLUIR O USÁRIO DO ID = 2, ERRONIAMENTE FOI INSERIDO NO PARAM O ID = 5, O QUAL É ESSE QUE FAZ TODAS OPERAÇÕES DA API!
+DEVIDO ESSA PASSAGEM EQUIVOCADA, FOI OPORTUNO PARA DEMONSTRAR A FUNCIONALIDADE DO TRATAMENTO DE ERRO, VEJA A IMAGEM:<b>
+
+{
+"status": 409,
+"timestamp": "2021-12-11T23:35:22.3690515Z",
+"type": "https://bluebank.6devs.com.br/entidade-em-uso",
+"title": "Entidade em uso",
+"detail": "Correntista de id 5 não pode ser removido, pois está em uso",
+"userMessage": "Correntista de id 5 não pode ser removido, pois está em uso"
+}
+
+</b>
+
+</p>
 <p align="center">
-  <a href="https://docbleubankdev6.netlify.app/">
-    <img align="center" width="300" src="https://i.imgur.com/v54srxt.png" style="max-width:100%;">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/61qUrMs.png" title="Imagem Swagger referente excluir Correntista com ID errado, mas API notifaca errro" />
   </a>
 </p>
 
+---
 
-## Criar um projeto com aws-lambda
+<p>
+FEITO A OBSERVAÇÃO, VOLTA-SE À EXCLUSÃO DO ID = 2, VEJA A IMAGEM:
+</p>
 
-Com o comando abaixo vai ser criado um projeto padrão para criar a lambda
-com framework Serverless Framework (https://www.serverless.com/)
+---
 
- ~~~bash
-  $ serverless create --template aws-java-maven --name nomedoseuservico
- ~~~
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/ZV7Ey2k.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
 
-Após a implementação, configuração das credencias e região da AWS para fazer o
-deploy basta:
+---
 
-~~~bash
-$ serverless deploy
-~~~
+### 4️⃣  🔄  Criar Movimentações em Conta
 
-Para testar sua lambda localmente:
+<b> 
+<p>
+REGRA DE NEGOCIO:
 
-~~~bash
-$ serverless invoke local -f nomedasuafuncao 
-~~~
+Conforme o modelo é o Correntista com ID = 5, então, segue-se com esse para exeplicar o Fluxo de Movimentação cuja Entidade pode-se ser melhor compreendida pela a imagem abaixo:
+</p>
+</b>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/ZBu2vNp.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/v8UiKfq.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+<p>
+Retorno:
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/3gNREWb.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+### 5️⃣  ✉️ Notificação enviada ao email do Cliente com PROTOCOLO:
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img align="center" src="https://i.imgur.com/2iasABM.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
+  </a>
+</p>
+
+---
+
+
