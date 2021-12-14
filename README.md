@@ -412,9 +412,7 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
         - Atualizar Movimentacao pelo id
         - Deleta Movimentacao pelo i a lista de agencias
         
-<img alt="squad-dev6" height="300" src="https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20.gif" title="squad-dev6" width="400"/>
-
-<img alt="postman-dev6"  src="https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20demo.gif" title="postman-dev6"/>
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/72285106/146072171-d18e6d61-a447-47d0-bd14-b878fad94d48.gif)
 
 ---
 
