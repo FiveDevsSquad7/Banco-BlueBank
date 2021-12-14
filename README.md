@@ -33,7 +33,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Taisis Marinelo](https://www.linkedin.com/in/taisis-marinelo/)
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
 
-![Imgur](https://imgur.com/A353ADT)
+![A353ADT - Imgur](https://user-images.githubusercontent.com/72285106/145930013-2c2db5a9-cd7a-4b06-834a-58456df38728.gif)
 
 ---
 
