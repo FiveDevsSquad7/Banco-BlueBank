@@ -18,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.util.List;
@@ -45,6 +46,7 @@ public class ContaController {
 			@ApiResponse(code = 500, message = "Ocorreu um erro interno do servidor" ),
 	})
 	@CheckSecurity.Contas.PodeConsultar
+	@ResponseStatus(HttpStatus.OK)
 	@GetMapping
 	public Page<ContaOutputDTO> listar(Pageable pageable) {
 		return mapper.toCollectionModelDTO(contaservice.listar(pageable));
@@ -79,7 +81,7 @@ public class ContaController {
 	@CheckSecurity.Contas.PodeEditar
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public ContaOutputDTO salvar(@RequestBody Conta conta) {
+	public ContaOutputDTO salvar(@RequestBody @Valid Conta conta) {
 		Conta novaConta = contaservice.salvar(conta);
 		return mapper.toModelDTO(novaConta);
 	}
@@ -97,7 +99,7 @@ public class ContaController {
 	@GetMapping(path = "/{id}/saldo/{data}")
 	@ResponseStatus(HttpStatus.OK)
 	public SaldoOutput saldo(@PathVariable Long id, @PathVariable String data) {
-		return contaservice.buscarSaldo(id,OffsetDateTime.parse(data));
+		return contaservice.buscarSaldo(id,data);
 	}
 
 	@ApiOperation(value = "Busca todas as transações efetuadas e retorna o extrato",  httpMethod = "GET",
@@ -115,7 +117,7 @@ public class ContaController {
 	public Page<Movimentacao> extrato(@PathVariable Long id,
 									  @PathVariable String dataInicial,
 									  @PathVariable String dataFinal, Pageable pageable) {
-		return serviceMovimentacao.listar(id,OffsetDateTime.parse(dataInicial),OffsetDateTime.parse(dataFinal), pageable);
+		return serviceMovimentacao.listar(id,dataInicial,dataFinal, pageable);
 	}
 
 	@ApiOperation(value = "Faz atualização global das Contas pelo específico ID",  httpMethod = "PUT",
@@ -132,10 +134,8 @@ public class ContaController {
 	@CheckSecurity.Contas.PodeEditar
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.OK)
-	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody Conta conta){
-		Conta contaAtual = contaservice.buscar(id);
-		BeanUtils.copyProperties(conta, contaAtual, "numeroConta", "dataCadastro");
-		Conta contaModificada = contaservice.salvar(contaAtual);
+	public ContaOutputDTO atualizar (@PathVariable Long id, @RequestBody @Valid Conta conta){
+		Conta contaModificada = contaservice.atualizar(id,conta);
 		return mapper.toModelDTO(contaModificada);
 	}
 

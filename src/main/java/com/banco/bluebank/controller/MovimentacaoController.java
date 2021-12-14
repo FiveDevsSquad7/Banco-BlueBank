@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(path = "/movimentacoes")
 public class MovimentacaoController {
@@ -31,7 +33,7 @@ public class MovimentacaoController {
     @CheckSecurity.Movimentacoes.PodeTransferir
     @PostMapping(path="/transferencia")
     @ResponseStatus(HttpStatus.CREATED)
-    public Movimentacao salvar(@RequestBody Movimentacao movimentacao) {
+    public Movimentacao salvar(@RequestBody @Valid Movimentacao movimentacao) {
         movimentacao.setNumeroContaCredito(movimentacao.getNumeroContaCredito());
         movimentacao.setNumeroContaDebito(movimentacao.getNumeroContaDebito());
         service.salvar(movimentacao);
@@ -49,7 +51,7 @@ public class MovimentacaoController {
     @CheckSecurity.Movimentacoes.PodeDepositar
     @PostMapping(path = "/deposito")
     @ResponseStatus(HttpStatus.CREATED)
-    public Movimentacao depositar(@RequestBody MovimentacaoInput movimentacaoInput) {
+    public Movimentacao depositar(@RequestBody @Valid MovimentacaoInput movimentacaoInput) {
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setNumeroContaDebito(NUMERO_CONTA_CAIXA_ADM);
         movimentacao.setNumeroContaCredito(movimentacaoInput.getNumeroConta());
@@ -70,7 +72,7 @@ public class MovimentacaoController {
     @CheckSecurity.Movimentacoes.PodeSacar
     @PostMapping(path = "/saque")
     @ResponseStatus(HttpStatus.CREATED)
-    public Movimentacao sacar(@RequestBody MovimentacaoInput movimentacaoInput) {
+    public Movimentacao sacar(@RequestBody @Valid MovimentacaoInput movimentacaoInput) {
         Movimentacao movimentacao = new Movimentacao();
         movimentacao.setNumeroContaCredito(NUMERO_CONTA_CAIXA_ADM);
         movimentacao.setNumeroContaDebito(movimentacaoInput.getNumeroConta());

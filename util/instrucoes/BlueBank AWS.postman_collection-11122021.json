@@ -1,0 +1,1121 @@
+{
+	"info": {
+		"_postman_id": "c0f51557-abeb-4b96-be2b-26f0e4e192a4",
+		"name": "BlueBank AWS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "API hostcheck",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/hostcheck",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"hostcheck"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencias Lista",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/agencias",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"agencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia por Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/agencias/1",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"agencias",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/agencias/4",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"agencias",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"agencia\": \"037-4\",\n    \"nome\": \"Sao Paulo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/agencias/5",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"agencias",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Agencia create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"agencia\": \"070-2\",\n    \"nome\": \"Carimã\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/agencias",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"agencias"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas Lista",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas?size=10&page=0&sort=nome,asc",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas"
+					],
+					"query": [
+						{
+							"key": "size",
+							"value": "10"
+						},
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "sort",
+							"value": "nome,asc"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas por Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/5",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cnpj\": \"62382161000144\",\n  \"contatos\": [\n    {\n      \"email\": \"teste@teste.com\",\n      \"infoRecado\": \"teste teste\",\n      \"telefone\": \"3271526938\"\n    }\n  ],\n  \"cpf\": \"77687961013\",\n  \"emailValidacao\": \"teste@teste.com\",\n  \"enderecos\": [\n    {\n      \"bairro\": \"Marabaixo\",\n      \"cep\": \"68906519\",\n      \"cidade\": \"Macapá\",\n      \"complemento\": \"Rua Nove\",\n      \"estado\": \"AP\",\n      \"logradouro\": \"Rua Nove\",\n      \"numero\": \"300\"\n    }\n  ],\n  \"nome\": \"SEM NOME\",\n  \"rg\": \"153702126\",\n  \"sms\": \"teste\",\n  \"tipoPessoa\": \"F\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"Carlos Betiol\",\n    \"cpf\": \"546465445\",\n    \"rg\": \"46546464\",\n    \"cnpj\": \"446465\",\n    \"tipoPessoa\": \"F\",\n    \"emailValidacao\": \"carlos@betiol.dev\",\n    \"sms\": \"6456465\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/5",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/5",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas Lista Enderecos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/2/enderecos",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"2",
+						"enderecos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas add endereco",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"logradouro\": \"rua do angico\",\n    \"numero\": \"ut dolor\",\n    \"complemento\": \"dolore non sunt\",\n    \"cep\": \"85858522\",\n    \"bairro\": \"ut minim occaecat te\",\n    \"cidade\": \"manaus\",\n    \"estado\": \"AM\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/2/enderecos",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"2",
+						"enderecos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas delete endereco",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/2/enderecos/7",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"2",
+						"enderecos",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas Lista Contatos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/2/contatos",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"2",
+						"contatos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas add contato",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"telefone\": \"9999999\",\n    \"email\": \"joca@email.com\",\n    \"infoRecado\": \"ad voluptate anim eiusmod\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/2/contatos",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"2",
+						"contatos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Correntistas delete contato",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/correntistas/2/contatos/7",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"correntistas",
+						"2",
+						"contatos",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas Lista",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas Extrato",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas/42/extrato/2021-12-02T00:00Z/2021-12-12T00:00Z",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas",
+						"42",
+						"extrato",
+						"2021-12-02T00:00Z",
+						"2021-12-12T00:00Z"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas Saldo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "text"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas/42/saldo/2021-12-12T00:00Z",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas",
+						"42",
+						"saldo",
+						"2021-12-12T00:00Z"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas por Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas/42",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas",
+						"42"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tipoConta\":\"CC\",\n    \"correntista\": {\"id\":2} ,\n    \"agencia\": {\"id\": 2},\n    \"senha\": \"1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tipoConta\":\"PP\",\n    \"correntista\": {\"id\": 2} ,\n    \"agencia\": {\"id\": 2},\n    \"senha\": \"5246\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas/83",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas",
+						"83"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Contas delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/contas/83",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"contas",
+						"83"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes por Id",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/movimentacoes/1",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"movimentacoes",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes tranferencia create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroContaDebito\":  42,\n    \"numeroContaCredito\": 59,\n    \"descricao\":\"teste 4\",\n    \"valor\": 100.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/movimentacoes/transferencia",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"movimentacoes",
+						"transferencia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes deposito create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODMzODgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiMzA0NDcwZGEtNjVlOS00YjMwLWI3MDItNWJlNmQ1ZDk5ODg2IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.JppF7nir_AnEum5axnRU4JQV9maND_PksenHZrZRs0JudG_2XWiMdxpfrHmuCIiC5g5YPp1bQIh65RIxDQpH3jeVCPWuwfomS5KWH7OuQsFGXJbMojhhenO_fk7vTMh3BYbE15B6g2MJKqK2tbf3nLG9dJcr5ojM0cQaBreOIRuHqsWfvO8K49VW-PDp_1l5WyLFL1o9PazpISnByiEHHJl29ZllNlinqQre0C5sP6T71ElenWIhNU4GjHl-DwJs-15KwGyE5tA9b-bAtmFmaKuVdgFaBs3K0wGpA3fVwd2DzRZIm4ORrknwdQqp_5VDCKGTa9x5Bx3P9PU6kOne_g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroConta\":  42,\n    \"descricao\":\"dep no caixa\",\n    \"valor\": 1000.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/movimentacoes/deposito",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"movimentacoes",
+						"deposito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Movimentacoes saque  create",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODI4NjYsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiZGIzZGI3ZjEtYTJjMy00NmUyLTliOGUtNDA3MGVjMjI2NDAxIiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.EKBv-IR9U05RFI-MW8eBtHclw4kZQzUpMfGL00PLAr9gZTKYqKGfY7T7kLP2tvy-e_gTR1VPdIOBwg1FW8qGL6vhboPtr229FH21GADUHZEg31nfS3N2H5CsAm768suWw6sEeAwhvR0khrzpasWW-4Kj-7E7tvQh5vipLCLBviHcTU_7wa4z3sPpQwGVyHyiSl5OSzamVZINq94Y_O1EuStAeCBeTNhTfzbjWwUnTYbyF7UY6nx_xznesxzlow84vbk1XkY9pq1TAkwpgAadZ6erlio7rwDe4YY-bkXkvgZBmSZlOI-pWmud9nv0qY72s1gt-DhqBVwpkML7NnW9ug",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"numeroConta\":  42,\n    \"descricao\":\"saque no caixa\",\n    \"valor\": 100.0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://bluebank.6devs.com.br/movimentacoes/saque",
+					"protocol": "https",
+					"host": [
+						"bluebank",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"movimentacoes",
+						"saque"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Gerar Access Token",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "web123",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "bluebank-app",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "username",
+							"value": "18",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "8912",
+							"type": "text"
+						},
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://bluebanktoken.6devs.com.br/oauth/token",
+					"protocol": "https",
+					"host": [
+						"bluebanktoken",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Checar Access Token (password)",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2MzkyODI4NjYsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOlsiQURNSU4iXSwianRpIjoiZGIzZGI3ZjEtYTJjMy00NmUyLTliOGUtNDA3MGVjMjI2NDAxIiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGUiOlsiUkVBRCIsIldSSVRFIl19.EKBv-IR9U05RFI-MW8eBtHclw4kZQzUpMfGL00PLAr9gZTKYqKGfY7T7kLP2tvy-e_gTR1VPdIOBwg1FW8qGL6vhboPtr229FH21GADUHZEg31nfS3N2H5CsAm768suWw6sEeAwhvR0khrzpasWW-4Kj-7E7tvQh5vipLCLBviHcTU_7wa4z3sPpQwGVyHyiSl5OSzamVZINq94Y_O1EuStAeCBeTNhTfzbjWwUnTYbyF7UY6nx_xznesxzlow84vbk1XkY9pq1TAkwpgAadZ6erlio7rwDe4YY-bkXkvgZBmSZlOI-pWmud9nv0qY72s1gt-DhqBVwpkML7NnW9ug",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://bluebanktoken.6devs.com.br/oauth/check_token",
+					"protocol": "https",
+					"host": [
+						"bluebanktoken",
+						"6devs",
+						"com",
+						"br"
+					],
+					"path": [
+						"oauth",
+						"check_token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
