@@ -11,7 +11,7 @@
   <a href="#-funcionalidades">Funcionalidades</a>
 </p>
 
-## 👨🏻‍💻 Sobre o projeto
+##  👨🏻‍💻  Sobre o projeto
 
 <b>
 <p style="color: red;">Banco BlueBank é projeto final referente ao treinamento sobre BACK-END em Java ofertado pelo Banco Pan cuja Parceria Gama Academy!
@@ -57,6 +57,7 @@ Tecnologias, Framework e Metodologias utilizadas:
 - [AWS](https://aws.amazon.com/pt/)
 - [AWS Lambda](https://aws.amazon.com/pt/lambda/)
 - [AWS ApiGateway](https://aws.amazon.com/pt/api-gateway/)
+- [Testes Unitário e de Integração](https://www.zup.com.br/blog/fases-de-teste-tipos-de-teste)
 
 ---
 
@@ -678,6 +679,14 @@ Retorno:
     <img align="center" src="https://i.imgur.com/2iasABM.png" title="Imagem Swagger exclusão concluida Correntista por ID correto" />
   </a>
 </p>
+
+---
+
+### 6️⃣  🚦 Notificação enviada ao email do Cliente com PROTOCOLO:
+
+---
+
+![ezgif-3-2cf7ae3d3e62](https://user-images.githubusercontent.com/72285106/146070005-1e0ac402-09c9-4169-9a3e-5fe99f4e6132.gif)
 
 ---
 
