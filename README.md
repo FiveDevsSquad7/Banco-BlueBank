@@ -34,7 +34,7 @@ Para ver a **api**, clique aqui: [BlueBank API](https://bluebank.6devs.com.br/sw
 - [Weslley Lima](https://www.linkedin.com/in/weslley-lima-6844122b/)
 
 
-![Alt Text](https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif)
+![](https://github.com/WCL79/imagnes_diversas/blob/master/Squad6Dev.gif)
 
 
 ---
