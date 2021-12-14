@@ -41,7 +41,7 @@ public class NotificacaoCorrentistaService {
     public void enviarSmsContaCreditoMovimentacaoRealizadaListener(MovimentacaoRealizadaEvent event) {
 
         notificadorSMS.notificar(event.getMovimentacao().getContaCredito().getCorrentista(),
-                String.format("Sua conta %d%s sofreu uma movimentação de débito no valor de R$ %.2f.",
+                String.format("Sua conta %d%s sofreu uma movimentação de crédito no valor de R$ %.2f.",
                         event.getMovimentacao().getContaCredito().getNumeroConta(),
                         dv.calculaDigitoVerificador(event.getMovimentacao().getContaCredito().getNumeroConta().toString()),
                         event.getMovimentacao().getValor()));
