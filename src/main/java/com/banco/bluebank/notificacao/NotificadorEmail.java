@@ -33,6 +33,8 @@ public class NotificadorEmail implements Notificador {
     @Override
     public void notificar(Correntista correntista, String mensagem) throws ClassNotFoundException, MessagingException {
 
+        if (correntista.getEmailValidacao() == null) return;
+
         String filename = "logo-6devs.png";
         BodyPart image = new MimeBodyPart();
         image.setDisposition(MimeBodyPart.INLINE);
@@ -41,29 +43,27 @@ public class NotificadorEmail implements Notificador {
 
         MimeMessage mimeMessage;
         try {
-                InternetAddress from = new InternetAddress("fivedevssq7@gmail.com", "BlueBank 6Devs");
+                InternetAddress from = new InternetAddress("bluebank6devs@betiol.dev", "BlueBank 6Devs");
 
                 mimeMessage = javaMailSender.createMimeMessage();
                 mimeMessage.setSubject("BlueBank 6Devs - Notificação de movimentação em conta bancária - Protocolo: "+ emailProtocolo);
 
                 MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
 
-                helper.setValidateAddresses(!correntista.getEmailValidacao().isEmpty());
+                helper.setValidateAddresses(! (correntista.getEmailValidacao() == null || correntista.getEmailValidacao().isBlank()));
                 helper.setSentDate(new Date());
                 helper.setFrom(from);
                 helper.setTo(correntista.getEmailValidacao());
 
                 String contentId = ContentIdGenerator.getContentId();
 
-                String texto = String.format(" %s da conta cujo numero %s  ", correntista.getNome(), mensagem);
-                helper.setText(texto);
-
                 String htmlText = (
-                        "Prezado Cliente<br><br>Primando qualidade em seguranca, julga-se necessario que Sr(a):<br><br>" +
-                        "O(a) gestor"+texto+
-                        "<br><br>Estamos a sua disposicao para maiores esclarecimentos por meio do email fivedevssq7@gmail.com ou se preferir entre em contato com o gerente da sua conta!\"\n" +
-                        "<br><br><br><br>Atenciosamente,<br><br><br><br> BlueBank 6Devs." +
-                        "<a href=\"https://bluebank.6devs.com.br\">"+
+                        "Prezado Cliente<br><br>"+correntista.getNome()+"<br><br>O BlueBank 6Devs se preocupa com a seguranca da "+
+                                "sua conta e notifica o seguinte:<br><br>" +
+                                "<b>"+mensagem+"</b><br><br>"+
+                        "Estamos a sua disposicao para maiores esclarecimentos por meio do email bluebank6devs@betiol.dev ou se preferir entre em contato com o gerente da sua conta!\"\n" +
+                        "<br><br><br><br>Atenciosamente,<br><br><br><br>" +
+                        "<a href=\"https://github.com/FiveDevsSquad7\">BlueBank 6Devs"+
                         "<td style=\"width:114px;padding-top:19px>\""+
                         "<img src=\"cid:"+ contentId + "</td>"+
                         "</a>");
