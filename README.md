@@ -692,7 +692,7 @@ Retorno:
 
 #### Ecossistema da API
 
-<img src="\util\imagens\1-Bleubank.png" />
+<img src="/util/imagens/1-Bleubank.png" />
 
 
 // index.js - triggered by an endpoint api gateway
