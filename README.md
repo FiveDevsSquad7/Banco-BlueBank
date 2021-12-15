@@ -688,4 +688,83 @@ Retorno:
 
 ---
 
+### 7️⃣ API Gateway 🔁 Código em Node.js: Lambda! 
 
+// index.js - triggered by an endpoint api gateway
+// publish a message containing the phone and message in the push SNS
+
+// Load the AWS SDK for Node.js
+const AWS = require('aws-sdk');
+// Set region
+AWS.config.update({region: 'us-east-2'});
+
+exports.handler = function(event, context, callback) {
+    
+
+  // Create publish parameters
+  var params =
+    Message: event.message, /* required */
+    TopicArn: 'arn:aws:sns:xxxxxxxxxxxxxxxxxxxxxx:bluebankPushNotification'
+  };
+
+  // Create promise and SNS service object
+  var publishTextPromise = new AWS.SNS({apiVersion: '2010-03-31'}).publish(params).promise();
+
+  // Handle promise's fulfilled/rejected states
+  publishTextPromise.then(
+    function(data) {
+      console.log(`Message ${params.Message} sent to the topic ${params.TopicArn}`);
+      console.log("MessageID is " + data.MessageId);
+    }).catch(
+      function(err) {
+      console.error(err, err.stack);
+    });
+  
+  //callback(null,null);
+  
+const response = {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'The request was fulfilled' })
+ }
+
+  return callback(null,response);
+
+};
+
+---
+
+### 8️⃣ API Gateway 🔁 Código em Node.js: Lambda SNS
+
+// arquivo index.js - disparado por um SNS de push
+// registra log no cloudwatch e dispara uma mensagem sms
+const aws =  require("aws-sdk");
+const sns = new aws.SNS({
+   region:'us-east-2'
+});
+exports.handler = function(event, context, callback) {
+   console.log("AWS lambda and SNS trigger ");
+   console.log(event);
+   const snsmessage = event.Records[0].Sns.Message;
+   const tmp=snsmessage.substring(1);
+   const message=tmp.substring(tmp.indexOf("]")+1);
+   const telefone=tmp.substring(0,tmp.indexOf("]"));
+   
+   
+   console.log(snsmessage);
+   console.log(message);
+   console.log(telefone);
+   sns.publish({
+      Message: message,
+      PhoneNumber: telefone
+   }, function (err, data) {
+      if (err) {
+         console.log(err);
+         callback(err, null);
+      } else {
+         console.log(data);
+         callback(null, data);
+      } 
+   });
+};
+
+---
