@@ -692,9 +692,25 @@ Retorno:
 
 #### Ecossistema da API
 
-<img src="/util/imagens/1-Bleubank.png" />
+---
 
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/1-Bleubank.png" />
+  </a>
+</p>
 
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/2-AWS.png" />
+  </a>
+</p>
+<b>
+<p style="color: red;">Por motivo de custos, nessa API foi aplicado SNS como SANDBOX para envio de SMS, portanto só aceita 
+números registrados e verificados, entretanto, o fluxo de envio de emails funciona para todos os destinatários</p>
+</b>
 // index.js - triggered by an endpoint api gateway
 // publish a message containing the phone and message in the push SNS
 
@@ -772,4 +788,73 @@ exports.handler = function(event, context, callback) {
 
 ---
 
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/3-RDS.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/4-ecs-fargate.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/5-systems-manager.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/6-ECR.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/7-ECR.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/8-CloudWatch.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/9-elb.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/10-certificate-manager.png" />
+  </a>
+</p>
+
+---
+
+<b>
+<p style="color: red;">Agradecemos pela oportunidade!</p>
+</b>
+
+---
 
