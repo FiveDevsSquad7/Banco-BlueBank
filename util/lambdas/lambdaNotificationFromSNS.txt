@@ -1,0 +1,32 @@
+// arquivo index.js - disparado por um SNS de push
+// registra log no cloudwatch e dispara uma mensagem sms
+
+const aws =  require("aws-sdk");
+const sns = new aws.SNS({
+   region:'us-east-2'
+});
+exports.handler = function(event, context, callback) {
+   console.log("AWS lambda and SNS trigger ");
+   console.log(event);
+   const snsmessage = event.Records[0].Sns.Message;
+   const tmp=snsmessage.substring(1);
+   const message=tmp.substring(tmp.indexOf("]")+1);
+   const telefone=tmp.substring(0,tmp.indexOf("]"));
+   
+   
+   console.log(snsmessage);
+   console.log(message);
+   console.log(telefone);
+   sns.publish({
+      Message: message,
+      PhoneNumber: telefone
+   }, function (err, data) {
+      if (err) {
+         console.log(err);
+         callback(err, null);
+      } else {
+         console.log(data);
+         callback(null, data);
+      }	
+   });
+};
