@@ -688,7 +688,12 @@ Retorno:
 
 ---
 
-### 7️⃣ API Gateway 🔁 Código em Node.js: Lambda! 
+### 7️⃣ AWS, API Gateway e outro 🔁 Código em Node.js: Lambda SNS
+
+#### Ecossistema da API
+
+<img src="\util\imagens\1-Bleubank.png" />
+
 
 // index.js - triggered by an endpoint api gateway
 // publish a message containing the phone and message in the push SNS
@@ -733,8 +738,6 @@ const response = {
 
 ---
 
-### 8️⃣ API Gateway 🔁 Código em Node.js: Lambda SNS
-
 // arquivo index.js - disparado por um SNS de push
 // registra log no cloudwatch e dispara uma mensagem sms
 const aws =  require("aws-sdk");
@@ -768,3 +771,5 @@ exports.handler = function(event, context, callback) {
 };
 
 ---
+
+
