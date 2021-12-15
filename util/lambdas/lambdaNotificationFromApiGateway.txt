@@ -1,0 +1,40 @@
+// index.js - disparado por um endpoint api gateway
+// publica uma mensagem contendo o telefone e mensagem no SNS de push
+
+// Load the AWS SDK for Node.js
+const AWS = require('aws-sdk');
+// Set region
+AWS.config.update({region: 'us-east-2'});
+
+exports.handler = function(event, context, callback) {
+    
+
+  // Create publish parameters
+  var params = {
+    Message: event.message, /* required */
+    TopicArn: 'arn:aws:sns:xxxxxxxxxxxxxxxxxxxxxx:bluebankPushNotification'
+  };
+
+  // Create promise and SNS service object
+  var publishTextPromise = new AWS.SNS({apiVersion: '2010-03-31'}).publish(params).promise();
+
+  // Handle promise's fulfilled/rejected states
+  publishTextPromise.then(
+    function(data) {
+      console.log(`Message ${params.Message} sent to the topic ${params.TopicArn}`);
+      console.log("MessageID is " + data.MessageId);
+    }).catch(
+      function(err) {
+      console.error(err, err.stack);
+    });
+  
+  //callback(null,null);
+  
+const response = {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'A requisicao foi atendida' })
+ }
+
+  return callback(null,response);
+
+};
