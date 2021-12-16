@@ -1,10 +1,9 @@
 package com.banco.bluebank.service;
 
-
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.junit.Before;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -30,13 +29,19 @@ public class AgenciaEndPointIT {
 	@Test
 	public void deveRetornar200AoListarAgencias() {
 
+		final String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2Mzk3MTY5MzgsInVzZXJfbmFtZSI6IjE4IiwiYXV0aG9yaXRpZXMiOls"+
+				"iQURNSU4iXSwianRpIjoiOGQ1YWFhMmQtOTY0My00NTA0LThkNzQtMjdlYjRjZDg1Mjc4IiwiY2xpZW50X2lkIjoiYmx1ZWJhbmstYXBwIiwic2NvcGU"+
+				"iOlsiUkVBRCIsIldSSVRFIl19.dxnEvmzPAKllzNrYNw4r0Nc1Rgt7vhPZaZMSHvcOAy5FZ6gHqsgs5n-qB-HURD3lBKMF8K2SNAG4PpvGJr9hBD9c"+
+				"8bDtu6P8YXXVySeF9XZ77S6PmO4RjrCkuwbNM_ZNjnIcYE6JiEZh5MuaQ7-l85nIgQez7nU9eM7Ly7i2L-nqUxVwW2sqfAjZqvVKKeX0QUKtMKDQPaQGS"+
+				"z0R-5PShm1mEdpfiE228WDXnKN1d4u3lo7kAn4eVX1aIrhuga7KscsRxjQslEoe29L1n_e1-MYM_ic4w--MVcab9Bjkr0CrTtJRPMmnPvjqk93vYALrQD"+
+				"o6YXmIpyJi4k-eR74izA";
 
 		RestAssured.enableLoggingOfRequestAndResponseIfValidationFails();
-//RestAssured.authentication =
-//		preemptive().basic("bluebank-app","web123")
 
 		RestAssured.given()
-				.basePath("/agencias").accept(ContentType.JSON)
+				.basePath("/agencias")
+				.header("Authorization", "Bearer "+token)
+				.accept(ContentType.JSON)
 		.when().get().then().statusCode(HttpStatus.OK.value());
 		
 	}
