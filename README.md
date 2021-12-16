@@ -11,7 +11,7 @@
   <a href="#-funcionalidades">Funcionalidades</a>
 </p>
 
-## 👨🏻‍💻 Sobre o projeto
+##  👨🏻‍💻  Sobre o projeto
 
 <b>
 <p style="color: red;">Banco BlueBank é projeto final referente ao treinamento sobre BACK-END em Java ofertado pelo Banco Pan cuja Parceria Gama Academy!
@@ -57,6 +57,7 @@ Tecnologias, Framework e Metodologias utilizadas:
 - [AWS](https://aws.amazon.com/pt/)
 - [AWS Lambda](https://aws.amazon.com/pt/lambda/)
 - [AWS ApiGateway](https://aws.amazon.com/pt/api-gateway/)
+- [Testes Unitário e de Integração](https://www.zup.com.br/blog/fases-de-teste-tipos-de-teste)
 
 ---
 
@@ -411,9 +412,7 @@ DELETE | /movimentacoes/{id} | SIM & NÃO | Deleta Movimentação pelo id por id
         - Atualizar Movimentacao pelo id
         - Deleta Movimentacao pelo i a lista de agencias
         
-<img alt="squad-dev6" height="300" src="https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20.gif" title="squad-dev6" width="400"/>
-
-<img alt="postman-dev6"  src="https://github.com/WCL79/imagnes_diversas/blob/master/Postman%20demo.gif" title="postman-dev6"/>
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/72285106/146072171-d18e6d61-a447-47d0-bd14-b878fad94d48.gif)
 
 ---
 
@@ -681,4 +680,181 @@ Retorno:
 
 ---
 
+### 6️⃣  🚦 Testes Unitário e de Integração:
+
+---
+
+![ezgif-3-2cf7ae3d3e62](https://user-images.githubusercontent.com/72285106/146070005-1e0ac402-09c9-4169-9a3e-5fe99f4e6132.gif)
+
+---
+
+### 7️⃣ AWS, API Gateway e outro 🔁 Código em Node.js: Lambda SNS
+
+#### Ecossistema da API
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/1-Bleubank.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/2-AWS.png" />
+  </a>
+</p>
+<b>
+<p style="color: red;">Por motivo de custos, nessa API foi aplicado SNS como SANDBOX para envio de SMS, portanto só aceita 
+números registrados e verificados, entretanto, o fluxo de envio de emails funciona para todos os destinatários</p>
+</b>
+// index.js - triggered by an endpoint api gateway
+// publish a message containing the phone and message in the push SNS
+
+// Load the AWS SDK for Node.js
+const AWS = require('aws-sdk');
+// Set region
+AWS.config.update({region: 'us-east-2'});
+
+exports.handler = function(event, context, callback) {
+    
+
+  // Create publish parameters
+  var params =
+    Message: event.message, /* required */
+    TopicArn: 'arn:aws:sns:xxxxxxxxxxxxxxxxxxxxxx:bluebankPushNotification'
+  };
+
+  // Create promise and SNS service object
+  var publishTextPromise = new AWS.SNS({apiVersion: '2010-03-31'}).publish(params).promise();
+
+  // Handle promise's fulfilled/rejected states
+  publishTextPromise.then(
+    function(data) {
+      console.log(`Message ${params.Message} sent to the topic ${params.TopicArn}`);
+      console.log("MessageID is " + data.MessageId);
+    }).catch(
+      function(err) {
+      console.error(err, err.stack);
+    });
+  
+  //callback(null,null);
+  
+const response = {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'The request was fulfilled' })
+ }
+
+  return callback(null,response);
+
+};
+
+---
+
+// arquivo index.js - disparado por um SNS de push
+// registra log no cloudwatch e dispara uma mensagem sms
+const aws =  require("aws-sdk");
+const sns = new aws.SNS({
+   region:'us-east-2'
+});
+exports.handler = function(event, context, callback) {
+   console.log("AWS lambda and SNS trigger ");
+   console.log(event);
+   const snsmessage = event.Records[0].Sns.Message;
+   const tmp=snsmessage.substring(1);
+   const message=tmp.substring(tmp.indexOf("]")+1);
+   const telefone=tmp.substring(0,tmp.indexOf("]"));
+   
+   
+   console.log(snsmessage);
+   console.log(message);
+   console.log(telefone);
+   sns.publish({
+      Message: message,
+      PhoneNumber: telefone
+   }, function (err, data) {
+      if (err) {
+         console.log(err);
+         callback(err, null);
+      } else {
+         console.log(data);
+         callback(null, data);
+      } 
+   });
+};
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/3-RDS.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/4-ecs-fargate.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/5-systems-manager.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/6-ECR.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/7-ECR.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/8-CloudWatch.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/9-elb.png" />
+  </a>
+</p>
+
+---
+
+<p align="center">
+  <a href="https://bluebank.6devs.com.br/swagger-ui.html#/">
+    <img src="/util/imagens/10-certificate-manager.png" />
+  </a>
+</p>
+
+---
+
+<b>
+<p style="color: red;">Agradecemos pela oportunidade!</p>
+</b>
+
+---
 

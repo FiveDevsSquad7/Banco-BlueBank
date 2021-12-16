@@ -43,6 +43,7 @@ public class NotificadorEmail implements Notificador {
 
         MimeMessage mimeMessage;
         try {
+
                 InternetAddress from = new InternetAddress("bluebank6devs@betiol.dev", "BlueBank 6Devs");
 
                 mimeMessage = javaMailSender.createMimeMessage();
@@ -74,6 +75,7 @@ public class NotificadorEmail implements Notificador {
 
         }
         catch (Exception e) {
+            System.out.println("erro ao notificador de email");
             Logger.getLogger(Class.forName(e.getMessage()));
         }
     }
