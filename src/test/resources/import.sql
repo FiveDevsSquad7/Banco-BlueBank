@@ -13,8 +13,8 @@ insert into agencia (agencia, nome_agencia, data_cadastro) values ('060-2', "Sã
 -- as contas de codigo 1 e 2 servirao para disponibilizacao do saldo inicial (a conta 1 tera codigo
 -- credor para a contrapartida nas contas dos correntistas)
 insert into correntista (cnpj,cpf,email_validacao,nome,rg,sms_validacao,pf_pj,data_cadastro) values ('99524991000179',null,null,'Blue Bank',null,null,'J', utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('AD',1,1, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('AC',1,1, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('AD',1,1, '$2a$12$ITFASWZvf3eUryfhvJZfyOLj0QMso4RQJxcFNPaKtY7QxtPNacey.',utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('AC',1,1, '$2a$12$ITFASWZvf3eUryfhvJZfyOLj0QMso4RQJxcFNPaKtY7QxtPNacey.',utc_timestamp);
 
 -- registros de correntistas normais com seus enderecos e contatos
 
@@ -52,14 +52,14 @@ insert into contato_cliente (email,id_correntista,info_recado,telefone,data_cada
 
 -- registro das contas
 
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',2,2, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',2,2, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',3,3, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',3,3, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',2,4, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',2,5, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('CC',2,6, utc_timestamp);
-insert into conta (tipo_conta,id_agencia,id_correntista,data_cadastro) values ('PP',2,6, utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('CC',2,2,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('PP',2,2,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('CC',3,3,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('PP',3,3,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('CC',2,4,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('CC',2,5,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('CC',2,6,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
+insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) values ('PP',2,6,'$2a$12$D1IqiP4meSU1rZ8hWzsuQOArFY4cFMoxnsUnxLnir89FDatAkQty6', utc_timestamp);
 
 -- registro das movimentações
 
