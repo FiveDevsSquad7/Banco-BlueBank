@@ -132,15 +132,7 @@ public class Conta  implements Serializable {
 		this.agencia = agencia;
 	}
 	
-	public Conta(Integer numeroConta, String tipoConta, Correntista correntista, Agencia agencia, Long idCorrentista,
-			Long idAgencia, int digito) {
-		super();
-		this.tipoConta = tipoConta;
-		this.correntista = correntista;
-		this.agencia = agencia;
-		this.idCorrentista = idCorrentista;
-		this.idAgencia = idAgencia;
-	}
+
 
 	public Conta() {
 		

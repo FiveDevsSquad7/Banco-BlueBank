@@ -64,4 +64,5 @@ insert into conta (tipo_conta,id_agencia,id_correntista,senha,data_cadastro) val
 -- registro das movimentações
 
 insert into movimentacao (data_movimento,descricao,num_conta_debito,num_conta_credito,valor) values (utc_timestamp,'Saldo inicial para a conta administrativa',1,2,1000000000.0);
+insert into movimentacao (data_movimento,descricao,num_conta_debito,num_conta_credito,valor) values (utc_timestamp,'transferencia',1,4,100.0);
 
