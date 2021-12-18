@@ -116,7 +116,7 @@ public class AgenciaIT {
 	@Test(expected = EntidadeEmUsoException.class)
 	public void deveFalharAoExcluirAgencia_QuandoAgenciaEmUso() {
 		
-			service.excluir(1L);
+			service.excluir(3L);
 	}
-	
+
 }

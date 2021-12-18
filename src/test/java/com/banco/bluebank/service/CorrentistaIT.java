@@ -28,7 +28,7 @@ public class CorrentistaIT {
 	public void deveInserirCorrentistaComSucesso_QuandoCorrentistaCorreto() {
 		
 		Correntista novoCorrentista = 
-				new Correntista("Harry Thiago","45899657566","145897586", null,"F","HT@teste.com","999999999");
+				new Correntista("Harry Thiago","00677403089","145897586", null,"F","HT@teste.com","999999999");
 		
 		Correntista correntista = service.create(novoCorrentista);
 		

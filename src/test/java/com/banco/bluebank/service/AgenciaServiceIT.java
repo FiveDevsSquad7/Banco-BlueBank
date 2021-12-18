@@ -1,4 +1,4 @@
-package com.banco.bluebank;
+package com.banco.bluebank.service;
 
 import com.banco.bluebank.exceptionhandler.exceptions.AgenciaNaoEncontradaException;
 import com.banco.bluebank.exceptionhandler.exceptions.EntidadeEmUsoException;
@@ -13,12 +13,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import javax.validation.ConstraintViolationException;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
+@TestPropertySource("/application-test.properties")
 class AgenciaServiceIT {
 
 	@Autowired

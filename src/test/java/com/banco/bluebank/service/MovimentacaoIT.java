@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 
+import com.banco.bluebank.model.Conta;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,11 +39,14 @@ public class MovimentacaoIT {
 	
 	@Test
 	public void deveSalvarMovimentacao() {
-		OffsetDateTime data = OffsetDateTime.now();
-		
+
 		Movimentacao novMovimentacao = 
-				new Movimentacao(data, BigDecimal.valueOf(100.0), "test");
-		novMovimentacao.setContaDebito(contaService.buscar(83L));
+				new Movimentacao();
+		novMovimentacao.setNumeroContaCredito(4L);
+		novMovimentacao.setNumeroContaDebito(1L);
+		novMovimentacao.setValor(BigDecimal.valueOf(100.00));
+		novMovimentacao.setDescricao("teste de movimento");
+
 		movimentacaoRepository.save(novMovimentacao);
 		
 		assertThat(novMovimentacao).isNotNull();

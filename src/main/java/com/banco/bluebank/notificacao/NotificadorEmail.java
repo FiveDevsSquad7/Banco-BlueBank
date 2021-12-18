@@ -2,6 +2,7 @@ package com.banco.bluebank.notificacao;
 
 import com.banco.bluebank.model.Correntista;
 import com.banco.bluebank.utils.ContentIdGenerator;
+import com.nimbusds.jose.jwk.source.JWKSetWithTimestamp;
 import com.sun.istack.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;

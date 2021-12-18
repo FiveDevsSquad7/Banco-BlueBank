@@ -147,16 +147,4 @@ public class Movimentacao implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 
-	public Movimentacao() {
-
-	}
-
-	public Movimentacao(OffsetDateTime dataMovimento, BigDecimal valor, String descricao) {
-
-		this.dataMovimento = dataMovimento;
-		this.valor = valor;
-		this.descricao = descricao;
-
-	}
-
 }
