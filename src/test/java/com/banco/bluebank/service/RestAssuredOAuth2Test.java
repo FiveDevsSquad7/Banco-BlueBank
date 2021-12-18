@@ -2,6 +2,7 @@ package com.banco.bluebank.service;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.springframework.stereotype.Component;
 
 import java.util.Base64;
 

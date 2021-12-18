@@ -79,7 +79,6 @@ public class CorrentistaService {
                 .orElseThrow(() -> new CorrentistaNaoEncontradoException(correntistaId));
     }
 
-    @Transactional(readOnly = false)
     public void excluir(Long correntistaId) {
 
         if (correntistaId == CORRENTISTA_BLUEBANK) {
@@ -178,7 +177,7 @@ public class CorrentistaService {
         buscar(correntistaId);
 
         ContatoCliente contato = contatoClienteRepository.findById(contatoId)
-                .orElseThrow(() -> new ContaNaoEncontradaException(contatoId));
+                .orElseThrow(() -> new ContatoNaoEncontradoException(contatoId));
 
         if (!Objects.equals(contato.getCorrentista().getId(), correntistaId)) {
             throw new ContatoNaoEncontradoException(
