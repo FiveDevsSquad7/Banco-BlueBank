@@ -2,21 +2,16 @@ package com.banco.bluebank.notificacao;
 
 import com.banco.bluebank.model.Correntista;
 import com.nimbusds.jose.shaded.json.JSONObject;
+import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 @Component
-public class NotificadorSMS implements Notificador {
+@Profile("prod")
+public class NotificadorSmsNormal implements NotificadorSms {
 
     @Override
     public void notificar(Correntista correntista, String mensagem) {

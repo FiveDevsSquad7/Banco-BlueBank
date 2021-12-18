@@ -5,8 +5,8 @@ import org.springframework.stereotype.Component;
 
 import javax.mail.MessagingException;
 
-public interface NotificadorEmail {
+public interface NotificadorSms {
 
-    void notificar(Correntista correntista, String mensagem) throws ClassNotFoundException, MessagingException;
+    void notificar(Correntista correntista, String mensagem);
 
 }
