@@ -28,3 +28,4 @@ phases:
 artifacts:
   files:
     - target/bluebank-latest.jar
+    - imagedefinitions.json
