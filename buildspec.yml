@@ -25,4 +25,4 @@ phases:
       - echo Writing image definitions file...
 artifacts:
   files:
-    - target/bluebank.jar
+    - target/bluebank-latest.jar
