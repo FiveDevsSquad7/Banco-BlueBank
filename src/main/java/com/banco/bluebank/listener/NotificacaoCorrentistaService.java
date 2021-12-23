@@ -1,7 +1,7 @@
 package com.banco.bluebank.listener;
 
 import com.banco.bluebank.notificacao.NotificadorEmail;
-import com.banco.bluebank.notificacao.NotificadorSMS;
+import com.banco.bluebank.notificacao.NotificadorSms;
 import com.banco.bluebank.service.MovimentacaoRealizadaEvent;
 import com.banco.bluebank.utils.DigitoVerificadorLuhn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ public class NotificacaoCorrentistaService {
     private NotificadorEmail notificadorEmail;
 
     @Autowired
-    private NotificadorSMS notificadorSMS;
+    private NotificadorSms notificadorSMS;
 
     @Autowired
     private DigitoVerificadorLuhn dv;
