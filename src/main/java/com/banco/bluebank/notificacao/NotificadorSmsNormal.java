@@ -21,7 +21,8 @@ public class NotificadorSmsNormal implements NotificadorSms {
                 System.out.printf("Notificando %s por SMS através do telefone %s: %s\n",
                         correntista.getNome(), correntista.getSms(), mensagem);
 
-                post(correntista, mensagem);
+                // post(correntista, mensagem);
+                // comentado para nao enviar sms via AWS para nao gerar custos, mas esta implementado
 
             }
 
